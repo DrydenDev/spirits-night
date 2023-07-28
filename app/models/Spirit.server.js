@@ -1,3 +1,4 @@
+import { prisma } from "~/utils/prisma"
 
 export async function getRandomSpirit() {
   const spiritCount = await prisma.spirit.count();
