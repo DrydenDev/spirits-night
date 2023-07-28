@@ -12,5 +12,9 @@ datasource db {
 
 model Spirit {
   id    String    @id @default(uuid())
-  name  String
+  name  String    @unique
+  expansion  String
+  complexity String
+  complexityValue Int @map("complexity_value")
+  incarna    Boolean @default(false)
 }

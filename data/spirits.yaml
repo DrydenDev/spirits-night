@@ -1,0 +1,116 @@
+spirits:
+  - name: A Spread of Rampant Green
+    expansion: Spirit Island
+    complexity: Moderate
+  - name: Breath of Darkness Down Your Spine
+    expansion: Nature Incarnate
+    complexity: High
+    incarna: true
+  - name: Bringer of Dreams and Nightmares
+    expansion: Spirit Island
+    complexity: High
+  - name: Dances Up Earthquakes
+    expansion: Nature Incarnate
+    complexity: Very High
+  - name: Devouring Teeth Lurk Underfoot
+    expansion: Horizons
+    complexity: Low
+  - name: Downpour Drenches the World
+    expansion: Feather and Flame
+    complexity: High
+  - name: Ember-eyed Behemoth
+    expansion: Nature Incarnate
+    complexity: Moderate
+    incarna: true
+  - name: Eyes Watch From the Trees
+    expansion: Horizons
+    complexity: Low
+  - name: Fathomless Mud of the Swamp
+    expansion: Horizons
+    complexity: Low
+  - name: Finder of Paths Unseen
+    expansion: Feather and Flame
+    complexity: Very High
+  - name: Fractured Days Split the Sky
+    expansion: Jagged Earth
+    complexity: Very High
+  - name: Grinning Trickster Stirs Up Trouble
+    expansion: Jagged Earth
+    complexity: Moderate
+  - name: Heart of the Wildfire
+    expansion: Feather and Flame
+    complexity: High
+  - name: Hearth-Vigil
+    expansion: Nature Incarnate
+    complexity: Moderate
+  - name: Keeper of the Forbidden Wilds
+    expansion: Branch and Claw
+    complexity: Moderate
+  - name: Lightning's Swift Strike
+    expansion: Spirit Island
+    complexity: Low
+  - name: Lure of the Deep Wilderness
+    expansion: Jagged Earth
+    complexity: Moderate
+  - name: Many Minds Move as One
+    expansion: Jagged Earth
+    complexity: Moderate
+  - name: Ocean's Hungry Grasp
+    expansion: Spirit Island
+    complexity: High
+  - name: Relentless Gaze of the Sun
+    expansion: Nature Incarnate
+    complexity: High
+  - name: Rising Heat of Stone and Sand
+    expansion: Horizons
+    complexity: Low
+  - name: River Surges in Sunlight
+    expansion: Spirit Island
+    complexity: Low
+  - name: Serpent Slumbering Beneath the Island
+    expansion: Feather and Flame
+    complexity: High
+  - name: Shadows Flicker Like Flame
+    expansion: Spirit Island
+    complexity: Low
+  - name: Sharp Fangs Behind the Leaves
+    expansion: Branch and Claw
+    complexity: Moderate
+  - name: Shifting Memory of Ages
+    expansion: Jagged Earth
+    complexity: Moderate
+  - name: Shroud of Silent Mist
+    expansion: Jagged Earth
+    complexity: High
+  - name: Starlight Seeks Its Form
+    expansion: Jagged Earth
+    complexity: Very High
+  - name: Stone's Unyielding Defiance
+    expansion: Jagged Earth
+    complexity: Moderate
+  - name: Sun-Bright Whirlwind
+    expansion: Horizons
+    complexity: Low
+  - name: Thunderspeaker
+    expansion: Spirit Island
+    complexity: Moderate
+  - name: Towering Roots of the Jungle
+    expansion: Nature Incarnate
+    complexity: Moderate
+    incarna: true
+  - name: Vengeance as a Burning Plague
+    expansion: Jagged Earth
+    complexity: High
+  - name: Vital Strength of the Earth
+    expansion: Spirit Island
+    complexity: Low
+  - name: Volcano Looming High
+    expansion: Jagged Earth
+    complexity: Moderate
+  - name: Wandering Voice Keens Delirium
+    expansion: Nature Incarnate
+    complexity: High
+    incarna: true
+  - name: Wounded Waters Bleeding
+    expansion: Nature Incarnate
+    complexity: High
