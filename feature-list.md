@@ -11,3 +11,4 @@
 - [ ] Add support for multiple spirit generation
 - [ ] Add quick lookup/reference for what each adversary does on each level, by spirit phase (e.g., WHEN RAVAGING, WHEN BUILDING, AFTER BUILDING, etc)
 - [ ] Add fun water wave + island animation to bottom of screen
+= [ ] Add .devcontainer to install packages, prisma, seed DB, etc
