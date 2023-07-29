@@ -69,7 +69,8 @@ export default function Index() {
           <Chip label={spirit.expansion} />
         </Stack>
       </CardContent>
-      <CardActions sx={{ justifyContent: 'space-around' }}>
+      <CardActions sx={{ alignItems: 'center', justifyContent: 'center' }}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 4 }}>
           <Button 
             variant="outlined"
             size="medium"
@@ -92,6 +93,7 @@ export default function Index() {
             startIcon={<TodayIcon />}>
             Today's Spirit
           </Button>
+        </Stack>
       </CardActions>
     </Card>
   );
