@@ -9,6 +9,8 @@ import {
   CardMedia, 
   CardContent,
   Chip,
+  ImageList,
+  ImageListItem,
   Typography,
   Stack,
 } from "@mui/material";
@@ -58,7 +60,7 @@ export default function Index() {
       <CardContent>
         <Typography align="center" gutterBottom variant="h3">{spirit.name}</Typography>
         <Stack direction="row" spacing={1}>
-          <Chip variant="outlined" label={spirit.complexity} />
+          <Chip variant="outlined" label={`${spirit.complexity} Complexity`} />
           <Chip label={spirit.expansion} />
         </Stack>
       </CardContent>
