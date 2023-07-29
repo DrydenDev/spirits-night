@@ -13,6 +13,7 @@ function loadYamlFile(filename: string) {
 async function loadSpirits() {
   interface Spirit {
     name: string;
+    slug: string;
     expansion: string;
     complexity: string;
     complexityValue: number;

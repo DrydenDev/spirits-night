@@ -1,116 +1,153 @@
 spirits:
   - name: A Spread of Rampant Green
+    slug: green
     expansion: Spirit Island
     complexity: Moderate
   - name: Breath of Darkness Down Your Spine
+    slug: breath-of-darkness
     expansion: Nature Incarnate
     complexity: High
     incarna: true
   - name: Bringer of Dreams and Nightmares
+    slug: bodan
     expansion: Spirit Island
     complexity: High
   - name: Dances Up Earthquakes
+    slug: earthquakes
     expansion: Nature Incarnate
     complexity: Very High
   - name: Devouring Teeth Lurk Underfoot
+    slug: teeth
     expansion: Horizons
     complexity: Low
   - name: Downpour Drenches the World
+    slug: downpour
     expansion: Feather and Flame
     complexity: High
   - name: Ember-eyed Behemoth
+    slug: behemoth
     expansion: Nature Incarnate
     complexity: Moderate
     incarna: true
   - name: Eyes Watch From the Trees
+    slug: eyes
     expansion: Horizons
     complexity: Low
   - name: Fathomless Mud of the Swamp
+    slug: otter
     expansion: Horizons
     complexity: Low
   - name: Finder of Paths Unseen
+    slug: finder
     expansion: Feather and Flame
     complexity: Very High
   - name: Fractured Days Split the Sky
+    slug: fractured-days
     expansion: Jagged Earth
     complexity: Very High
   - name: Grinning Trickster Stirs Up Trouble
+    slug: trickster
     expansion: Jagged Earth
     complexity: Moderate
   - name: Heart of the Wildfire
+    slug: wildfire
     expansion: Feather and Flame
     complexity: High
   - name: Hearth-Vigil
+    slug: hearth-vigil
     expansion: Nature Incarnate
     complexity: Moderate
   - name: Keeper of the Forbidden Wilds
+    slug: keeper
     expansion: Branch and Claw
     complexity: Moderate
   - name: Lightning's Swift Strike
+    slug: lightning
     expansion: Spirit Island
     complexity: Low
   - name: Lure of the Deep Wilderness
+    slug: lure
     expansion: Jagged Earth
     complexity: Moderate
   - name: Many Minds Move as One
+    slug: many-minds
     expansion: Jagged Earth
     complexity: Moderate
   - name: Ocean's Hungry Grasp
+    slug: ocean
     expansion: Spirit Island
     complexity: High
   - name: Relentless Gaze of the Sun
+    slug: sun
     expansion: Nature Incarnate
     complexity: High
   - name: Rising Heat of Stone and Sand
+    slug: heat-dragon
     expansion: Horizons
     complexity: Low
   - name: River Surges in Sunlight
+    slug: river
     expansion: Spirit Island
     complexity: Low
   - name: Serpent Slumbering Beneath the Island
+    slug: serpent
     expansion: Feather and Flame
     complexity: High
   - name: Shadows Flicker Like Flame
+    slug: shadows-flicker
     expansion: Spirit Island
     complexity: Low
   - name: Sharp Fangs Behind the Leaves
+    slug: sharp-fangs
     expansion: Branch and Claw
     complexity: Moderate
   - name: Shifting Memory of Ages
+    slug: shifting-memory
     expansion: Jagged Earth
     complexity: Moderate
   - name: Shroud of Silent Mist
+    slug: silent-mist
     expansion: Jagged Earth
     complexity: High
   - name: Starlight Seeks Its Form
+    slug: starlight
     expansion: Jagged Earth
     complexity: Very High
   - name: Stone's Unyielding Defiance
+    slug: stone-defiance
     expansion: Jagged Earth
     complexity: Moderate
   - name: Sun-Bright Whirlwind
+    slug: sun-bright
     expansion: Horizons
     complexity: Low
   - name: Thunderspeaker
+    slug: thunderspeaker
     expansion: Spirit Island
     complexity: Moderate
   - name: Towering Roots of the Jungle
+    slug: towering-roots
     expansion: Nature Incarnate
     complexity: Moderate
     incarna: true
   - name: Vengeance as a Burning Plague
+    slug: burning-plague
     expansion: Jagged Earth
     complexity: High
   - name: Vital Strength of the Earth
+    slug: vital-strength
     expansion: Spirit Island
     complexity: Low
   - name: Volcano Looming High
+    slug: volcano
     expansion: Jagged Earth
     complexity: Moderate
   - name: Wandering Voice Keens Delirium
+    slug: keens-delirium
     expansion: Nature Incarnate
     complexity: High
     incarna: true
   - name: Wounded Waters Bleeding
+    slug: wounded-waters
     expansion: Nature Incarnate
     complexity: High

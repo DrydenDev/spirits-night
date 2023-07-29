@@ -13,6 +13,7 @@ datasource supabase {
 model Spirit {
   id    String    @id @default(uuid())
   name  String    @unique
+  slug  String    @unique
   expansion  String
   complexity String
   complexityValue Int @map("complexity_value")
