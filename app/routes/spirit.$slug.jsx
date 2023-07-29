@@ -1,5 +1,6 @@
+import { useCallback } from "react";
 import { json } from "@remix-run/node";
-import { useLoaderData, useNavigate } from "@remix-run/react";
+import { useLoaderData, useNavigate, useParams } from "@remix-run/react";
 
 import { getRandomSpirit, getSpiritBySlug } from "../models/Spirit.server";
 import { 
@@ -47,8 +48,12 @@ export async function loader({ params }) {
 
 export default function Index() {
   const { spirit } = useLoaderData();
+  const { slug } = useParams();
   const navigate = useNavigate();
-  const linkPage = (slug, options = {}) => navigate(`/spirit/${slug}`, options);
+  const linkPage = useCallback((slugLink) => {
+    const options = slugLink === slug ? { replace: true } : {};
+    navigate(`/spirit/${slugLink}`, options)
+  }, [slug]);
 
   return (
     <Card variant="outlined" className="spirit-card">
@@ -59,32 +64,32 @@ export default function Index() {
       />
       <CardContent>
         <Typography align="center" gutterBottom variant="h3">{spirit.name}</Typography>
-        <Stack direction="row" spacing={1}>
+        <Stack sx={{ justifyContent: 'center' }} direction="row" spacing={1}>
           <Chip variant="outlined" label={`${spirit.complexity} Complexity`} />
           <Chip label={spirit.expansion} />
         </Stack>
       </CardContent>
-      <CardActions>
-        <Button 
-          variant="outlined"
-          size="medium"
-          color="primary"
-          onClick={() => linkPage("random", { replace: true })}
-          startIcon={<ReplayIcon />}>
+      <CardActions sx={{ justifyContent: 'space-around' }}>
+          <Button 
+            variant="outlined"
+            size="medium"
+            color="primary"
+            onClick={() => linkPage("random")}
+            startIcon={<ReplayIcon />}>
             Random Spirit
           </Button>
           <Button 
-          size="medium"
-          color="primary"
-          onClick={() => linkPage(spirit.slug, { replace: true })}
-          startIcon={<LinkIcon />}>
+            size="medium"
+            color="primary"
+            onClick={() => linkPage(spirit.slug)}
+            startIcon={<LinkIcon />}>
             Permalink
           </Button>
           <Button 
-          size="medium"
-          color="primary"
-          onClick={() => linkPage("today", { replace: true })}
-          startIcon={<TodayIcon />}>
+            size="medium"
+            color="primary"
+            onClick={() => linkPage("today")}
+            startIcon={<TodayIcon />}>
             Today's Spirit
           </Button>
       </CardActions>
