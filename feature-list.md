@@ -1,14 +1,17 @@
-- [ ] Basic UI on homepage that generates a random spirit (text) with a button to regenerate the random spirit
+- [x] Basic UI on homepage that generates a random spirit (text) with a button to regenerate the random spirit
 - [ ] Add a random aspect to the spirit
 - [ ] Add full image for spirit board to generation
-- [ ] Add generation of an adversary in with a random level
-- [ ] Add a slider to control the level(s) of the adversary
+- [x] Add generation of an adversary in with a random level
+- [x] Add a slider to control the level(s) of the adversary
 - [ ] Add full adversary images to generation
-- [ ] Deploy to an available host (cloudflare, netlify, vercel, github, etc)
-- [ ] Point domain to host
-- [ ] Ensure all functionality works on mobile
-- [ ] Add "Today" option with fixed randomness for adversary and spirit
+- [x] Deploy to an available host (cloudflare, netlify, vercel, github, etc)
+- [x] Point domain to host
+- [x] Ensure all functionality works on mobile
+- [x] Add "Today" option with fixed randomness for adversary and spirit
 - [ ] Add support for multiple spirit generation
 - [ ] Add quick lookup/reference for what each adversary does on each level, by spirit phase (e.g., WHEN RAVAGING, WHEN BUILDING, AFTER BUILDING, etc)
 - [ ] Add fun water wave + island animation to bottom of screen
-= [ ] Add .devcontainer to install packages, prisma, seed DB, etc
+- [ ] Add .devcontainer to install packages, prisma, seed DB, etc
+- [ ] Fix long title like Thunderspeaker on mobile
+- [ ] Add index page for Spirits, sortable by complexity and name
+- [ ] Add index page for Adversaries, sortable by difficulty and name
