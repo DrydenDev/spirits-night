@@ -19,7 +19,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import ReplayIcon from '@mui/icons-material/Replay';
+import CasinoIcon from '@mui/icons-material/Casino';
 import LinkIcon from '@mui/icons-material/Link';
 import TodayIcon from '@mui/icons-material/Today';
 
@@ -109,7 +109,7 @@ export default function AdversaryDetails() {
               size="medium"
               color="primary"
               onClick={() => linkPage("random")}
-              startIcon={<ReplayIcon />}>
+              startIcon={<CasinoIcon />}>
               Random Adversary
             </Button>
             <Button 

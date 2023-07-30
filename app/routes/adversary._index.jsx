@@ -1,7 +1,10 @@
+import { Fragment } from 'react';
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useNavigate } from "@remix-run/react";
 import { 
   Avatar,
+  BottomNavigation,
+  BottomNavigationAction,
   Card,
   CardContent,
   CardMedia,
@@ -14,6 +17,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import CasinoIcon from '@mui/icons-material/Casino';
+import TodayIcon from '@mui/icons-material/Today';
 import { getAllAdversaries } from '~/models/Adversary.server';
 
 export async function loader() {
@@ -24,21 +29,33 @@ export async function loader() {
 
 export default function AdversaryIndex() {
   const { adversaries } = useLoaderData();
+  const navigate = useNavigate();
 
   return (
-    <Card variant="outlined">
-      <CardMedia 
-        sx={{height:140}}
-        image='./images/adversaries/adversary_splash.jpg'
-        title="Spirit Island Adversaries"
-      />
-      <CardContent className="adversary-list">
-        <Stack direction="column" spacing={2}>
-          <Typography align="center" variant="h3">Adversaries</Typography>
-          <AdversaryList adversaries={adversaries} />
-        </Stack>
-      </CardContent>
-    </Card>
+    <>
+      <Card variant="outlined">
+        <CardMedia 
+          sx={{height:140}}
+          image='./images/adversaries/adversary_splash.jpg'
+          title="Spirit Island Adversaries"
+        />
+        <CardContent className="adversary-list">
+          <Stack direction="column" spacing={2}>
+            <Typography align="center" variant="h3">Adversaries</Typography>
+            <AdversaryList adversaries={adversaries} />
+          </Stack>
+        </CardContent>
+      </Card>
+      <BottomNavigation
+        showLabels
+        onChange={(event, selectedValue) => {
+          navigate(`/adversary/${selectedValue}`);
+        }}
+      >
+        <BottomNavigationAction label="Random" value="random" icon={<CasinoIcon />} />
+        <BottomNavigationAction label="Today" value="today" icon={<TodayIcon />} />
+      </BottomNavigation>
+    </>
   );
 }
 
@@ -52,9 +69,9 @@ function AdversaryList({ adversaries }) {
   const adversaryList = adversaries.map((adversary, index) => {
     const dividerMarkup = (index === 0) ? null : <Divider variant="inset" component="li" />
     return  (
-      <>
+      <Fragment key={adversary.id}>
         {dividerMarkup}
-        <ListItem key={adversary.id} alignItems="flex-start">
+        <ListItem alignItems="flex-start">
           <ListItemAvatar>
             <Avatar alt={adversary.name} src="/images/adversaries/france.png" />
           </ListItemAvatar>
@@ -63,7 +80,7 @@ function AdversaryList({ adversaries }) {
             secondary={<Typography sx={{ display: 'inline', fontWeight: '400', fontSize: '0.75rem' }} component="span" variant="subtitle2" color="text.secondary">Difficulty Range: {difficultyRange(adversary)}</Typography>}
           />
         </ListItem>
-      </>
+      </Fragment>
     );
   })
 
