@@ -11,23 +11,22 @@ import {
   CardMedia, 
   CardContent,
   Chip,
-  IconButton,
   List,
   ListItem,
   ListItemText,
   Paper,
   Slider,
-  Snackbar,
   Stack,
   Typography,
 } from "@mui/material";
 import ReplayIcon from '@mui/icons-material/Replay';
 import LinkIcon from '@mui/icons-material/Link';
 import TodayIcon from '@mui/icons-material/Today';
-import CloseIcon from '@mui/icons-material/Close';
 
+import { useStatusSnackbar, StatusSnackbar } from "~/components/StatusSnackbar";
 import { getRandomAdversary, getAdversaryBySlug } from "~/models/Adversary.server";
 import { toSpiritIslandText } from "~/utils/spiritIslandText";
+import { getTodaySeed } from "~/utils/random";
 import adversaryStyles from "~/styles/adversary.css";
 
 export const links = () => [
@@ -38,8 +37,8 @@ export async function loader({ params }) {
   const [slug, capturedLevel] = params['*'].split('/');
   const clampedLevel = capturedLevel ? Math.min(Math.max(capturedLevel, 0), 6) : null;
 
-  const randomSeed = (slug === "today") ? new Date().toLocaleDateString("en-US") : null;
   if (slug === "random" || slug === "today") {
+    const randomSeed = (slug === "today") ? getTodaySeed() : null;
     const { adversary, level } = await getRandomAdversary(randomSeed);
     const desiredLevel = clampedLevel || level;
     return redirect(`/adversary/${adversary.slug}/${desiredLevel}`);
@@ -63,8 +62,7 @@ function getDifficultyLevel(adversary, level) {
 export default function Index() {
   const { adversary, level } = useLoaderData();
   const [sliderLevel, setSliderLevel] = useState(level);
-  const [snackbarState, setSnackbarState] = useState({open: false});
-  const closeSnackbar = ()  => setSnackbarState({open: false});
+  const { openSnackbar, closeSnackbar, open: snackbarOpen, text: snackbarText } = useStatusSnackbar();
   const effectiveLevel = sliderLevel !== null ? sliderLevel : level;
   const navigate = useNavigate();
   const linkPage = useCallback((slugLink, levelLink) => {
@@ -124,7 +122,7 @@ export default function Index() {
               color="primary"
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href)
-                setSnackbarState({open: true, text: "Permalink copied!"})
+                openSnackbar("Permalink copied!");
               }}
               startIcon={<LinkIcon />}>
               Permalink
@@ -139,22 +137,10 @@ export default function Index() {
           </Stack>
         </CardActions>
       </Card>
-      <Snackbar
-        open={snackbarState.open}
-        autoHideDuration={1500}
+      <StatusSnackbar
+        open={snackbarOpen}
         onClose={closeSnackbar}
-        message={snackbarState.text}
-        anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
-        action={
-          <IconButton
-          size="small"
-          aria-label="close"
-          color="inherit"
-          onClick={closeSnackbar}
-        >
-          <CloseIcon fontSize="small" />
-        </IconButton>
-        }
+        message={snackbarText}
       />
     </>
   );
