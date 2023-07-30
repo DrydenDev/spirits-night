@@ -19,3 +19,26 @@ model Spirit {
   complexityValue Int @map("complexity_value")
   incarna    Boolean @default(false)
 }
+
+model Adversary {
+  id                String   @id @default(uuid())
+  name              String   @unique
+  expansion         String
+  slug              String   @unique
+  difficulty        Int
+  lossCondition     Json?    @map("loss_condition")
+  escalationAbility Json     @map("escalation_ability")
+  levels            AdversaryLevel[]
+}
+
+model AdversaryLevel {
+  id          String    @id @default(uuid())
+  adversaryId String    @map("adversary_id")
+  adversary   Adversary @relation(fields: [adversaryId], references: [id])
+  level       Int
+  difficulty  Int
+  title       String
+  fearCards   String    @map("fear_cards")
+  description String
+  @@unique([adversaryId, title], name: "adversaryTitle")
+}

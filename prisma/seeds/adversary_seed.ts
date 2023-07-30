@@ -1,0 +1,97 @@
+import { Prisma, PrismaClient } from '@prisma/client';
+import { loadYamlFile, validExpansion } from './utils';
+
+interface LossCondition {
+  title: string;
+  description: string;
+}
+
+interface EscalationAbility {
+  title: string;
+  description: string;
+}
+
+interface Adversary {
+  name: string;
+  expansion: string;
+  slug: string;
+  difficulty: number;
+  lossCondition: LossCondition;
+  escalation: EscalationAbility;
+  levels: AdversaryLevel[];
+}
+
+interface AdversaryLevel {
+  title: string;
+  level: number;
+  difficulty: number;
+  fear: string;
+  description: string;
+}
+
+const complexityValue: {[index: string]: number} = {
+  "Low": 0,
+  "Moderate": 1,
+  "High": 2,
+  "Very High": 3
+}
+
+function validAdversary(adversary: Adversary) {
+  return validExpansion(adversary.expansion);
+}
+
+export async function loadAdversaries(prismaClient: PrismaClient) {
+  const adversaryFile = process.env.ADVERSARY_FILE;
+  if (!adversaryFile) return;
+
+  const { adversaries } = loadYamlFile(adversaryFile);
+
+  adversaries.forEach(async (adversary: Adversary) => {
+    console.log(`Updating ${adversary.name}...`);
+    if (!validAdversary(adversary)) {
+      throw new Error(`Problem loading ${adversary}`);
+    }
+
+    const adversaryData = {
+      name: adversary.name,
+      expansion: adversary.expansion,
+      slug: adversary.slug,
+      difficulty: adversary.difficulty,
+      lossCondition: adversary.lossCondition ? {
+        title: adversary.lossCondition.title,
+        description: adversary.lossCondition.description
+      } : Prisma.DbNull,
+      escalationAbility: {
+        title: adversary.escalation.title,
+        description: adversary.escalation.description
+      }
+    }
+
+    const adversaryRow = await prismaClient.adversary.upsert({
+      where: { name: adversary.name },
+      update: { ...adversaryData },
+      create: { ...adversaryData }
+    })
+
+    await prismaClient.adversaryLevel.deleteMany({ where: { adversaryId: adversaryRow.id } });
+    const adversaryLevelData = adversary.levels.map((level) => {
+      return {
+        adversaryId: adversaryRow.id,
+        level: level.level,
+        difficulty: level.difficulty,
+        title: level.title,
+        fearCards: level.fear,
+        description: level.description
+      }
+    });
+
+    await prismaClient.adversaryLevel.createMany({ data: adversaryLevelData });
+  });
+
+
+  const adversaryCount = await prismaClient.adversary.count();
+  console.log(`Adversary Count: ${adversaryCount}`);
+
+  const levelsCount = await prismaClient.adversaryLevel.count();
+  console.log(`Adversary Level Count: ${levelsCount}`);
+}

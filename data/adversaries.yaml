@@ -2,7 +2,7 @@ adversaries:
   - name: The Kingdom of Bradenburg-Prussia
     slug: bradenburg-prussia
     expansion: Spirit Island
-    base_difficulty: 1
+    difficulty: 1
     escalation:
       title: Land Rush
       description: "On each board with [[Town]]/[[City]], add 1 [[Town]] to a land without [[Town]]"
@@ -43,7 +43,7 @@ adversaries:
     loss_condition:
       title: Proud & Mighty Capital
       description: "If 7 or more [[Town]]/[[City]] are ever in a single land, the Invaders win."
-    base_difficulty: 1
+    difficulty: 1
     escalation:
       title: Building Boom
       description: "On each board with [[Town]]/[[City]], build in the land with the most [[Town]]/[[City]]"
@@ -62,7 +62,7 @@ adversaries:
         title: High Immigration (I)
         difficulty: 6
         fear: 4/5/4
-        description: "Put the "High Immigration" tile on the Invader board, to the left of "Ravage". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
+        description: "Put the \"High Immigration\" tile on the Invader board, to the left of \"Ravage\". The Invaders take this Build action each Invader phase before Ravaging. Cards slide left from Ravage to it, and from it to the discard pile. Remove the tile when a Stage II card slides onto it, putting that card in the discard."
       - level: 4
         title: High Immigration (full)
         difficulty: 7
@@ -81,7 +81,7 @@ adversaries:
   - name: The Kingdom of Sweden
     expansion: Spirit Island
     slug: sweden
-    base_difficulty: 1
+    difficulty: 1
     escalation:
       title: Swayed by the Invaders
       description: "After Invaders Explore into each land this Phase, if that land has at least as many Invaders as [[Dahan]], replace 1 [[Dahan]] with 1 [[Town]]"
@@ -119,7 +119,7 @@ adversaries:
   - name: The Kingdom of France (Plantation Colony)
     expansion: Branch and Claw
     slug: france
-    base_difficulty: 2
+    difficulty: 2
     loss_condition:
       title: Sprawling Plantations
       description: "Before Setup, return all but 7 [[Town]] per player to the box. Invaders win if you ever cannot place a [[Town]]."
@@ -136,7 +136,7 @@ adversaries:
         title: Slave Labor
         difficulty: 5
         fear: 3/4/3
-        description: "DUring Setup, put the "Slave Rebellion" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 [[Explorer]] or more, replace all but 1 [[Explorer]] there with an equal number of [[Town]]."
+        description: "DUring Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck. After Invaders Build in a land with 2 [[Explorer]] or more, replace all but 1 [[Explorer]] there with an equal number of [[Town]]."
       - level: 3
         title: Early Plantation
         difficulty: 7
@@ -160,7 +160,7 @@ adversaries:
   - name: Habsburg Monarchy (Livestock Colony)
     expansion: Jagged Earth
     slug: habsburg-livestock
-    base_difficulty: 2
+    difficulty: 2
     loss_condition:
       title: Irreparable Damage
       description: "Track how many [[Blight]] come off the Blight Card during Ravages that do 8+ Damage to the land. If that number ever exceeds players, the Invaders win."
@@ -201,7 +201,7 @@ adversaries:
   - name: The Tsardom of Russia
     expansion: Jagged Earth
     slug: russia
-    base_difficulty: 1
+    difficulty: 1
     loss_condition:
       title: Hunters Swarm the Island
       description: "Put [[Beast]] Destroyed by Adversary rules on this panel. If  there are ever more [[Beast]] on this  panel than on the island, the Invaders win."
@@ -242,7 +242,7 @@ adversaries:
   - name: The Kingdom of Scotland
     expansion: Feather and Flame
     slug: scotland
-    base_difficulty: 1
+    difficulty: 1
     loss_condition:
       title: Trade Hub
       description: "If the number of Coastal lands with [[City]] is ever greater than (2 x # of boards), the Invaders win."
@@ -283,7 +283,7 @@ adversaries:
   - name: Habsburg Mining Expedition
     expansion: Nature Incarnate
     slug: habsburg-mining
-    base_difficulty: 1
+    difficulty: 1
     loss_condition:
       title: Land Stripped Bare
       description: "At the end of the [[Fast]] Phase, the Invaders win if any land has at least 8 total Invaders/[[Blight]]  (_combined_)."
