@@ -16,7 +16,7 @@ interface Adversary {
   expansion: string;
   slug: string;
   difficulty: number;
-  lossCondition: LossCondition;
+  loss_condition: LossCondition;
   escalation: EscalationAbility;
   levels: AdversaryLevel[];
 }
@@ -57,9 +57,9 @@ export async function loadAdversaries(prismaClient: PrismaClient) {
       expansion: adversary.expansion,
       slug: adversary.slug,
       difficulty: adversary.difficulty,
-      lossCondition: adversary.lossCondition ? {
-        title: adversary.lossCondition.title,
-        description: adversary.lossCondition.description
+      lossCondition: adversary.loss_condition ? {
+        title: adversary.loss_condition.title,
+        description: adversary.loss_condition.description
       } : Prisma.DbNull,
       escalationAbility: {
         title: adversary.escalation.title,
