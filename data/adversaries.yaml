@@ -295,7 +295,7 @@ adversaries:
         title: Avarice Rewarded
         difficulty: 3
         fear: 3/3/3
-        description: "When [[Blight]] added by a Ravage Action would cascade, instead, Upgrade 1 [[Explorer]]/[[Town]] (_before [[Dahan]] counterattack.)"
+        description: "When [[Blight]] added by a Ravage Action would cascade, instead, Upgrade 1 [[Explorer]]/[[Town]] (before [[Dahan]] counterattack.)"
       - level: 1
         title: Ceaseless Mining
         difficulty: 3
