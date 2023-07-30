@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 import { json } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { 
@@ -66,7 +66,9 @@ function AdversaryList({ adversaries }) {
     return `${baseDifficulty} - ${maxDifficulty}`;
   }
 
-  const adversaryList = adversaries.map((adversary, index) => {
+  const sortedAdversaries = useMemo(() => adversaries.sort((a, b) => a.name.localeCompare(b.name)), [adversaries]);
+
+  const adversaryList = sortedAdversaries.map((adversary, index) => {
     const dividerMarkup = (index === 0) ? null : <Divider variant="inset" component="li" />
     return  (
       <Fragment key={adversary.id}>

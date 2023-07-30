@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 import { json } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { 
@@ -60,7 +60,7 @@ export default function SpiritIndex() {
 }
 
 function SpiritList({ spirits }) {
-  const orderedSpirits = spirits.sort((a,b) => a.name.localeCompare(b.name));
+  const orderedSpirits = useMemo(() => spirits.sort((a,b) => a.name.localeCompare(b.name), [spirits]));
 
   const spiritList = orderedSpirits.map((spirit, index) => {
     const dividerMarkup = (index === 0) ? null : <Divider variant="inset" component="li" />
