@@ -19,3 +19,4 @@
 - [x] Make adversary page able to take an optional difficulty at the end and use it for permalinks
 - [ ] Make spirit island icons more accessible via aria-hidden and sr-only labels?
 - [ ] Spirit island "text" causes lots of key issues in React
+- [ ] Make spirit random/today redirect to permanent slug, and permalink copy to clipboard
