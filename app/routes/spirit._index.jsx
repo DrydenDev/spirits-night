@@ -33,7 +33,7 @@ export default function SpiritIndex() {
 
   return (
     <>
-      <Card variant="outlined">
+      <Card square>
         <CardMedia 
           sx={{height:140}}
           image='./images/spirits/spirits_splash.png'

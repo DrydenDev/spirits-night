@@ -15,7 +15,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import { Container } from "@mui/material";
+import { TopNav } from "~/components/TopNav";
+import { Container, Link, Stack } from "@mui/material";
 
 export const links = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -34,6 +35,7 @@ export default function App() {
       </head>
       <body>
         <Container maxWidth="lg">
+          <TopNav />
           <Outlet />
           <ScrollRestoration />
           <Scripts />

@@ -53,7 +53,7 @@ export default function SpiritDetails() {
 
   return (
     <>
-      <Card variant="outlined">
+      <Card square>
         <CardMedia 
           sx={{height:140}}
           image="https://spiritislandwiki.com/images/d/d6/Spirit_island_box.png"

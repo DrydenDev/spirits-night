@@ -33,7 +33,7 @@ export default function AdversaryIndex() {
 
   return (
     <>
-      <Card variant="outlined">
+      <Card square>
         <CardMedia 
           sx={{height:140}}
           image='./images/adversaries/adversary_splash.jpg'
