@@ -45,7 +45,7 @@ export async function loader({ params }) {
   });
 }
 
-export default function Index() {
+export default function SpiritDetails() {
   const { spirit } = useLoaderData();
   const navigate = useNavigate();
   const linkPage = (slugLink) => navigate(`/spirit/${slugLink}`);
@@ -53,13 +53,13 @@ export default function Index() {
 
   return (
     <>
-      <Card variant="outlined" className="spirit-card">
+      <Card variant="outlined">
         <CardMedia 
           sx={{height:140}}
           image="https://spiritislandwiki.com/images/d/d6/Spirit_island_box.png"
           title={spirit.name}
         />
-        <CardContent>
+        <CardContent className="spirit-card">
           <Typography align="center" gutterBottom variant="h3">{spirit.name}</Typography>
           <Stack sx={{ justifyContent: 'center' }} direction="row" spacing={1}>
             <Chip variant="outlined" label={`${spirit.complexity} Complexity`} />

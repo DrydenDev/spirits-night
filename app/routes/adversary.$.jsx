@@ -27,11 +27,6 @@ import { useStatusSnackbar, StatusSnackbar } from "~/components/StatusSnackbar";
 import { getRandomAdversary, getAdversaryBySlug } from "~/models/Adversary.server";
 import { toSpiritIslandText } from "~/utils/spiritIslandText";
 import { getTodaySeed } from "~/utils/random";
-import adversaryStyles from "~/styles/adversary.css";
-
-export const links = () => [
-  { rel: "stylesheet", href: adversaryStyles }
-];
 
 export async function loader({ params }) {
   const [slug, capturedLevel] = params['*'].split('/');
@@ -59,7 +54,7 @@ function getDifficultyLevel(adversary, level) {
   return adversary.levels.find((adversaryLevel) => adversaryLevel.level === level);
 }
 
-export default function Index() {
+export default function AdversaryDetails() {
   const { adversary, level } = useLoaderData();
   const [sliderLevel, setSliderLevel] = useState(level);
   const { openSnackbar, closeSnackbar, open: snackbarOpen, text: snackbarText } = useStatusSnackbar();
@@ -74,13 +69,13 @@ export default function Index() {
 
   return (
     <>
-      <Card variant="outlined" className="adversary-card">
+      <Card variant="outlined">
         <CardMedia 
           sx={{height:140}}
           image='https://spiritislandwiki.com/images/d/d6/Spirit_island_box.png'
           title={adversary.name}
         />
-        <CardContent>
+        <CardContent className="adversary-card">
           <Typography align="center" gutterBottom variant="h3">{adversary.name}</Typography>
           <Stack sx={{ alignItems: 'center', justifyContent: 'center' }} spacing={1}>
             <Slider

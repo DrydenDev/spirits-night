@@ -20,3 +20,7 @@ export async function getAdversaryBySlug(slug) {
     include: { levels: true }
   });
 }
+
+export async function getAllAdversaries() {
+  return await prisma.adversary.findMany({ include: { levels: true }});
+}
