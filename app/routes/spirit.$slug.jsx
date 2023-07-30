@@ -55,8 +55,8 @@ export default function SpiritDetails() {
     <>
       <Card square>
         <CardMedia 
-          sx={{height:140}}
-          image="https://spiritislandwiki.com/images/d/d6/Spirit_island_box.png"
+          sx={{height:200}}
+          image={`/images/spirits/${spirit.slug}/splash.png`}
           title={spirit.name}
         />
         <CardContent className="spirit-card">
