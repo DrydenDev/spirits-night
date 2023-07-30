@@ -72,7 +72,7 @@ export default function AdversaryDetails() {
       <Card square>
         <CardMedia 
           sx={{height:140}}
-          image='https://spiritislandwiki.com/images/d/d6/Spirit_island_box.png'
+          image={`/images/adversaries/${adversary.slug}/banner.png`}
           title={adversary.name}
         />
         <CardContent className="adversary-card">

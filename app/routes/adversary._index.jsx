@@ -36,7 +36,7 @@ export default function AdversaryIndex() {
       <Card square>
         <CardMedia 
           sx={{height:140}}
-          image='./images/adversaries/adversary_splash.jpg'
+          image='/images/adversaries/adversary_splash.jpg'
           title="Spirit Island Adversaries"
         />
         <CardContent className="adversary-list">
@@ -75,7 +75,7 @@ function AdversaryList({ adversaries }) {
         {dividerMarkup}
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar alt={adversary.name} src="/images/adversaries/france.png" />
+            <Avatar alt={adversary.name} src={`/images/adversaries/${adversary.slug}/avatar.png`} />
           </ListItemAvatar>
           <ListItemText
             primary={<Link href={`/adversary/${adversary.slug}`}>{adversary.name}</Link>}
