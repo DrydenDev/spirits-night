@@ -1,8 +1,6 @@
 import { useCallback, useState } from "react";
 import { json } from "@remix-run/node";
 import { useLoaderData, useNavigate, useParams } from "@remix-run/react";
-
-import { getRandomAdversary, getAdversaryBySlug } from "../models/Adversary.server";
 import { 
   Alert,
   AlertTitle,
@@ -25,6 +23,8 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import LinkIcon from '@mui/icons-material/Link';
 import TodayIcon from '@mui/icons-material/Today';
 
+import { getRandomAdversary, getAdversaryBySlug } from "~/models/Adversary.server";
+import { toSpiritIslandText } from "~/utils/spiritIslandText";
 import adversaryStyles from "~/styles/adversary.css";
 
 export const links = () => [
@@ -149,14 +149,14 @@ function AdversaryTable({adversary, level}) {
   const lossConditionMarkup = !lossCondition ? null : (
     <Alert severity="error">
       <AlertTitle>Additional Loss Condition</AlertTitle>
-      <strong>{lossCondition.title}</strong>: {lossCondition.description}
+      <strong>{lossCondition.title}</strong>: {toSpiritIslandText(lossCondition.description)}
     </Alert>
   );
 
   const escalationMarkup = (
     <Alert severity="warning">
       <AlertTitle>Escalation</AlertTitle>
-      <strong>{escalationAbility.title}</strong>: {escalationAbility.description}
+      <strong>{escalationAbility.title}</strong>: {toSpiritIslandText(escalationAbility.description)}
     </Alert>
   );
 
@@ -173,7 +173,7 @@ function AdversaryTable({adversary, level}) {
       <ListItem>
         <ListItemText
           primary={levelRow.title}
-          secondary={levelRow.description}
+          secondary={toSpiritIslandText(levelRow.description)}
         />
       </ListItem>
     )

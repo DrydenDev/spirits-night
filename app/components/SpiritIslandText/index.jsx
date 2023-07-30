@@ -1,1 +1,0 @@
-export { SpiritIslandText } from './spiritIslandText';
