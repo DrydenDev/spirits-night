@@ -2,3 +2,12 @@
 body {
     background: #79E0EE;
 }
+
+@font-face {
+  font-family: "SpiritIsland";
+  src: url("./fonts/FreehandSpirit04.ttf");
+}
+
+.spirit-island-text {
+  font-family: 'SpiritIsland';
+}
