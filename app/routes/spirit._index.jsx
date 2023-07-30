@@ -69,7 +69,7 @@ function SpiritList({ spirits }) {
         {dividerMarkup}
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar alt={spirit.name} src={`/images/spirits/${spirit.slug}/splash.png`} />
+            <Avatar alt={spirit.name} src={`/images/spirits/${spirit.slug}/splash.png`} sx={{width: 56, height: 56, marginRight: '0.5em', border: '2px solid #06b6d4' }} />
           </ListItemAvatar>
           <ListItemText
             primary={<Link href={`/spirit/${spirit.slug}`}>{spirit.name}</Link>}

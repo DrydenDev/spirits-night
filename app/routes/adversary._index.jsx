@@ -75,7 +75,7 @@ function AdversaryList({ adversaries }) {
         {dividerMarkup}
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar alt={adversary.name} src={`/images/adversaries/${adversary.slug}/avatar.png`} />
+            <Avatar alt={adversary.name} src={`/images/adversaries/${adversary.slug}/avatar.png`} sx={{width: 56, height: 56, marginRight: '0.5em', border: '1px solid lightgray' }} />
           </ListItemAvatar>
           <ListItemText
             primary={<Link href={`/adversary/${adversary.slug}`}>{adversary.name}</Link>}
