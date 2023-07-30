@@ -33,21 +33,22 @@ export const links = () => [
 
 export async function loader({ params }) {
   const [slug, capturedLevel] = params['*'].split('/');
+  const clampedLevel = capturedLevel ? Math.min(Math.max(capturedLevel, 0), 6) : null;
 
   if (slug === "random") {
     const randomAdversary = await getRandomAdversary();
-    return json({ adversary: randomAdversary.adversary, level: capturedLevel || randomAdversary.level});
+    return json({ adversary: randomAdversary.adversary, level: clampedLevel || randomAdversary.level, loadMethod: "random"});
   }
 
   if (slug === "today") {
     const dateSeed = new Date().toLocaleDateString("en-US");
     const randomAdversary = await getRandomAdversary(dateSeed);
-    return json({ adversary: randomAdversary.adversary, level: capturedLevel || randomAdversary.level});
+    return json({ adversary: randomAdversary.adversary, level: clampedLevel || randomAdversary.level, loadMethod: "today"});
   }
 
   const adversary = await getAdversaryBySlug(slug);
   if (adversary) {
-    return json({ adversary, level: capturedLevel || 6 });
+    return json({ adversary, level: clampedLevel || 6, loadMethod: "slug" });
   }
 
   throw new Response(null, {
@@ -61,7 +62,7 @@ function getDifficultyLevel(adversary, level) {
 }
 
 export default function Index() {
-  const { adversary, level } = useLoaderData();
+  const { adversary, level, loadMethod } = useLoaderData();
   const [sliderLevel, setSliderLevel] = useState(level);
   const effectiveLevel = sliderLevel !== null ? sliderLevel : level;
   const navigate = useNavigate();
@@ -95,7 +96,12 @@ export default function Index() {
             sx={{
               width: "50%"
             }}
-            onChange={(event, value) => { setSliderLevel(value) }}
+            onChange={(event, value) => setSliderLevel(value)}
+            onChangeCommitted={(event, value) => {
+              if (loadMethod === "slug") {
+                navigate(`/adversary/${adversary.slug}/${value}`, { replace: true });
+              }
+            }}
           />
         </Stack>
         <AdversaryTable adversary={adversary} level={effectiveLevel} />
