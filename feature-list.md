@@ -11,12 +11,12 @@
 - [x] Add "Today" option with fixed randomness for adversary and spirit
 - [ ] Add support for multiple spirit generation
 - [ ] Add quick lookup/reference for what each adversary does on each level, by spirit phase (e.g., WHEN RAVAGING, WHEN BUILDING, AFTER BUILDING, etc)
-- [ ] Add fun water wave + island animation to bottom of screen
+- [ ] Add fun water wave + island animation to bottom of screen (start with 404 page)
 - [ ] Add .devcontainer to install packages, prisma, seed DB, etc
 - [ ] Fix long title like Thunderspeaker on mobile
 - [ ] Add index page for Spirits, sortable by complexity and name
-- [ ] Add index page for Adversaries, sortable by difficulty and name
+- [x] Add index page for Adversaries, sortable by difficulty and name
 - [x] Make adversary page able to take an optional difficulty at the end and use it for permalinks
 - [ ] Make spirit island icons more accessible via aria-hidden and sr-only labels?
 - [ ] Spirit island "text" causes lots of key issues in React
-- [ ] Make spirit random/today redirect to permanent slug, and permalink copy to clipboard
+- [x] Make spirit random/today redirect to permanent slug, and permalink copy to clipboard
