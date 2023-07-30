@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { json } from "@remix-run/node";
-import { useLoaderData, useNavigate, useParams } from "@remix-run/react";
+import { useLoaderData, useNavigate } from "@remix-run/react";
 import { 
   Alert,
   AlertTitle,
@@ -32,18 +32,22 @@ export const links = () => [
 ];
 
 export async function loader({ params }) {
-  if (params.slug === "random") {
-    return json(await getRandomAdversary());
+  const [slug, capturedLevel] = params['*'].split('/');
+
+  if (slug === "random") {
+    const randomAdversary = await getRandomAdversary();
+    return json({ adversary: randomAdversary.adversary, level: capturedLevel || randomAdversary.level});
   }
 
-  if (params.slug === "today") {
+  if (slug === "today") {
     const dateSeed = new Date().toLocaleDateString("en-US");
-    return json(await getRandomAdversary(dateSeed));
+    const randomAdversary = await getRandomAdversary(dateSeed);
+    return json({ adversary: randomAdversary.adversary, level: capturedLevel || randomAdversary.level});
   }
 
-  const adversary = await getAdversaryBySlug(params.slug);
+  const adversary = await getAdversaryBySlug(slug);
   if (adversary) {
-    return json({ adversary, level: 6 });
+    return json({ adversary, level: capturedLevel || 6 });
   }
 
   throw new Response(null, {
@@ -58,21 +62,22 @@ function getDifficultyLevel(adversary, level) {
 
 export default function Index() {
   const { adversary, level } = useLoaderData();
-  const { slug } = useParams();
   const [sliderLevel, setSliderLevel] = useState(level);
   const effectiveLevel = sliderLevel !== null ? sliderLevel : level;
   const navigate = useNavigate();
-  const linkPage = useCallback((slugLink) => {
-    const options = slugLink === slug ? { replace: true } : {};
+  const linkPage = useCallback((slugLink, levelLink) => {
+    const options = slugLink === adversary.slug ? { replace: true } : {};
+    const baseUrl = `/adversary/${slugLink}`;
+    const levelUrl = levelLink ? `${baseUrl}/${levelLink}` : baseUrl;
     setSliderLevel(null);
-    navigate(`/adversary/${slugLink}`, options)
-  }, [slug]);
+    navigate(levelUrl, options)
+  }, [adversary]);
 
   return (
     <Card variant="outlined" className="adversary-card">
       <CardMedia 
         sx={{height:140}}
-        image="https://spiritislandwiki.com/images/d/d6/Spirit_island_box.png"
+        image='https://spiritislandwiki.com/images/d/d6/Spirit_island_box.png'
         title={adversary.name}
       />
       <CardContent>
@@ -112,7 +117,7 @@ export default function Index() {
           <Button 
             size="medium"
             color="primary"
-            onClick={() => linkPage(adversary.slug)}
+            onClick={() => linkPage(adversary.slug, effectiveLevel)}
             startIcon={<LinkIcon />}>
             Permalink
           </Button>
@@ -167,11 +172,12 @@ function AdversaryTable({adversary, level}) {
     </Stack>
   );
 
-  const levelItems = levels.map((levelRow) => {
+  const levelItems = levels.map((levelRow, index) => {
     if (levelRow.level > level) return;
     return (
-      <ListItem>
+      <ListItem key={index}>
         <ListItemText
+          key={index}
           primary={levelRow.title}
           secondary={toSpiritIslandText(levelRow.description)}
         />
