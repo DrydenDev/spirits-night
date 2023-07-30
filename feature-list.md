@@ -15,3 +15,4 @@
 - [ ] Fix long title like Thunderspeaker on mobile
 - [ ] Add index page for Spirits, sortable by complexity and name
 - [ ] Add index page for Adversaries, sortable by difficulty and name
+- [ ] Make adversary page able to take an optional difficulty at the end and use it for permalinks
