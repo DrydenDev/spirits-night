@@ -16,5 +16,6 @@
 - [ ] Fix long title like Thunderspeaker on mobile
 - [ ] Add index page for Spirits, sortable by complexity and name
 - [ ] Add index page for Adversaries, sortable by difficulty and name
-- [ ] Make adversary page able to take an optional difficulty at the end and use it for permalinks
+- [x] Make adversary page able to take an optional difficulty at the end and use it for permalinks
 - [ ] Make spirit island icons more accessible via aria-hidden and sr-only labels?
+- [ ] Spirit island "text" causes lots of key issues in React
