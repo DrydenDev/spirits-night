@@ -20,3 +20,4 @@
 - [ ] Make spirit island icons more accessible via aria-hidden and sr-only labels?
 - [ ] Spirit island "text" causes lots of key issues in React
 - [x] Make spirit random/today redirect to permanent slug, and permalink copy to clipboard
+- [x] Add basic nav between pages
