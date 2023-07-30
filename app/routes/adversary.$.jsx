@@ -92,7 +92,7 @@ export default function AdversaryDetails() {
               }}
               onChange={(event, value) => setSliderLevel(value)}
               onChangeCommitted={(event, value) => {
-                navigate(`/adversary/${adversary.slug}/${value}`, { replace: true });
+                window.history.replaceState({}, "Spirits Night", `/adversary/${adversary.slug}/${value}`);
               }}
             />
           </Stack>
