@@ -17,3 +17,7 @@ export async function getSpiritBySlug(slug) {
     where: { slug }
   });
 }
+
+export async function getAllSpirits() {
+  return await prisma.spirit.findMany();
+}
