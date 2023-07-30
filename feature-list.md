@@ -4,6 +4,7 @@
 - [x] Add generation of an adversary in with a random level
 - [x] Add a slider to control the level(s) of the adversary
 - [ ] Add full adversary images to generation
+- [x] Add icons instead of text to descriptions
 - [x] Deploy to an available host (cloudflare, netlify, vercel, github, etc)
 - [x] Point domain to host
 - [x] Ensure all functionality works on mobile
@@ -16,3 +17,4 @@
 - [ ] Add index page for Spirits, sortable by complexity and name
 - [ ] Add index page for Adversaries, sortable by difficulty and name
 - [ ] Make adversary page able to take an optional difficulty at the end and use it for permalinks
+- [ ] Make spirit island icons more accessible via aria-hidden and sr-only labels?
