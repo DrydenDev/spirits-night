@@ -17,6 +17,7 @@ import {
 
 import { TopNav } from "~/components/TopNav";
 import { Container, Link, Stack } from "@mui/material";
+import { Analytics } from '@vercel/analytics/react';
 
 export const links = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -40,6 +41,7 @@ export default function App() {
           <ScrollRestoration />
           <Scripts />
           <LiveReload />
+          <Analytics />
         </Container>
       </body>
     </html>
