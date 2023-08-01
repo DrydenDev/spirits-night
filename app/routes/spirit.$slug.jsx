@@ -5,14 +5,14 @@ import ColorThief from 'colorthief';
 
 import { getRandomSpirit, getSpiritBySlug } from "~/models/Spirit.server";
 import { getTodaySeed } from "~/utils/random";
-import { 
+import {
+  Box,
   Button,
   Card,
   CardActions, 
   CardMedia, 
   CardContent,
   Chip,
-  Container,
   Typography,
   Stack,
 } from "@mui/material";
@@ -65,7 +65,6 @@ export default function SpiritDetails() {
   const navigate = useNavigate();
   const linkPage = (slugLink) => navigate(`/spirit/${slugLink}`);
   const { openSnackbar, closeSnackbar, open: snackbarOpen, text: snackbarText } = useStatusSnackbar();
-  console.log(spiritColor);
 
   return (
     <>
@@ -77,9 +76,7 @@ export default function SpiritDetails() {
         />
         <CardContent className="spirit-card">
           <Typography align="center" gutterBottom variant="h3">{spirit.name}</Typography>
-          <Container sx={{ width: { xs: "100%", md: "50%" }, padding: 0 }}>
-            <SpiritChart spirit={spirit} color={spiritColor} />
-          </Container>
+          <SpiritChart spirit={spirit} color={spiritColor} />
           <Stack sx={{ justifyContent: 'center' }} direction="row" spacing={1}>
             <Chip variant="outlined" label={`${spirit.complexity} Complexity`} />
             <Chip label={spirit.expansion} />
@@ -149,11 +146,13 @@ function SpiritChart({ spirit, color }) {
   ];
 
   return (
-    <ResponsiveContainer width="100%" height={240} minWidth={320}>
-      <BarChart width="100%" height={240} data={spiritChartData} className="spirit-chart">
-        <XAxis dataKey="name" tickLine={false} tick={{fontWeight: 400}} />
-        <Bar dataKey="attribute" fill={`rgb(${color})`} />
-      </BarChart>
-    </ResponsiveContainer>
+    <Box className="spirit-chart">
+      <ResponsiveContainer width="100%" height={240} minWidth={320}>
+        <BarChart width="100%" height={240} data={spiritChartData}>
+          <XAxis dataKey="name" tickLine={false} tick={{fontWeight: 400}} />
+          <Bar dataKey="attribute" fill={`rgb(${color})`} />
+        </BarChart>
+      </ResponsiveContainer>
+    </Box>
   );
 }

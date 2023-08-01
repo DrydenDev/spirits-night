@@ -26,4 +26,5 @@
 - [ ] Add tags to each spirit for things like elements, strengths,, etc
 - [ ] Tool to select spirits you like and find commonalities in playstyles?
 - [ ] Add ability to filter spirits by complexity and attributes
-- [ ] Add ability to search spirits/adversaries quickly with slash command
+- [ ] Add ability to search spirits/adversaries quickly with slash command 
+- [ ] Add link to Spirit Island wiki from each spirit/adversary
