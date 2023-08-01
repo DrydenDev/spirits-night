@@ -1,6 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 import { loadYamlFile, validExpansion } from './utils';
 
+interface SpiritAttributes {
+  offence: number;
+  control: number;
+  fear: number;
+  defense: number;
+  utility: number;
+}
+
 interface Spirit {
   name: string;
   slug: string;
@@ -8,6 +16,7 @@ interface Spirit {
   complexity: string;
   complexityValue: number;
   incarna: boolean;
+  attributes: SpiritAttributes;
 }
 
 const complexityValue: {[index: string]: number} = {
@@ -27,7 +36,12 @@ export async function loadSpirits(prismaClient: PrismaClient) {
 
   const { spirits } = loadYamlFile(spiritFile);
   const augmentedSpirits = spirits.map((spirit: Spirit) => {
-    return {...spirit, complexityValue: complexityValue[spirit.complexity]};
+    const { attributes, ...spiritFields } = spirit;
+    return {
+      ...spiritFields,
+      ...attributes,
+      complexityValue: complexityValue[spiritFields.complexity],
+    };
   })
 
   augmentedSpirits.forEach(async (spirit: Spirit) => {

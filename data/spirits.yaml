@@ -3,151 +3,373 @@ spirits:
     slug: green
     expansion: Spirit Island
     complexity: Moderate
+    attributes:
+      offense: 4
+      control: 3
+      fear: 2
+      defense: 5
+      utility: 4
   - name: Breath of Darkness Down Your Spine
     slug: breath-of-darkness
     expansion: Nature Incarnate
     complexity: High
     incarna: true
+    attributes:
+      offense: 2
+      control: 4
+      fear: 5
+      defense: 1
+      utility: 2
   - name: Bringer of Dreams and Nightmares
     slug: bodan
     expansion: Spirit Island
     complexity: High
+    attributes:
+      offense: 1
+      control: 2
+      fear: 5
+      defense: 2
+      utility: 2
   - name: Dances Up Earthquakes
     slug: earthquakes
     expansion: Nature Incarnate
     complexity: Very High
+    attributes:
+      offense: 5
+      control: 2
+      fear: 2
+      defense: 3
+      utility: 4
   - name: Devouring Teeth Lurk Underfoot
     slug: teeth
     expansion: Horizons
     complexity: Low
+    attributes:
+      offense: 5
+      control: 2
+      fear: 2
+      defense: 1
+      utility: 1
   - name: Downpour Drenches the World
     slug: downpour
     expansion: Feather and Flame
     complexity: High
+    attributes:
+      offense: 2
+      control: 1
+      fear: 3
+      defense: 5
+      utility: 3
   - name: Ember-eyed Behemoth
     slug: behemoth
     expansion: Nature Incarnate
     complexity: Moderate
     incarna: true
+    attributes:
+      offense: 5
+      control: 1
+      fear: 1
+      defense: 1
+      utility: 2
   - name: Eyes Watch From the Trees
     slug: eyes
     expansion: Horizons
     complexity: Low
+    attributes:
+      offense: 2
+      control: 3
+      fear: 4
+      defense: 5
+      utility: 1
   - name: Fathomless Mud of the Swamp
     slug: otter
     expansion: Horizons
     complexity: Low
+    attributes:
+      offense: 3
+      control: 2
+      fear: 3
+      defense: 3
+      utility: 2
   - name: Finder of Paths Unseen
     slug: finder
     expansion: Feather and Flame
     complexity: Very High
+    attributes:
+      offense: -1
+      control: 5
+      fear: 1
+      defense: 2
+      utility: 2
   - name: Fractured Days Split the Sky
     slug: fractured-days
     expansion: Jagged Earth
     complexity: Very High
+    attributes:
+      offense: 1
+      control: 2
+      fear: 1
+      defense: 3
+      utility: 5
   - name: Grinning Trickster Stirs Up Trouble
     slug: trickster
     expansion: Jagged Earth
     complexity: Moderate
+    attributes:
+      offense: 4
+      control: 3
+      fear: 2
+      defense: 5
+      utility: 4
   - name: Heart of the Wildfire
     slug: wildfire
     expansion: Feather and Flame
     complexity: High
+    attributes:
+      offense: 5
+      control: 3
+      fear: 4
+      defense: 1
+      utility: 2
   - name: Hearth-Vigil
     slug: hearth-vigil
     expansion: Nature Incarnate
     complexity: Moderate
+    attributes:
+      offense: 3
+      control: 1
+      fear: 2
+      defense: 4
+      utility: 4
   - name: Keeper of the Forbidden Wilds
     slug: keeper
     expansion: Branch and Claw
     complexity: Moderate
+    attributes:
+      offense: 5
+      control: 2
+      fear: 1
+      defense: 4
+      utility: 3
   - name: Lightning's Swift Strike
     slug: lightning
     expansion: Spirit Island
     complexity: Low
+    attributes:
+      offense: 5
+      control: 2
+      fear: 3
+      defense: 1
+      utility: 2
   - name: Lure of the Deep Wilderness
     slug: lure
     expansion: Jagged Earth
     complexity: Moderate
+    attributes:
+      offense: 4
+      control: 4
+      fear: 4
+      defense: 2
+      utility: 1
   - name: Many Minds Move as One
     slug: many-minds
     expansion: Jagged Earth
     complexity: Moderate
+    attributes:
+      offense: 1
+      control: 5
+      fear: 5
+      defense: 5
+      utility: 1
   - name: Ocean's Hungry Grasp
     slug: ocean
     expansion: Spirit Island
     complexity: High
+    attributes:
+      offense: 5
+      control: 4
+      fear: 4
+      defense: 3
+      utility: 2
   - name: Relentless Gaze of the Sun
     slug: sun
     expansion: Nature Incarnate
     complexity: High
+    attributes:
+      offense: 5
+      control: 1
+      fear: 3
+      defense: 2
+      utility: 3
   - name: Rising Heat of Stone and Sand
     slug: heat-dragon
     expansion: Horizons
     complexity: Low
+    attributes:
+      offense: 5
+      control: 3
+      fear: 1
+      defense: 2
+      utility: 3
   - name: River Surges in Sunlight
     slug: river
     expansion: Spirit Island
     complexity: Low
+    attributes:
+      offense: 4
+      control: 5
+      fear: 1
+      defense: 1
+      utility: 4
   - name: Serpent Slumbering Beneath the Island
     slug: serpent
     expansion: Feather and Flame
     complexity: High
+    attributes:
+      offense: 2
+      control: 2
+      fear: 2
+      defense: 4
+      utility: 5
   - name: Shadows Flicker Like Flame
     slug: shadows-flicker
     expansion: Spirit Island
     complexity: Low
+    attributes:
+      offense: 4
+      control: 3
+      fear: 5
+      defense: 1
+      utility: 1
   - name: Sharp Fangs Behind the Leaves
     slug: sharp-fangs
     expansion: Branch and Claw
     complexity: Moderate
+    attributes:
+      offense: 3
+      control: 3
+      fear: 4
+      defense: 2
+      utility: 1
   - name: Shifting Memory of Ages
     slug: shifting-memory
     expansion: Jagged Earth
     complexity: Moderate
+    attributes:
+      offense: 1
+      control: 2
+      fear: 2
+      defense: 4
+      utility: 5
   - name: Shroud of Silent Mist
     slug: silent-mist
     expansion: Jagged Earth
     complexity: High
+    attributes:
+      offense: 4
+      control: 4
+      fear: 5
+      defense: 2
+      utility: 1
   - name: Starlight Seeks Its Form
     slug: starlight
     expansion: Jagged Earth
     complexity: Very High
+    attributes:
+      offense: 1
+      control: 1
+      fear: 1
+      defense: 2
+      utility: 2
   - name: Stone's Unyielding Defiance
     slug: stone-defiance
     expansion: Jagged Earth
     complexity: Moderate
+    attributes:
+      offense: 4
+      control: 2
+      fear: 1
+      defense: 5
+      utility: 2
   - name: Sun-Bright Whirlwind
     slug: sun-bright
     expansion: Horizons
     complexity: Low
+    attributes:
+      offense: 3
+      control: 5
+      fear: 1
+      defense: 1
+      utility: 3
   - name: Thunderspeaker
     slug: thunderspeaker
     expansion: Spirit Island
     complexity: Moderate
+    attributes:
+      offense: 4
+      control: 5
+      fear: 3
+      defense: 2
+      utility: 1
   - name: Towering Roots of the Jungle
     slug: towering-roots
     expansion: Nature Incarnate
     complexity: Moderate
     incarna: true
+    attributes:
+      offense: 1
+      control: 3
+      fear: 2
+      defense: 5
+      utility: 2
   - name: Vengeance as a Burning Plague
     slug: burning-plague
     expansion: Jagged Earth
     complexity: High
+    attributes:
+      offense: 5
+      control: 2
+      fear: 3
+      defense: 1
+      utility: 1
   - name: Vital Strength of the Earth
     slug: vital-strength
     expansion: Spirit Island
     complexity: Low
+    attributes:
+      offense: 2
+      control: 3
+      fear: 1
+      defense: 5
+      utility: 3
   - name: Volcano Looming High
     slug: volcano
     expansion: Jagged Earth
     complexity: Moderate
+    attributes:
+      offense: 5
+      control: 1
+      fear: 2
+      defense: 1
+      utility: 3
   - name: Wandering Voice Keens Delirium
     slug: keens-delirium
     expansion: Nature Incarnate
     complexity: High
     incarna: true
+    attributes:
+      offense: 2
+      control: 5
+      fear: 3
+      defense: 1
+      utility: 2
   - name: Wounded Waters Bleeding
     slug: wounded-waters
     expansion: Nature Incarnate
     complexity: High
+    attributes:
+      offense: 4
+      control: 5
+      fear: 2
+      defense: 1
+      utility: 1

@@ -11,13 +11,18 @@ datasource supabase {
 }
 
 model Spirit {
-  id    String    @id @default(uuid())
-  name  String    @unique
-  slug  String    @unique
-  expansion  String
-  complexity String
-  complexityValue Int @map("complexity_value")
-  incarna    Boolean @default(false)
+  id              String  @id @default(uuid())
+  name            String  @unique
+  slug            String  @unique
+  expansion       String
+  complexity      String
+  complexityValue Int     @map("complexity_value")
+  incarna         Boolean @default(false)
+  offense         Int     @default(0)
+  control         Int     @default(0)
+  fear            Int     @default(0)
+  defense         Int     @default(0)
+  utility         Int     @default(0)
 }
 
 model Adversary {
