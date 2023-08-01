@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useState } from "react";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { 
@@ -60,12 +60,12 @@ export default function AdversaryDetails() {
   const { openSnackbar, closeSnackbar, open: snackbarOpen, text: snackbarText } = useStatusSnackbar();
   const effectiveLevel = sliderLevel !== null ? sliderLevel : level;
   const navigate = useNavigate();
-  const linkPage = useCallback((slugLink, levelLink) => {
+  const linkPage = (slugLink, levelLink) => {
     const baseUrl = `/adversary/${slugLink}`;
     const levelUrl = levelLink ? `${baseUrl}/${levelLink}` : baseUrl;
     setSliderLevel(null);
     navigate(levelUrl)
-  }, [adversary]);
+  };
 
   return (
     <>
@@ -135,7 +135,7 @@ export default function AdversaryDetails() {
       <StatusSnackbar
         open={snackbarOpen}
         onClose={closeSnackbar}
-        message={snackbarText}
+        text={snackbarText}
       />
     </>
   );
