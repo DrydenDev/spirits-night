@@ -147,9 +147,9 @@ function SpiritChart({ spirit, color }) {
 
   return (
     <Box className="spirit-chart">
-      <ResponsiveContainer width="100%" height={240} minWidth={320}>
+      <ResponsiveContainer width="100%" height={240} minWidth={300}>
         <BarChart width="100%" height={240} data={spiritChartData}>
-          <XAxis dataKey="name" tickLine={false} tick={{fontWeight: 400}} />
+          <XAxis dataKey="name" tickLine={false} interval={0} tick={{fontWeight: 400}} />
           <Bar dataKey="attribute" fill={`rgb(${color})`} />
         </BarChart>
       </ResponsiveContainer>
