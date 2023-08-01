@@ -148,7 +148,6 @@ function SpiritChart({ spirit, color }) {
   const minTicks = Math.min(0, ...spiritChartData.map((s) => s.attribute));
   const maxTicks = Math.max(5, ...spiritChartData.map((s) => s.attribute));
   const ticks = Array.from(Array(maxTicks - minTicks + 1), (x, i) => i - minTicks);
-  console.log(ticks);
 
   return (
     <Box className="spirit-chart">

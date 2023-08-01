@@ -9,7 +9,6 @@ export function useStatusSnackbar() {
   const [snackbarState, setSnackbarState] = useState({ open: false });
   const closeSnackbar = () => setSnackbarState({open: false});
   const openSnackbar = (text) => {
-    console.log("Opening Snackbar!" + text);
     setSnackbarState({text, open: true});
   };
 
