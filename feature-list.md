@@ -3,7 +3,6 @@
 - [ ] Add full image for spirit board to generation
 - [x] Add generation of an adversary in with a random level
 - [x] Add a slider to control the level(s) of the adversary
-- [ ] Add full adversary images to generation
 - [x] Add icons instead of text to descriptions
 - [x] Deploy to an available host (cloudflare, netlify, vercel, github, etc)
 - [x] Point domain to host
@@ -21,3 +20,10 @@
 - [ ] Spirit island "text" causes lots of key issues in React
 - [x] Make spirit random/today redirect to permanent slug, and permalink copy to clipboard
 - [x] Add basic nav between pages
+- [ ] Add navbbar at top instead of pure links
+- [x] Add spirit charts showing what they're good at
+- [ ] Add playstyle description to each spirit
+- [ ] Add tags to each spirit for things like elements, strengths,, etc
+- [ ] Tool to select spirits you like and find commonalities in playstyles?
+- [ ] Add ability to filter spirits by complexity and attributes
+- [ ] Add ability to search spirits/adversaries quickly with slash command
