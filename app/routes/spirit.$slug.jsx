@@ -1,7 +1,7 @@
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
-import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import ColorThief from 'colorthief';
+import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import ColorThief from "colorthief";
 
 import { getRandomSpirit, getSpiritBySlug } from "~/models/Spirit.server";
 import { getTodaySeed } from "~/utils/random";
@@ -145,10 +145,16 @@ function SpiritChart({ spirit, color }) {
     }
   ];
 
+  const minTicks = Math.min(0, ...spiritChartData.map((s) => s.attribute));
+  const maxTicks = Math.max(5, ...spiritChartData.map((s) => s.attribute));
+  const ticks = Array.from(Array(maxTicks - minTicks + 1), (x, i) => i - minTicks);
+  console.log(ticks);
+
   return (
     <Box className="spirit-chart">
       <ResponsiveContainer width="100%" height={240} minWidth={300}>
         <BarChart width="100%" height={240} data={spiritChartData}>
+          <YAxis hide={true} ticks={ticks} />
           <XAxis dataKey="name" tickLine={false} interval={0} tick={{fontWeight: 400}} />
           <Bar dataKey="attribute" fill={`rgb(${color})`} />
         </BarChart>
