@@ -21,10 +21,12 @@
     "@remix-run/react": "^1.19.1",
     "@remix-run/serve": "^1.19.1",
     "@vercel/analytics": "^1.0.1",
+    "colorthief": "^2.4.0",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-string-replace": "^1.1.1",
+    "recharts": "^2.7.2",
     "seedrandom": "^3.0.5",
     "yaml": "^2.3.1"
   },

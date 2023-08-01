@@ -1,6 +1,7 @@
-import { useCallback, useState} from "react";
 import { json, redirect } from "@remix-run/node";
-import { useLoaderData, useNavigate, useParams } from "@remix-run/react";
+import { useLoaderData, useNavigate } from "@remix-run/react";
+import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import ColorThief from 'colorthief';
 
 import { getRandomSpirit, getSpiritBySlug } from "~/models/Spirit.server";
 import { getTodaySeed } from "~/utils/random";
@@ -11,6 +12,7 @@ import {
   CardMedia, 
   CardContent,
   Chip,
+  Container,
   Typography,
   Stack,
 } from "@mui/material";
@@ -25,8 +27,20 @@ export const links = () => [
   { rel: "stylesheet", href: spiritStyles }
 ];
 
-export async function loader({ params }) {
+async function getSpiritColor(url, spirit) {
+  try {
+    const palette = await ColorThief.getPalette(`http://${url.hostname}:${url.port}/images/spirits/${spirit.slug}/splash.png`);
+    return palette[Math.floor ( Math.random() * palette.length)];
+  } catch(err) {
+    // #A782EC -- Purple that will show nice on background
+    console.log("Error fetching spirit color", err);
+    return [65, 51, 93];
+  }
+}
+
+export async function loader({ params, request }) {
   const { slug } = params;
+  const url = new URL(request.url);
   
   if (slug === "random" || slug === "today") {
     const randomSeed = (slug === "today") ? getTodaySeed() : null;
@@ -35,8 +49,9 @@ export async function loader({ params }) {
   }
 
   const spirit = await getSpiritBySlug(slug);
+  const spiritColor = await getSpiritColor(new URL(request.url), spirit);
   if (spirit) {
-    return json({ spirit });
+    return json({ spirit, spiritColor });
   }
 
   throw new Response(null, {
@@ -46,10 +61,11 @@ export async function loader({ params }) {
 }
 
 export default function SpiritDetails() {
-  const { spirit } = useLoaderData();
+  const { spirit, spiritColor } = useLoaderData();
   const navigate = useNavigate();
   const linkPage = (slugLink) => navigate(`/spirit/${slugLink}`);
   const { openSnackbar, closeSnackbar, open: snackbarOpen, text: snackbarText } = useStatusSnackbar();
+  console.log(spiritColor);
 
   return (
     <>
@@ -61,6 +77,9 @@ export default function SpiritDetails() {
         />
         <CardContent className="spirit-card">
           <Typography align="center" gutterBottom variant="h3">{spirit.name}</Typography>
+          <Container sx={{ width: { xs: "100%", md: "50%" }, padding: 0 }}>
+            <SpiritChart spirit={spirit} color={spiritColor} />
+          </Container>
           <Stack sx={{ justifyContent: 'center' }} direction="row" spacing={1}>
             <Chip variant="outlined" label={`${spirit.complexity} Complexity`} />
             <Chip label={spirit.expansion} />
@@ -102,5 +121,39 @@ export default function SpiritDetails() {
         text={snackbarText}
       />
     </>
+  );
+}
+
+function SpiritChart({ spirit, color }) {
+  const spiritChartData = [
+    {
+      name: "Offense",
+      attribute: spirit.offense
+    },
+    {
+      name: "Control",
+      attribute: spirit.control,
+    },
+    {
+      name: "Fear",
+      attribute: spirit.fear,
+    },
+    {
+      name: "Defense",
+      attribute: spirit.defense
+    },
+    {
+      name: "Utility",
+      attribute: spirit.utility,
+    }
+  ];
+
+  return (
+    <ResponsiveContainer width="100%" height={240} minWidth={320}>
+      <BarChart width="100%" height={240} data={spiritChartData} className="spirit-chart">
+        <XAxis dataKey="name" tickLine={false} tick={{fontWeight: 400}} />
+        <Bar dataKey="attribute" fill={`rgb(${color})`} />
+      </BarChart>
+    </ResponsiveContainer>
   );
 }
