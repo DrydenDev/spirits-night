@@ -94,6 +94,7 @@ export async function loadAdversaries(prismaClient: PrismaClient) {
         description: level.description
       }
     });
+    await prismaClient.adversaryLevel.createMany({ data: adversaryLevelData });
 
     await prismaClient.adversaryReference.deleteMany({ where: { adversaryId: adversaryRow.id } });
     const adversaryReferenceData = adversary.reference.map((ref) => {

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
+
 import { 
-  Alert,
-  AlertTitle,
   Box,
   Button,
   Card,
@@ -11,22 +10,27 @@ import {
   CardMedia, 
   CardContent,
   Chip,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-  Slider,
   Stack,
+  Tab,
+  Tabs,
   Typography,
 } from "@mui/material";
 import CasinoIcon from '@mui/icons-material/Casino';
 import LinkIcon from '@mui/icons-material/Link';
 import TodayIcon from '@mui/icons-material/Today';
 
+import { AdversaryCard } from '~/components/AdversaryCard';
+import { AdversarySlider } from '~/components/AdversarySlider';
+import { AdversaryTagBar } from "~/components/AdversaryTagBar";
 import { useStatusSnackbar, StatusSnackbar } from "~/components/StatusSnackbar";
+
 import { getRandomAdversary, getAdversaryBySlug } from "~/models/Adversary.server";
-import { toSpiritIslandText } from "~/utils/spiritIslandText";
 import { getTodaySeed } from "~/utils/random";
+
+const TAB_TYPE = {
+  card: "CARD",
+  reference: "REFERENCE"
+}
 
 export async function loader({ params }) {
   const [slug, capturedLevel] = params['*'].split('/');
@@ -56,9 +60,11 @@ function getDifficultyLevel(adversary, level) {
 
 export default function AdversaryDetails() {
   const { adversary, level } = useLoaderData();
-  const [sliderLevel, setSliderLevel] = useState(level);
   const { openSnackbar, closeSnackbar, open: snackbarOpen, text: snackbarText } = useStatusSnackbar();
+  const [sliderLevel, setSliderLevel] = useState(level);
+  const [currentTab, setCurrentTab] = useState(TAB_TYPE.card);
   const effectiveLevel = sliderLevel !== null ? sliderLevel : level;
+
   const navigate = useNavigate();
   const linkPage = (slugLink, levelLink) => {
     const baseUrl = `/adversary/${slugLink}`;
@@ -66,6 +72,12 @@ export default function AdversaryDetails() {
     setSliderLevel(null);
     navigate(levelUrl)
   };
+
+  const currentTabMarkup = currentTab === TAB_TYPE.card ? (
+    <AdversaryCard adversary={adversary} level={effectiveLevel} />
+  ) : (
+    <div>Actually it's gameplay ref time</div>
+  )
 
   return (
     <>
@@ -76,30 +88,16 @@ export default function AdversaryDetails() {
           title={adversary.name}
         />
         <CardContent className="adversary-card">
-          <Typography align="center" gutterBottom variant="h3">{adversary.name}</Typography>
-          <Stack sx={{ alignItems: 'center', justifyContent: 'center' }} spacing={1}>
-            <Slider
-              size="medium"
-              aria-label="Adversary difficulty"
-              value={effectiveLevel}
-              valueLabelDisplay="auto"
-              step={null}
-              marks={[...Array(7).keys()].map((level) => ({ value: level, label: level }))}
-              min={0}
-              max={6}
-              sx={{
-                width: "50%"
-              }}
-              onChange={(event, value) => setSliderLevel(value)}
-              onChangeCommitted={(event, value) => {
-                window.history.replaceState({}, "Spirits Night", `/adversary/${adversary.slug}/${value}`);
-              }}
+          <Stack spacing={2} centered={true}>
+            <Typography align="center" gutterBottom variant="h3">{adversary.name}</Typography>
+            <AdversarySlider
+              level={effectiveLevel}
+              onChange={(level) => setSliderLevel(level)}
+              onCommit={(level) => window.history.replaceState({}, "Spirits Night", `/adversary/${adversary.slug}/${level}`)}
             />
-          </Stack>
-          <AdversaryTable adversary={adversary} level={effectiveLevel} />
-          <Stack sx={{ justifyContent: 'center' }} direction="row" spacing={1}>
-            <LevelChips adversary={adversary} level={effectiveLevel} />
-            <Chip label={adversary.expansion} />
+            <AdversaryModeTabs currentTab={currentTab} onChange={(value) => setCurrentTab(value)} />
+            { currentTabMarkup }
+            <AdversaryTagBar adversary={adversary} level={effectiveLevel} />
           </Stack>
         </CardContent>
         <CardActions sx={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -141,70 +139,13 @@ export default function AdversaryDetails() {
   );
 }
 
-function LevelChips({level, adversary, ...additionalProps}) {
-  const difficultyLevel = getDifficultyLevel(adversary, level)?.difficulty || adversary.difficulty;
-  const dangerColor = difficultyLevel > 7 ? "error" : difficultyLevel > 4 ? "warning" : "success";
-  const difficultyChip = difficultyLevel ? 
-    <Chip color={dangerColor} variant="filled" label={`Difficulty ${difficultyLevel}`}/> : null;
-
+function AdversaryModeTabs({ currentTab, onChange }) {
   return (
-    <>
-      <Chip color="primary" label={`Level ${level}`} {...additionalProps} />
-      {difficultyChip}
-    </>
-  );
-}
-
-function AdversaryTable({adversary, level}) {
-  const { lossCondition, escalationAbility, levels } = adversary;
-  const difficultyLevel = getDifficultyLevel(adversary, level);
-  const lossConditionMarkup = !lossCondition ? null : (
-    <Alert severity="error">
-      <AlertTitle>Additional Loss Condition</AlertTitle>
-      <strong>{lossCondition.title}</strong>: {toSpiritIslandText(lossCondition.description)}
-    </Alert>
-  );
-
-  const escalationMarkup = (
-    <Alert severity="warning">
-      <AlertTitle>Escalation</AlertTitle>
-      <strong>{escalationAbility.title}</strong>: {toSpiritIslandText(escalationAbility.description)}
-    </Alert>
-  );
-
-  const fearMarkup = (
-    <Stack direction="column" className="fear-card" spacing={0}>
-      <Box className="header-bar"><Typography variant="h4">Fear Cards</Typography></Box>
-      <Box className="body-text"><Typography variant="body1">{difficultyLevel?.fearCards || "3/3/3"}</Typography></Box>
-    </Stack>
-  );
-
-  const levelItems = levels.map((levelRow, index) => {
-    if (levelRow.level > level) return;
-    return (
-      <ListItem key={index}>
-        <ListItemText
-          key={index}
-          primary={levelRow.title}
-          secondary={toSpiritIslandText(levelRow.description)}
-        />
-      </ListItem>
-    )
-  });
-  const levelsMarkup = levelItems.length > 0 ? (
-    <List>{levelItems}</List>
-  ) : null;
-
-  return (
-    <>
-      <Paper elevation={2} className="adversary-card">
-        <Stack direction="column" spacing={2}>
-          {lossConditionMarkup}
-          {escalationMarkup}
-          {fearMarkup}
-          {levelsMarkup}
-        </Stack>
-      </Paper> 
-    </>
+    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Tabs value={currentTab} centered={true} onChange={(event, value) => onChange(value)}>
+        <Tab value={TAB_TYPE.card} label="Adversary Card" />
+        <Tab value={TAB_TYPE.reference} label="Gameplay Reference" />
+      </Tabs>
+    </Box>
   );
 }
