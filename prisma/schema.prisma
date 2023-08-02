@@ -34,6 +34,7 @@ model Adversary {
   lossCondition     Json?    @map("loss_condition")
   escalationAbility Json     @map("escalation_ability")
   levels            AdversaryLevel[]
+  references        AdversaryReference[]
 }
 
 model AdversaryLevel {
@@ -46,4 +47,16 @@ model AdversaryLevel {
   fearCards   String    @map("fear_cards")
   description String
   @@unique([adversaryId, title], name: "adversaryTitle")
+}
+
+model AdversaryReference {
+  id          String    @id @default(uuid())
+  adversaryId String    @map("adversary_id")
+  adversary   Adversary @relation(fields: [adversaryId], references: [id])
+  title       String
+  level       Int
+  maxLevel    Int?      @map("max_level")
+  type        String
+  phase       String
+  description String
 }

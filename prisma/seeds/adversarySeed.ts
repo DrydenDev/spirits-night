@@ -19,6 +19,7 @@ interface Adversary {
   loss_condition: LossCondition;
   escalation: EscalationAbility;
   levels: AdversaryLevel[];
+  reference: AdversaryReference[];
 }
 
 interface AdversaryLevel {
@@ -26,6 +27,15 @@ interface AdversaryLevel {
   level: number;
   difficulty: number;
   fear: string;
+  description: string;
+}
+
+interface AdversaryReference {
+  title: string;
+  level: number;
+  maxLevel: number;
+  type: string;
+  phase: string;
   description: string;
 }
 
@@ -85,7 +95,20 @@ export async function loadAdversaries(prismaClient: PrismaClient) {
       }
     });
 
-    await prismaClient.adversaryLevel.createMany({ data: adversaryLevelData });
+    await prismaClient.adversaryReference.deleteMany({ where: { adversaryId: adversaryRow.id } });
+    const adversaryReferenceData = adversary.reference.map((ref) => {
+      return {
+        adversaryId: adversaryRow.id,
+        level: ref.level,
+        maxLevel: ref.maxLevel,
+        title: ref.title,
+        description: ref.description,
+        phase: ref.phase,
+        type: ref.type
+      }
+    });
+
+    await prismaClient.adversaryReference.createMany({ data: adversaryReferenceData });
   });
 
 
@@ -94,4 +117,7 @@ export async function loadAdversaries(prismaClient: PrismaClient) {
 
   const levelsCount = await prismaClient.adversaryLevel.count();
   console.log(`Adversary Level Count: ${levelsCount}`);
+
+  const refCount = await prismaClient.adversaryReference.count();
+  console.log(`Adversary Reference Count: ${refCount}`);
 }
