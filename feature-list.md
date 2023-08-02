@@ -9,7 +9,7 @@
 - [x] Ensure all functionality works on mobile
 - [x] Add "Today" option with fixed randomness for adversary and spirit
 - [ ] Add support for multiple spirit generation
-- [ ] Add quick lookup/reference for what each adversary does on each level, by spirit phase (e.g., WHEN RAVAGING, WHEN BUILDING, AFTER BUILDING, etc)
+- [x] Add quick lookup/reference for what each adversary does on each level, by spirit phase (e.g., WHEN RAVAGING, WHEN BUILDING, AFTER BUILDING, etc)
 - [ ] Add fun water wave + island animation to bottom of screen (start with 404 page)
 - [ ] Add .devcontainer to install packages, prisma, seed DB, etc
 - [ ] Fix long title like Thunderspeaker on mobile
