@@ -42,7 +42,7 @@ adversaries:
         level: 1
         phase: Setup
         type: Level
-        description: "During setup, on each board, add 1 [[Town]] to land #3."
+        description: "On each board, add 1 [[Town]] to land #3."
       - title: Surge of Colonists
         level: 2
         phase: Setup
@@ -124,7 +124,7 @@ adversaries:
         title: Criminals and Malcontents
         phase: Setup
         type: Level
-        description: "During Setup, on each board add 1 [[City]] to land #1 and 1 [[Town]] to land #2"
+        description: "On each board add 1 [[City]] to land #1 and 1 [[Town]] to land #2"
       - level: 3
         title: High Immigration
         phase: Setup
@@ -143,17 +143,17 @@ adversaries:
         description: "Remove the High Immigration tile when a Stage II card slides onto it, putting that card in the discard."
       - level: 5
         title: Local Autonomy
-        phase: Trait
+        phase: Traits
         type: Level
         description: "[[Town]]/[[City]] have +1 Health."
       - level: 6
         title: Independent Resolve
         phase: Setup
         type: Level
-        description: "During Setup, add an additional [[Fear]] to the Fear Pool per player in the game."
+        description: "Add an additional [[Fear]] to the Fear Pool per player in the game."
       - level: 6
         title: Independent Resolve
-        phase: Invader
+        phase: Fear
         type: Level
         description: "During any Invader Phase where you resolve no Fear Cards, perform the Build from High Immigration twice. (_This has no effect if no card is on the extra Build slot._)"
       - level: 0
@@ -163,7 +163,7 @@ adversaries:
         description: "On each board with [[Town]]/[[City]], build in the land with the most [[Town]]/[[City]]"
       - level: 0
         title: Proud & Mighty Capital
-        phase: Trait
+        phase: Traits
         type: Loss Condition
         description: "If 7 or more [[Town]]/[[City]] are ever in a single land, the Invaders win."
   - name: The Kingdom of Sweden
@@ -214,17 +214,17 @@ adversaries:
         title: Population Pressure at Home
         phase: Setup
         type: Level
-        description: "During Setup, on each board add 1 [[City]] to land #4. On boards where land #4 starts with [[Blight]], put that [[Blight]] in land #5 instead."
+        description: "On each board add 1 [[City]] to land #4. On boards where land #4 starts with [[Blight]], put that [[Blight]] in land #5 instead."
       - level: 3
         title: Fine Steel for Tools and Guns
-        phase: Trait
+        phase: Traits
         type: Level
         description: "[[Town]] deal 3 Damage. [[City]] deal 5 Damage."
       - level: 4
         title: Royal Backing
         phase: Setup
         type: Level
-        description: "During Setup, after adding all other Invaders, discard the top card of the Invader Deck. On each board, add 1 [[Town]] to the land of that terrain with the fewest Invaders."
+        description: "After adding all other Invaders, discard the top card of the Invader Deck. On each board, add 1 [[Town]] to the land of that terrain with the fewest Invaders."
       - level: 5
         title: Mining Rush
         phase: Ravage
@@ -234,7 +234,7 @@ adversaries:
         title: Prospecting Outpost
         phase: Setup
         type: Level
-        description: "During setup, on each board add 1 [[Town]] and 1 [[Blight]] to land #8. The [[Blight]] comes from the box, not the Blight Card."
+        description: "On each board add 1 [[Town]] and 1 [[Blight]] to land #8. The [[Blight]] comes from the box, not the Blight Card."
       - level: 0
         title: Swayed by the Invaders
         phase: Explore
@@ -291,7 +291,7 @@ adversaries:
         title: Slave Labor
         phase: Setup
         type: Level
-        description: "During Setup, put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck."
+        description: "Put the \"Slave Rebellion\" event under the top 3 cards of the Event Deck."
       - level: 2
         title: Slave Labor
         phase: Build
@@ -301,7 +301,7 @@ adversaries:
         title: Early Plantation
         phase: Setup
         type: Level
-        description: "During Setup, on each board add 1 [[Town]] to the highest-numbered land without [[Town]]. Add 1 [[Town]] to land #1."
+        description: "On each board add 1 [[Town]] to the highest-numbered land without [[Town]]. Add 1 [[Town]] to land #1."
       - level: 4
         title: Triangle Trade
         phase: Build
@@ -309,7 +309,7 @@ adversaries:
         description: "Whenever Invaders Build a Coastal [[City]], add 1 [[Town]] to the adjacent land with the fewest [[Town]]."
       - level: 5
         title: Slow-Healing Ecosystem
-        phase: Trait
+        phase: Traits
         type: Level
         description: "When you remove [[Blight]] from the board, put it here instead of onto the Blight Card. As soon as you have 3 [[Blight]] per player here, move it all back to the Blight Card."
       - level: 6
@@ -334,7 +334,7 @@ adversaries:
         description: "Before Setup, return all but 7 [[Town]] per player to the box (_prior to adding towns to setup lands_)."
       - level: 0
         title: Sprawling Plantations
-        phase: Trait
+        phase: Traits
         type: Loss Condition
         description: "Invaders win if you ever cannot place a [[Town]]."
   - name: Habsburg Monarchy (Livestock Colony)
@@ -388,7 +388,7 @@ adversaries:
         title: More Rural Than Urban
         phase: Setup
         type: Level
-        description: "During Setup, on each board, add 1 [[Town]] to land #2 and 1 [[Town]] to the highest-numbered land without Setup symbols."
+        description: "On each board, add 1 [[Town]] to land #2 and 1 [[Town]] to the highest-numbered land without Setup symbols."
       - level: 2
         title: More Rural Than Urban
         phase: Build
@@ -401,7 +401,7 @@ adversaries:
         description: "When making the Invader Deck, Remove 1 additional Stage I Card. (New deck order: 11-2222-33333)"
       - level: 4
         title: Herds Thrive in Verdant Lands
-        phase: Trait
+        phase: Traits
         type: Level
         description: "[[Town]] in lands without [[Blight]] are *Durable*: they have +2 Health, and \"Destroy [[Town]]\" effects instead deal 2 Damage (to those [[Town]] only) per [[Town]] they could Destroy. (\"Destroy all [[Town]]\" works normally.)"
       - level: 5
@@ -411,7 +411,7 @@ adversaries:
         description: "Before the initial Explore, put the Habsburg Reminder Card under the top 5 Invader Cards. When Revealed, on each board, add 1 [[City]] to a Coastland land without [[City]] and 1 [[Town]] to the 3 Inland lands with the fewest [[Blight]]."
       - level: 6
         title: Far-Flung Herds
-        phase: Trait
+        phase: Traits
         type: Level
         description: "Ravages do +2 Damage (total) if any adjacent lands have [[Town]]. (This does not cause lands without Invaders to Ravage.)"
       - level: 0
@@ -470,10 +470,10 @@ adversaries:
         title: Hunters Bring Home Shell and Hide
         phase: Setup
         type: Level
-        description: "During Setup, on each board, add 1 [[Beast]] and 1 [[Explorer]] to the highest-numbered land without [[Town]]/[[City]]."
+        description: "On each board, add 1 [[Beast]] and 1 [[Explorer]] to the highest-numbered land without [[Town]]/[[City]]."
       - level: 1
         title: Hunters Bring Home Shell and Hide
-        phase: Trait
+        phase: Traits
         type: Level
         description: "[[Explorer]] do +1 Damage."
       - level: 1
@@ -483,7 +483,7 @@ adversaries:
         description: "When Ravage adds [[Blight]] to a land (including cascades), Destroy 1 [[Beast]] in that land."
       - level: 2
         title: A Sense for Impending Disaster
-        phase: Trait
+        phase: Traits
         type: Level
         description: "The first time each Action would Destroy [[Explorer]]: If possible, 1 of those [[Explorer]] is instead Pushed. 1 [[Fear]] when you do so."
       - level: 3
@@ -567,7 +567,7 @@ adversaries:
         title: Seize Opportunity
         phase: Setup
         type: Level
-        description: "During Setup, add 1 [[City]] to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)"
+        description: "Add 1 [[City]] to land #2. Place \"Coastal Lands\" as the 3rd Stage II card, and move the two Stage II Cards above it up by one. (New Deck Order: 11-22-1-C2-33333, where C is the Stage II Coastal Lands Card.)"
       - level: 3
         title: Chart the Coastline
         phase: Build
@@ -577,7 +577,7 @@ adversaries:
         title: Ambition of a Minor Nation
         phase: Setup
         type: Level
-        description: "During Setup, replace the bottom Stage I Card with the bottom Stage III Card. (New Deck Order: 11-22-3-C2-3333)"
+        description: "Replace the bottom Stage I Card with the bottom Stage III Card. (New Deck Order: 11-22-3-C2-3333)"
       - level: 5
         title: Runoff and Bilgewater
         phase: Ravage
@@ -595,7 +595,7 @@ adversaries:
         description: "On the single board with the most Coastal [[Town]]/[[City]], add 1 [[Town]] to the N lands with the fewest [[Town]] (N = # of players.)"
       - level: 0
         title: Trade Hub
-        phase: Trait
+        phase: Traits
         type: Loss Condition
         description: "If the number of Coastal lands with [[City]] is ever greater than (2 x # of boards), the Invaders win."
   - name: Habsburg Mining Expedition

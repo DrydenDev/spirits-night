@@ -8,7 +8,7 @@ export async function getRandomAdversary(seed) {
   const randomAdversary = await prisma.adversary.findMany({
     take: 1,
     skip: skip,
-    include: { levels: true }
+    include: { levels: true, references: true }
   });
   const randomLevel = Math.round(generator() * 6);
   return { adversary: randomAdversary[0], level: randomLevel };
@@ -17,7 +17,7 @@ export async function getRandomAdversary(seed) {
 export async function getAdversaryBySlug(slug) {
   return await prisma.adversary.findUnique({
     where: { slug },
-    include: { levels: true }
+    include: { levels: true, references: true }
   });
 }
 

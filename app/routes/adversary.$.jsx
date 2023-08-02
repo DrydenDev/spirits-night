@@ -20,6 +20,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import TodayIcon from '@mui/icons-material/Today';
 
 import { AdversaryCard } from '~/components/AdversaryCard';
+import { AdversaryGameplayReference } from "~/components/AdversaryGameplayReference";
 import { AdversarySlider } from '~/components/AdversarySlider';
 import { AdversaryTagBar } from "~/components/AdversaryTagBar";
 import { useStatusSnackbar, StatusSnackbar } from "~/components/StatusSnackbar";
@@ -76,7 +77,7 @@ export default function AdversaryDetails() {
   const currentTabMarkup = currentTab === TAB_TYPE.card ? (
     <AdversaryCard adversary={adversary} level={effectiveLevel} />
   ) : (
-    <div>Actually it's gameplay ref time</div>
+    <AdversaryGameplayReference adversary={adversary} level={effectiveLevel} />
   )
 
   return (

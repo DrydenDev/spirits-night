@@ -9,12 +9,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { EscalationAlert, LossAlert } from '~/components/AdversaryAlerts';
 
 import { toSpiritIslandText } from '~/utils/spiritIslandText';
 
 function getDifficultyLevel(adversary, level) {
-  console.log(level);
-  console.log({adversary});
   return adversary.levels.find((adversaryLevel) => adversaryLevel.level === level);
 }
 
@@ -22,18 +21,10 @@ export function AdversaryCard({adversary, level}) {
   const { lossCondition, escalationAbility, levels } = adversary;
   const difficultyLevel = getDifficultyLevel(adversary, level);
   const lossConditionMarkup = !lossCondition ? null : (
-    <Alert severity="error">
-      <AlertTitle>Additional Loss Condition</AlertTitle>
-      <strong>{lossCondition.title}</strong>: {toSpiritIslandText(lossCondition.description)}
-    </Alert>
+    <LossAlert title={lossCondition.title} description={lossCondition.description} />
   );
 
-  const escalationMarkup = (
-    <Alert severity="warning">
-      <AlertTitle>Escalation</AlertTitle>
-      <strong>{escalationAbility.title}</strong>: {toSpiritIslandText(escalationAbility.description)}
-    </Alert>
-  );
+  const escalationMarkup = <EscalationAlert title={escalationAbility.title} description={escalationAbility.description} />;
 
   const fearMarkup = (
     <Stack direction="column" className="fear-card" spacing={0}>
@@ -59,15 +50,13 @@ export function AdversaryCard({adversary, level}) {
   ) : null;
 
   return (
-    <>
-      <Paper elevation={2} className="adversary-card">
-        <Stack direction="column" spacing={2}>
-          {lossConditionMarkup}
-          {escalationMarkup}
-          {fearMarkup}
-          {levelsMarkup}
-        </Stack>
-      </Paper> 
-    </>
+    <Paper elevation={2} className="adversary-card">
+      <Stack direction="column" spacing={2}>
+        {lossConditionMarkup}
+        {escalationMarkup}
+        {fearMarkup}
+        {levelsMarkup}
+      </Stack>
+    </Paper>
   );
 }
