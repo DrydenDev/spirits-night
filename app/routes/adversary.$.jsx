@@ -29,8 +29,8 @@ import { getRandomAdversary, getAdversaryBySlug } from "~/models/Adversary.serve
 import { getTodaySeed } from "~/utils/random";
 
 const TAB_TYPE = {
-  card: "CARD",
-  reference: "REFERENCE"
+  card: "card",
+  reference: "reference"
 }
 
 export async function loader({ params }) {
@@ -67,11 +67,9 @@ export default function AdversaryDetails() {
   const effectiveLevel = sliderLevel !== null ? sliderLevel : level;
 
   const navigate = useNavigate();
-  const linkPage = (slugLink, levelLink) => {
-    const baseUrl = `/adversary/${slugLink}`;
-    const levelUrl = levelLink ? `${baseUrl}/${levelLink}` : baseUrl;
+  const linkPage = (slugLink) => {
     setSliderLevel(null);
-    navigate(levelUrl)
+    navigate(`/adversary/${slugLink}`)
   };
 
   const currentTabMarkup = currentTab === TAB_TYPE.card ? (
