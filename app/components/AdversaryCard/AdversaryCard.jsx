@@ -33,7 +33,8 @@ export function AdversaryCard({adversary, level}) {
     </Stack>
   );
 
-  const levelItems = levels.map((levelRow, index) => {
+  const sortedLevels = levels.sort((a, b) => a.level - b.level);
+  const levelItems = sortedLevels.map((levelRow, index) => {
     if (levelRow.level > level) return;
     return (
       <ListItem key={index}>
