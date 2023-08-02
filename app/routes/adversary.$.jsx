@@ -142,8 +142,8 @@ function AdversaryModeTabs({ currentTab, onChange }) {
   return (
     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
       <Tabs value={currentTab} centered={true} onChange={(event, value) => onChange(value)}>
-        <Tab value={TAB_TYPE.card} label="Adversary Card" />
-        <Tab value={TAB_TYPE.reference} label="Gameplay Reference" />
+        <Tab value={TAB_TYPE.card} label="Card" />
+        <Tab value={TAB_TYPE.reference} label="Reference" />
       </Tabs>
     </Box>
   );
