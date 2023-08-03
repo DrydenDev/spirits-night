@@ -1,6 +1,6 @@
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
-import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { BarChart, Bar, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import ColorThief from "colorthief";
 
 import { getRandomSpirit, getSpiritBySlug } from "~/models/Spirit.server";
@@ -13,7 +13,6 @@ import {
   CardMedia, 
   CardContent,
   Chip,
-  Divider,
   Typography,
   Stack,
 } from "@mui/material";
@@ -200,6 +199,7 @@ function SpiritChart({ spirit, color }) {
         <BarChart width="100%" height={240} data={spiritChartData}>
           <YAxis hide={true} ticks={ticks} />
           <XAxis dataKey="name" tickLine={false} interval={0} tick={{fontWeight: 400, fill: backgroundColor.font }} />
+          <Tooltip cursor={{ fill: `rgb(${[...color, 0.1]})` }} />
           <Bar dataKey="attribute" fill={`rgb(${color})`} />
         </BarChart>
       </ResponsiveContainer>
