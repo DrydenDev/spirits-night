@@ -13,8 +13,9 @@ import {
   CardMedia, 
   CardContent,
   Chip,
-  Typography,
+  Paper,
   Stack,
+  Typography,
 } from "@mui/material";
 import ReplayIcon from '@mui/icons-material/Replay';
 import LinkIcon from '@mui/icons-material/Link';
@@ -193,13 +194,23 @@ function SpiritChart({ spirit, color }) {
   const ticks = Array.from(Array(maxTicks - minTicks + 1), (x, i) => i - minTicks);
   const backgroundColor = getBackgroundColor(color);
 
+  const AttributeTooltip = ({ active, payload, label}) => {
+    if (active && payload && payload.length) {
+      return (
+        <Paper sx={{ padding: '1em' }}>
+          <div><strong>{label}: </strong>{payload[0].value}</div>
+        </Paper>
+      );
+    }
+  }
+
   return (
     <Box className="spirit-chart" sx={{backgroundColor: `rgb(${backgroundColor.color})`}}>
       <ResponsiveContainer width="100%" height={240} minWidth={300}>
         <BarChart width="100%" height={240} data={spiritChartData}>
           <YAxis hide={true} ticks={ticks} />
           <XAxis dataKey="name" tickLine={false} interval={0} tick={{fontWeight: 400, fill: backgroundColor.font }} />
-          <Tooltip cursor={{ fill: `rgb(${[...color, 0.1]})` }} />
+          <Tooltip cursor={{ fill: `rgb(${[...color, 0.1]})` }} content={<AttributeTooltip />} />
           <Bar dataKey="attribute" fill={`rgb(${color})`} />
         </BarChart>
       </ResponsiveContainer>
