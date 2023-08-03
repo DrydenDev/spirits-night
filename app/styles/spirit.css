@@ -18,5 +18,9 @@
 }
 
 .playstyle-card p {
+  white-space: pre-wrap;
+}
+
+.playstyle-card p {
   padding: 0 10px 0 10px;
 }
