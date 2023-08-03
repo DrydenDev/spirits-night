@@ -22,6 +22,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import TodayIcon from '@mui/icons-material/Today';
 import { useStatusSnackbar, StatusSnackbar } from "~/components/StatusSnackbar";
 
+import { toSpiritIslandText } from "~/utils/spiritIslandText";
 import spiritStyles from "~/styles/spirit.css";
 
 export const links = () => [
@@ -159,7 +160,7 @@ function PlaystyleCard({ text, color }) {
     <>
       <Stack direction="column" className="playstyle-card" sx={{ maxWidth: { sm: '100%', md: '75%' }}}>
         <Typography variant="h6" as="h4" gutterBottom sx={{backgroundColor: `rgb(${[...color, 0.2]})`}}>Playstyle</Typography>
-        <Typography variant="body2">{text}</Typography>
+        <Typography variant="body2">{toSpiritIslandText(text)}</Typography>
       </Stack>
     </>
   );
