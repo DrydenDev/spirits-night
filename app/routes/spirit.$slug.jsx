@@ -55,7 +55,7 @@ function getBackgroundColor(color) {
     }
     backgroundColor = {
       font: 'white',
-      color: [...backgroundColor, 0.8]
+      color: [...backgroundColor]
     }
   } else {
     while(brightness(...backgroundColor) < 200) {
@@ -63,7 +63,7 @@ function getBackgroundColor(color) {
     }
     backgroundColor = {
       font: 'black',
-      color: [...backgroundColor, 0.5]
+      color: [...backgroundColor, 0.3]
     }
   }
 
@@ -108,7 +108,7 @@ export default function SpiritDetails() {
         />
         <CardContent className="spirit-card">
           <Typography align="center" gutterBottom variant="h3">{spirit.name}</Typography>
-          <PlaystyleCard text={spirit.playstyle} />
+          <PlaystyleCard text={spirit.playstyle} color={spiritColor} />
           <SpiritChart spirit={spirit} color={spiritColor} />
           <Stack sx={{ justifyContent: 'center' }} direction="row" spacing={1}>
             <Chip variant="outlined" label={`${spirit.complexity} Complexity`} />
@@ -154,11 +154,11 @@ export default function SpiritDetails() {
   );
 }
 
-function PlaystyleCard({ text }) {
+function PlaystyleCard({ text, color }) {
   return (
     <>
       <Stack direction="column" className="playstyle-card" sx={{ maxWidth: { sm: '100%', md: '75%' }}}>
-        <Typography variant="h6" as="h4" gutterBottom>Playstyle</Typography>
+        <Typography variant="h6" as="h4" gutterBottom sx={{backgroundColor: `rgb(${[...color, 0.2]})`}}>Playstyle</Typography>
         <Typography variant="body2">{text}</Typography>
       </Stack>
     </>
