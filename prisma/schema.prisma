@@ -14,6 +14,7 @@ model Spirit {
   id              String  @id @default(uuid())
   name            String  @unique
   slug            String  @unique
+  playstyle       String?
   expansion       String
   complexity      String
   complexityValue Int     @map("complexity_value")

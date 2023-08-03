@@ -1,6 +1,8 @@
 spirits:
   - name: A Spread of Rampant Green
     slug: green
+    playstyle: |
+      Fairly good at dealing with Towns, but terrible at handling Explorers (who are unfazed by prolific foliage). Can get Presence onto the board faster than most other Spirits. Extra Presence is good for targeting and especially for 'Choke the Land with Green", which can be extremely effective at slowing down invaders. Just be careful not to destroy Sacred Sites needed for Power use.
     expansion: Spirit Island
     complexity: Moderate
     attributes:
@@ -11,6 +13,10 @@ spirits:
       utility: 4
   - name: Breath of Darkness Down Your Spine
     slug: breath-of-darkness
+    playstyle: |
+      Abducts lone Invaders to gain [[Fear]] and keep them off the board for a time; its mobile Incarna is particularly useful for this. Reclaiming permits the Invaders to escape its void en masse, so can be quite painful.
+
+      Has trouble with built-up lands, and may need to scatter Invaders or take a Major Power to deal with them.
     expansion: Nature Incarnate
     complexity: High
     incarna: true
@@ -22,6 +28,8 @@ spirits:
       utility: 2
   - name: Bringer of Dreams and Nightmares
     slug: bodan
+    playstyle: |
+      With most Spirits, Terror Victories are a backup plan if the main push against the Invaders stalls out for too long, but Bringer turns Fear into a more viable primary strategy. Its transformation of damage & destruction into Fear can turn Major Powers into tremendous sources of terror and panic. However, the only real offense Bringer has is the Dahan fighting back. While it does have some defensive ability, it is fundamentally poor at clearing areas of Invaders.
     expansion: Spirit Island
     complexity: High
     attributes:
@@ -32,6 +40,10 @@ spirits:
       utility: 2
   - name: Dances Up Earthquakes
     slug: earthquakes
+    playstyle: |
+      Very much about tempo and timing: Can play high-cost Powers extremely easily, but they won't take effect until later in the game. Faces a constant tension between solving problems now and carefully planning ahead for big turns in the future - neglecting either one can be disastrous.
+
+      Despite starting with 6 Unique Powers, benefits greatly from gaining more.
     expansion: Nature Incarnate
     complexity: Very High
     attributes:
@@ -42,6 +54,10 @@ spirits:
       utility: 4
   - name: Devouring Teeth Lurk Underfoot
     slug: teeth
+    playstyle: |
+      Likes being in the same lands as Invaders, so it can use Range 0 offensive and defensive Powers. The first of its Innate Power can give some mobility, if needed.
+
+      Has a poor Plays track and potent but expensive Unique Powers, so can be better at handling fewer large threats than lots of little ones.
     expansion: Horizons
     complexity: Low
     attributes:
@@ -52,6 +68,10 @@ spirits:
       utility: 1
   - name: Downpour Drenches the World
     slug: downpour
+    playstyle: |
+      Cares about the question "How useful is this Power in the current context?" even more than most Spirits; it rarely plays all its Power Cards in any given Reclaim cycle (some get discarded to Growth), and for those it does play, it often has the option of using them multiple times.
+
+      Benefits even more than most Spirits from having lots of Presence on the board, both for Rain and Mud Suppress Conflict and to facilitate its Unique Powers (by making more lands Wetlands).
     expansion: Feather and Flame
     complexity: High
     attributes:
@@ -62,6 +82,10 @@ spirits:
       utility: 3
   - name: Ember-eyed Behemoth
     slug: behemoth
+    playstyle: |
+      Slowly but consistently stomps its Incarna around the island, smashing Invaders. ([[Dahan]] can keep clear, unless it really gets going.)
+
+      Benefits from spread-out [[Sacred Site]], both for targeting Powers and for moving its Incarna long distances. Adding [[Presence]] at its Incarna (which can count as [[Presence]]) can make it easier to get [[Presence]] into new lands, particularly non-Jungles.
     expansion: Nature Incarnate
     complexity: Moderate
     incarna: true
@@ -73,6 +97,10 @@ spirits:
       utility: 2
   - name: Eyes Watch From the Trees
     slug: eyes
+    playstyle: |
+      Good at Defending against Ravages, and at steadily earning [[Fear]].
+
+      Its ability to Gather [[Dahan]] to fight back when Defending can make a huge difference, changing a stalling tactic into a blow against the Invaders.
     expansion: Horizons
     complexity: Low
     attributes:
@@ -83,6 +111,10 @@ spirits:
       utility: 1
   - name: Fathomless Mud of the Swamp
     slug: otter
+    playstyle: |
+      Likes having [[Sacred Site]] where Invaders will Build, but may need to re-create those [[Sacred Site]] after oozing outwards with its Innate Power. In smaller games, might be able to cut off the most Inland lands from Explore actions by Destroying Inland [[Town]]/[[City]] and stopping new ones from being built.
+
+      Causes a fair bit of [[Fear]], much of which represents unpleasantness, hardship, and disgust.
     expansion: Horizons
     complexity: Low
     attributes:
@@ -93,6 +125,10 @@ spirits:
       utility: 2
   - name: Finder of Paths Unseen
     slug: finder
+    playstyle: |
+      All about moving the Invaders - and [[Dahan]]/[[Presence]]/[[Beasts]] from time to time. Good at creating Invader-free "safe-zones," due to its many movement Powers and its capacity to Isolate. Can't afford to Destroy Invaders too often without a way to re-add Destroyed [[Presence]], so either needs a big-hammer Major Power or to rely on its teammates for offense.
+
+      Changes the topology of the board, which increases complexity for all players - *particularly* in larger games!
     expansion: Feather and Flame
     complexity: Very High
     attributes:
@@ -103,6 +139,10 @@ spirits:
       utility: 2
   - name: Fractured Days Split the Sky
     slug: fractured-days
+    playstyle: |
+      Excellent at support and sweeping indirect effects, but starts off very limited otherwise. Several of its Unique Powers need setup to use well; it's entirely possible 1 or 2 of them may see no play in a given game.
+
+      Has a hard time getting lots of [[Presence]] onto the board. This can make targeting tricky, and may be quite dangerous if a Blighted Island effect Destroys [[Presence]].
     expansion: Jagged Earth
     complexity: Very High
     attributes:
@@ -113,6 +153,10 @@ spirits:
       utility: 5
   - name: Grinning Trickster Stirs Up Trouble
     slug: trickster
+    playstyle: |
+      Requires some comfort with risk: both Overenthusiastic Arson and Let's See What Will Happen involve uncertainty about how the Fast Powers phase will pan out.
+
+      Can be effective from the get-go, but benefits greatly from not working *too* hard, instead improving its capacity for mischief by adding [[Presence]] and gaining Power Cards. Bonus Energy from Let's See What Will Happen can be extremely helpful in avoiding the distraction of gaining Energy elsewhere.
     expansion: Jagged Earth
     complexity: Moderate
     attributes:
@@ -123,6 +167,8 @@ spirits:
       utility: 4
   - name: Heart of the Wildfire
     slug: wildfire
+    playstyle: |
+      Starts with good offense and gets better from there, but lays down Blight as it grows. The smaller the game, the more restraint is needed to prevent tipping the island over into being completely Blighted. The Wildfire can heal the land where it is, but may benefit from other Blight removal Powers so it can add Presence to problem lands without triggering Blight cascade. Removing Blight from its own lands limits its "Firestorm" innate power, however.
     expansion: Feather and Flame
     complexity: High
     attributes:
@@ -133,6 +179,10 @@ spirits:
       utility: 2
   - name: Hearth-Vigil
     slug: hearth-vigil
+    playstyle: |
+      Very good at protecting [[Dahan]] in its lands, not so great at stopping [[Blight]]. In keeping with its nature, largely brings [[Dahan]] to its [[Presence]] (or vice versa); getting [[Dahan]] elsewhere may require a bit of forethought with Keep Watch for New Incursions.
+
+      Very reactive, with reliable ways to deal with Invaders as they Ravage and Build, but has trouble handling established [[City]] that aren't Ravaging.
     expansion: Nature Incarnate
     complexity: Moderate
     attributes:
@@ -143,6 +193,10 @@ spirits:
       utility: 4
   - name: Keeper of the Forbidden Wilds
     slug: keeper
+    playstyle: |
+      A slowly growing wall - expanding can sometimes be difficult, but the Invaders will have an equally difficult time penetrating wherever the Keeper plants itself.
+      
+      In larger games, it may be useful to spread to one of the two far-distant lands early on, to have multiple points from which to slowly grow. 
     expansion: Branch and Claw
     complexity: Moderate
     attributes:
@@ -153,6 +207,10 @@ spirits:
       utility: 3
   - name: Lightning's Swift Strike
     slug: lightning
+    playstyle: |
+      Virtually all offense to start with: without a more defensive teammate, Blight may become a problem. Excellent at destroying buildings, less good at containing Explorers. Using Thundering Destruction tends to be a burst affair: a turn or two of position and build up Energy, followed by a really big turn.
+      
+      Starting Powers are extremely focused on Air and Fire: good for Thundering Destruction, bad for Major Power versatility.
     expansion: Spirit Island
     complexity: Low
     attributes:
@@ -163,6 +221,10 @@ spirits:
       utility: 2
   - name: Lure of the Deep Wilderness
     slug: lure
+    playstyle: |
+      Very focused on the interior - its best options for coastal lands are "draw the Invaders inland" or "turn [[Town]]/[[City]] into [[Explorer]], then draw them inland". Likes the interior to be dangerous, full of [[Badlands]], [[Beasts]], [[Disease]], and [[Wilds]], ideally where its [[Presence]] is.
+
+      Has better-than-average potential for containing Invaders and setting up a zone safe from Explores, but the coasts may get messy while doing so.
     expansion: Jagged Earth
     complexity: Moderate
     attributes:
@@ -173,6 +235,10 @@ spirits:
       utility: 1
   - name: Many Minds Move as One
     slug: many-minds
+    playstyle: |
+      Requires heavy spatial thought for [[Beast]] movement, due to its improved Push/Gather and large numbers of [[Beast]].
+
+      Has no offense to start with, but an excellent stalling defense combined with [[Fear]] generation; outright Fear victories may be plausible in smaller games. Both Fear Cards and [[Beast]] events are unpredictable, however, so swings of fortune are apt to be more relevant than usual.
     expansion: Jagged Earth
     complexity: Moderate
     attributes:
@@ -183,6 +249,8 @@ spirits:
       utility: 1
   - name: Ocean's Hungry Grasp
     slug: ocean
+    playstyle: |
+      Extremely good at assaulting the coasts where the Invaders start out strong, but quite weak island - the ocean is not accustomed to affecting events so far ashore. Its Presence shifts in and out like the tide, which can be tricky to manage, but permits re-positioning and tactical retreats or offensives in the hands of a skillful player. Has fairly inexpensive Unique Powers, but the energy gained from drowning Invaders can be necessary in stepping up to more potent Powers.
     expansion: Spirit Island
     complexity: High
     attributes:
@@ -193,6 +261,10 @@ spirits:
       utility: 2
   - name: Relentless Gaze of the Sun
     slug: sun
+    playstyle: |
+      Uses stacks of 3 [[Presence]] and high Energy income to hammer the same lands with repeated Power Cards. Because of its single-mindedness, is better at dealing with large problems than smaller ones.
+
+      Harms the land and [[Dahan]] while smiting Invaders unless it successfully changes its nature (by expanding into new Elements), which may mean partially foregoing the Sun and Fire that form the core of its initial strength.
     expansion: Nature Incarnate
     complexity: High
     attributes:
@@ -203,6 +275,10 @@ spirits:
       utility: 3
   - name: Rising Heat of Stone and Sand
     slug: heat-dragon
+    playstyle: |
+      Weaken-and-Destroy. Likes having [[Sacred Site]] where there's [[Town]]/[[City]], as it makes all Spirits' Damage more effective there.
+
+      Has an easier time setting up [[Sacred Site]] in Sands and Mountains, but can do so in any terrain with a bit more time.
     expansion: Horizons
     complexity: Low
     attributes:
@@ -213,6 +289,10 @@ spirits:
       utility: 3
   - name: River Surges in Sunlight
     slug: river
+    playstyle: |
+      While capable of some direct offense, River Surges in Sunlight is best at flooding out Explorers and Towns, displacing them from lands where they might Build or Ravage.
+
+      The ability to get free Sacred Sites makes a wide range of Powers more useful.
     expansion: Spirit Island
     complexity: Low
     attributes:
@@ -223,6 +303,10 @@ spirits:
       utility: 4
   - name: Serpent Slumbering Beneath the Island
     slug: serpent
+    playstyle: |
+      There are several ways to play the Serpent, but all require patience: early game involves slowly building up Powers and Presence. It's not helpless during this time, but it isn't as effective as anyone else. It becomes incredibly powerful after awakening, but getting there requires a lot of time.
+
+      Make sure to Absorb Essence before you run up against your Presence cap - and to get other players' buy-in before using Absorb Essence on their Presence.
     expansion: Feather and Flame
     complexity: High
     attributes:
@@ -233,6 +317,10 @@ spirits:
       utility: 5
   - name: Shadows Flicker Like Flame
     slug: shadows-flicker
+    playstyle: |
+      Good at causing Fear and picking off lone Explorers and Towns, containing the Invaders. Not so good at massive damage - may need to rely on allies to handle thoroughly colonized lands.
+
+      The ability to boost Range gives more flexibility to Range 0 Powers, and can be important in larger games.
     expansion: Spirit Island
     complexity: Low
     attributes:
@@ -243,6 +331,8 @@ spirits:
       utility: 1
   - name: Sharp Fangs Behind the Leaves
     slug: sharp-fangs
+    playstyle: |
+      All about Beasts and Jungles. Can be very fast out of the gate, but doesn't have the late-game power that some spirits do, and is likely to have some difficulty with Blighted areas. "Ranging Hunt" is a critical Innate ability, particularly in early-game: it simultaneously gives Beasts mobility and permits picking off a stray Explorers or Towns on most turns.
     expansion: Branch and Claw
     complexity: Moderate
     attributes:
@@ -253,6 +343,10 @@ spirits:
       utility: 1
   - name: Shifting Memory of Ages
     slug: shifting-memory
+    playstyle: |
+      Starts with little ability to influence the board - most of what it does in that regard will come from new Power Cards.
+
+      Extremely good with Major Powers and usually wants to take them early and often. Can either try sprinting towards victory with its phenomenal Energy Growth or build up towards becoming a late-game powerhouse.
     expansion: Jagged Earth
     complexity: Moderate
     attributes:
@@ -263,6 +357,12 @@ spirits:
       utility: 5
   - name: Shroud of Silent Mist
     slug: silent-mist
+    playstyle: |
+      Constantly shifting and moving its [[Presence]] around the board. Hurt more than most by [[Presence]] loss due to its desire to surround and envelop the Invaders.
+
+      Can (slowly) clear the most built-up of lands, but its real strength is the free Fear from _Slow and Silent Death_.
+
+      Extremely limited Energy income, but can stretch to Major Powers if it manages to gather enough Energy from its Special Rules.
     expansion: Jagged Earth
     complexity: High
     attributes:
@@ -273,6 +373,10 @@ spirits:
       utility: 1
   - name: Starlight Seeks Its Form
     slug: starlight
+    playstyle: |
+      A build-your-own-Spirit, capable of going in many different directions based on Elements picked, Growth choices selected, and Power Cards kept. Has a very high personal/visual complexity and a huge number of early-game options, but doesn't alter play much for other players at the table.
+
+      As it commits to choices, it loses versatility - not all paths will be good (or even possible) at all things. It especially wants a measure of adaptation to early Power Cards, rather than trying to pre-select a strategy.
     expansion: Jagged Earth
     complexity: Very High
     attributes:
@@ -283,6 +387,10 @@ spirits:
       utility: 2
   - name: Stone's Unyielding Defiance
     slug: stone-defiance
+    playstyle: |
+      Most of its special rules and innates require being where the Invaders are - particularly in the worst, most-overrun lands, so it can mitigate incoming Blight and (eventually) destroy the Invaders with their own Ravages.
+
+      Does best with the patience to build up a position over time, and the temperance to hold some Energy in reserve so it can take advantage of Hold the Island Fast With a Bulwark of Will.
     expansion: Jagged Earth
     complexity: Moderate
     attributes:
@@ -293,6 +401,10 @@ spirits:
       utility: 2
   - name: Sun-Bright Whirlwind
     slug: sun-bright
+    playstyle: |
+      Incredibly good at handling [[Explorer]], clearing newly-Explored lands of Invaders so they don't Build there. Not nearly so good at dealing with [[Town]]/[[City]].
+
+      Can focus on Energy and largely forego its Innate Power, focus on Plays to aim for mid-to-high Innate thresholds, or strike a more balanced path. Adds at most 1 [[Presence]] per turn, so there won't be time to do it all.
     expansion: Horizons
     complexity: Low
     attributes:
@@ -313,6 +425,8 @@ spirits:
       utility: 1
   - name: Towering Roots of the Jungle
     slug: towering-roots
+    playstyle: |
+      Incredibly good at protecting everything at its Incarna - and can draw Invaders towards there - but is constrained in when and where it can move its Incarna. Has some ability to Remove Invaders (driving them from the island), but starts off vastly better at guarding the land than at smashing things.
     expansion: Nature Incarnate
     complexity: Moderate
     incarna: true
@@ -324,6 +438,8 @@ spirits:
       utility: 2
   - name: Vengeance as a Burning Plague
     slug: burning-plague
+    playstyle: |
+      Not so powerful early, but can be a late-game juggernaut, especially if things are going badly: [[Blight]] adds to its Damage and its [[Presence]] being Destroyed adds [[Disease]]. It may even want to engineer these situations, which can make other Spirits nervous (and be risky if things go poorly).
     expansion: Jagged Earth
     complexity: High
     attributes:
@@ -334,6 +450,10 @@ spirits:
       utility: 1
   - name: Vital Strength of the Earth
     slug: vital-strength
+    playstyle: |
+      Powerful but slow: has potent Power Cards and an excellent Energy income, but starts wtih only one card play per turn, and Growth is limited to adding one Presence per turn.
+      
+      Also slow to change: learning new Powers carries slightly more cost than reclaiming played Power Cards.
     expansion: Spirit Island
     complexity: Low
     attributes:
@@ -344,6 +464,10 @@ spirits:
       utility: 3
   - name: Volcano Looming High
     slug: volcano
+    playstyle: |
+      Benefits more than most Spirits from getting [[Presence]] onto the board; in addition to the usual benefits, it can fuel an Explosive Eruption. This can result in a huge turn, but if overdone the following turn or two may be very constrained.
+
+      Bigger eruptions are extremely powerful, but cause [[Blight]], and the Invaders may not provide the luxury of enough time to build up the desired pressure - judging the timing of when to erupt and for how much is a key part of playing this Spirit.
     expansion: Jagged Earth
     complexity: Moderate
     attributes:
@@ -354,6 +478,10 @@ spirits:
       utility: 3
   - name: Wandering Voice Keens Delirium
     slug: keens-delirium
+    playstyle: |
+      Very positional; has a highly mobile Incarna (particularly with lots of Air) that adds [[Strife]] and chases [[Explorer]]/[[Town]] around as it roams the island.
+
+      Has a harder time setting up [[Dahan]] counterattacks, but can use Mind-Shattering Song to more directly harm Invaders with [[Strife]] - and earn a fair bit of [[Fear]] in the process.
     expansion: Nature Incarnate
     complexity: High
     incarna: true
@@ -365,6 +493,10 @@ spirits:
       utility: 2
   - name: Wounded Waters Bleeding
     slug: wounded-waters
+    playstyle: |
+      Starts off wounded, losing a [[Presence]] or a Power Card every turn. Heals over the course of the game, finding a new nature - while some choices may be a touch better or worse due to Adversary, Power Card picks, teammates, etc., most combinations are viable in most games.
+
+      Benefits from careful [[Presence]] placement, both due to losing [[Presence]] and because some if its Unique Powers must target from lands with [[Blight]].
     expansion: Nature Incarnate
     complexity: High
     attributes:

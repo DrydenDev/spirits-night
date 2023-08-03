@@ -1,4 +1,5 @@
 - [x] Basic UI on homepage that generates a random spirit (text) with a button to regenerate the random spirit
+- [ ] Load aspect data for  each spirit
 - [ ] Add a random aspect to the spirit
 - [ ] Add full image for spirit board to generation
 - [x] Add generation of an adversary in with a random level

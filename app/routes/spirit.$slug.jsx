@@ -13,6 +13,7 @@ import {
   CardMedia, 
   CardContent,
   Chip,
+  Divider,
   Typography,
   Stack,
 } from "@mui/material";
@@ -76,6 +77,7 @@ export default function SpiritDetails() {
         />
         <CardContent className="spirit-card">
           <Typography align="center" gutterBottom variant="h3">{spirit.name}</Typography>
+          <PlaystyleCard text={spirit.playstyle} />
           <SpiritChart spirit={spirit} color={spiritColor} />
           <Stack sx={{ justifyContent: 'center' }} direction="row" spacing={1}>
             <Chip variant="outlined" label={`${spirit.complexity} Complexity`} />
@@ -117,6 +119,17 @@ export default function SpiritDetails() {
         onClose={closeSnackbar}
         text={snackbarText}
       />
+    </>
+  );
+}
+
+function PlaystyleCard({ text }) {
+  return (
+    <>
+      <Stack direction="column" className="playstyle-card" sx={{ maxWidth: { sm: '100%', md: '75%' }}}>
+        <Typography variant="h6" as="h4" gutterBottom>Playstyle</Typography>
+        <Typography variant="body2">{text}</Typography>
+      </Stack>
     </>
   );
 }

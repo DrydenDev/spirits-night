@@ -13,7 +13,7 @@ const symbolMap = {
   "[[Town]]": 'T',
   "[[Wilds]]": 'W',
   "[[Presence]]": '1',
-  "[[Holy Site]]": '2',
+  "[[Sacred Site]]": '2',
   "[[Player]]": '.',
   "[[Players]]": ':',
   "[[Fast]]": '+',
