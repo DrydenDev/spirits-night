@@ -39,6 +39,37 @@ async function getSpiritColor(url, spirit) {
   }
 }
 
+function getBackgroundColor(color) {
+  const brightness = (r,g,b) => Math.sqrt(
+    r * r * .241 +
+    g * g * .691 +
+    b * b * .068
+  );
+  const brighten = (facet) => Math.min(255, facet * 1.5);
+  const darken = (facet) => facet * .5;
+
+  let backgroundColor = color;
+  if (brightness(...color) > 130) {
+    while(brightness(...backgroundColor) > 50) {
+      backgroundColor = backgroundColor.map(darken);
+    }
+    backgroundColor = {
+      font: 'white',
+      color: [...backgroundColor, 0.8]
+    }
+  } else {
+    while(brightness(...backgroundColor) < 200) {
+      backgroundColor = backgroundColor.map(brighten);
+    }
+    backgroundColor = {
+      font: 'black',
+      color: [...backgroundColor, 0.5]
+    }
+  }
+
+  return backgroundColor;
+}
+
 export async function loader({ params, request }) {
   const { slug } = params;
   const url = new URL(request.url);
@@ -161,13 +192,14 @@ function SpiritChart({ spirit, color }) {
   const minTicks = Math.min(0, ...spiritChartData.map((s) => s.attribute));
   const maxTicks = Math.max(5, ...spiritChartData.map((s) => s.attribute));
   const ticks = Array.from(Array(maxTicks - minTicks + 1), (x, i) => i - minTicks);
+  const backgroundColor = getBackgroundColor(color);
 
   return (
-    <Box className="spirit-chart">
+    <Box className="spirit-chart" sx={{backgroundColor: `rgb(${backgroundColor.color})`}}>
       <ResponsiveContainer width="100%" height={240} minWidth={300}>
         <BarChart width="100%" height={240} data={spiritChartData}>
           <YAxis hide={true} ticks={ticks} />
-          <XAxis dataKey="name" tickLine={false} interval={0} tick={{fontWeight: 400}} />
+          <XAxis dataKey="name" tickLine={false} interval={0} tick={{fontWeight: 400, fill: backgroundColor.font }} />
           <Bar dataKey="attribute" fill={`rgb(${color})`} />
         </BarChart>
       </ResponsiveContainer>
