@@ -11,6 +11,9 @@ spirits:
       fear: 2
       defense: 5
       utility: 4
+    aspects:
+      - Regrowth
+      - Tangles
   - name: Breath of Darkness Down Your Spine
     slug: breath-of-darkness
     playstyle: |
@@ -38,6 +41,9 @@ spirits:
       fear: 5
       defense: 2
       utility: 2
+    aspects:
+      - Violence
+      - Enticing
   - name: Dances Up Earthquakes
     slug: earthquakes
     playstyle: |
@@ -126,7 +132,7 @@ spirits:
   - name: Finder of Paths Unseen
     slug: finder
     playstyle: |
-      All about moving the Invaders - and [[Dahan]]/[[Presence]]/[[Beasts]] from time to time. Good at creating Invader-free "safe-zones," due to its many movement Powers and its capacity to Isolate. Can't afford to Destroy Invaders too often without a way to re-add Destroyed [[Presence]], so either needs a big-hammer Major Power or to rely on its teammates for offense.
+      All about moving the Invaders - and [[Dahan]]/[[Presence]]/[[Beast]] from time to time. Good at creating Invader-free "safe-zones," due to its many movement Powers and its capacity to Isolate. Can't afford to Destroy Invaders too often without a way to re-add Destroyed [[Presence]], so either needs a big-hammer Major Power or to rely on its teammates for offense.
 
       Changes the topology of the board, which increases complexity for all players - *particularly* in larger games!
     expansion: Feather and Flame
@@ -177,6 +183,8 @@ spirits:
       fear: 4
       defense: 1
       utility: 2
+    aspects:
+      - Transforming
   - name: Hearth-Vigil
     slug: hearth-vigil
     playstyle: |
@@ -205,6 +213,8 @@ spirits:
       fear: 1
       defense: 4
       utility: 3
+    aspects:
+      - Spreading Hostility
   - name: Lightning's Swift Strike
     slug: lightning
     playstyle: |
@@ -219,10 +229,15 @@ spirits:
       fear: 3
       defense: 1
       utility: 2
+    aspects:
+      - Pandemonium
+      - Wind
+      - Immense
+      - Sparking
   - name: Lure of the Deep Wilderness
     slug: lure
     playstyle: |
-      Very focused on the interior - its best options for coastal lands are "draw the Invaders inland" or "turn [[Town]]/[[City]] into [[Explorer]], then draw them inland". Likes the interior to be dangerous, full of [[Badlands]], [[Beasts]], [[Disease]], and [[Wilds]], ideally where its [[Presence]] is.
+      Very focused on the interior - its best options for coastal lands are "draw the Invaders inland" or "turn [[Town]]/[[City]] into [[Explorer]], then draw them inland". Likes the interior to be dangerous, full of [[Badlands]], [[Beast]], [[Disease]], and [[Wilds]], ideally where its [[Presence]] is.
 
       Has better-than-average potential for containing Invaders and setting up a zone safe from Explores, but the coasts may get messy while doing so.
     expansion: Jagged Earth
@@ -233,6 +248,8 @@ spirits:
       fear: 4
       defense: 2
       utility: 1
+    aspects:
+      - Lair
   - name: Many Minds Move as One
     slug: many-minds
     playstyle: |
@@ -259,6 +276,8 @@ spirits:
       fear: 4
       defense: 3
       utility: 2
+    aspects:
+      - Deeps
   - name: Relentless Gaze of the Sun
     slug: sun
     playstyle: |
@@ -301,6 +320,10 @@ spirits:
       fear: 1
       defense: 1
       utility: 4
+    aspects:
+      - Sunshine
+      - Travel
+      - Haven
   - name: Serpent Slumbering Beneath the Island
     slug: serpent
     playstyle: |
@@ -315,6 +338,8 @@ spirits:
       fear: 2
       defense: 4
       utility: 5
+    aspects:
+      - Locus
   - name: Shadows Flicker Like Flame
     slug: shadows-flicker
     playstyle: |
@@ -329,6 +354,12 @@ spirits:
       fear: 5
       defense: 1
       utility: 1
+    aspects:
+      - Madness
+      - Reach
+      - Amorphous
+      - Foreboding
+      - Dark Fire
   - name: Sharp Fangs Behind the Leaves
     slug: sharp-fangs
     playstyle: |
@@ -341,6 +372,9 @@ spirits:
       fear: 4
       defense: 2
       utility: 1
+    aspects:
+      - Encircle
+      - Unconstrained
   - name: Shifting Memory of Ages
     slug: shifting-memory
     playstyle: |
@@ -355,6 +389,9 @@ spirits:
       fear: 2
       defense: 4
       utility: 5
+    aspects:
+      - Mentor
+      - Intensify
   - name: Shroud of Silent Mist
     slug: silent-mist
     playstyle: |
@@ -371,6 +408,8 @@ spirits:
       fear: 5
       defense: 2
       utility: 1
+    aspects:
+      - Stranded
   - name: Starlight Seeks Its Form
     slug: starlight
     playstyle: |
@@ -423,6 +462,9 @@ spirits:
       fear: 3
       defense: 2
       utility: 1
+    aspects:
+      - Warrior
+      - Tactician
   - name: Towering Roots of the Jungle
     slug: towering-roots
     playstyle: |
@@ -462,6 +504,10 @@ spirits:
       fear: 1
       defense: 5
       utility: 3
+    aspects:
+      - Resilience
+      - Might
+      - Nourishing
   - name: Volcano Looming High
     slug: volcano
     playstyle: |
