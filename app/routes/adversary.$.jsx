@@ -40,7 +40,7 @@ export async function loader({ params }) {
   if (slug === "random" || slug === "today") {
     const randomSeed = (slug === "today") ? getTodaySeed() : null;
     const { adversary, level } = await getRandomAdversary(randomSeed);
-    const desiredLevel = clampedLevel || level;
+    const desiredLevel = clampedLevel || (slug === "today" ? Math.max(3, level) : level);
     return redirect(`/adversary/${adversary.slug}/${desiredLevel}`);
   }
 
