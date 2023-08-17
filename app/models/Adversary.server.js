@@ -10,7 +10,7 @@ export async function getRandomAdversary(seed) {
     skip: skip,
     include: { levels: true, references: true }
   });
-  const randomLevel = Math.round(generator() * 6);
+  const randomLevel = Math.round(generator() * 4) + 2;
   return { adversary: randomAdversary[0], level: randomLevel };
 }
 
