@@ -37,10 +37,12 @@ export const meta = ({ data }) => {
   const { adversary, level } = data;
 
   return [
-    { title: `${adversary.name} ${level}` },
-    { "og:title": `${adversary.name} ${level}` },
-    { description: `Adversary rules for ${adversary.name} at level ${level}` },
-    { "og:image": `/images/adversaries/${adversary.slug}/avatar.png` }
+    { name: "title", content: `${adversary.name} ${level}` },
+    { name: "description", content: `Adversary rules for ${adversary.name} at level ${level}` },
+    { property: "og:type", content: "website" },
+    { property: "og:title", content: `${adversary.name} ${level}` },
+    { property: "og: description", content: `Adversary rules for ${adversary.name} at level ${level}` },
+    { property: "og:image", content: `/images/adversaries/${adversary.slug}/banner.png` }
   ];
 }
 
