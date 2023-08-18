@@ -72,7 +72,7 @@ function getBackgroundColor(color) {
 }
 
 export const meta = ({ data }) => {
-  const { spirit } = useLoaderData();
+  const { spirit } = data;
 
   return [
     { name: "title", content: spirit.name },
