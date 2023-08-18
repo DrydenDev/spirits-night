@@ -33,6 +33,17 @@ const TAB_TYPE = {
   reference: "reference"
 }
 
+export const meta = ({ data }) => {
+  const { adversary, level } = data;
+
+  return [
+    { title: `${adversary.name} ${level}` },
+    { "og:title": `${adversary.name} ${level}` },
+    { description: `Adversary rules for ${adversary.name} at level ${level}` },
+    { "og:image": `/images/adversaries/${adversary.slug}/avatar.png` }
+  ];
+}
+
 export async function loader({ params }) {
   const [slug, capturedLevel] = params['*'].split('/');
   const clampedLevel = capturedLevel ? Math.min(Math.max(capturedLevel, 0), 6) : null;
