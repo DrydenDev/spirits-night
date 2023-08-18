@@ -71,6 +71,19 @@ function getBackgroundColor(color) {
   return backgroundColor;
 }
 
+export const meta = ({ data }) => {
+  const { spirit } = useLoaderData();
+
+  return [
+    { name: "title", content: spirit.name },
+    { name: "description", content: `Summary of ${spirit.name}` },
+    { property: "og:type", content: "website" },
+    { property: "og:title", content: spirit.name },
+    { property: "og: description", content: `Summary of ${spirit.name}` },
+    { property: "og:image", content: `/images/spirits/${spirit.slug}/splash.png` }
+  ];
+}
+
 export async function loader({ params, request }) {
   const { slug } = params;
   const url = new URL(request.url);

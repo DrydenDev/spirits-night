@@ -21,6 +21,17 @@ import CasinoIcon from '@mui/icons-material/Casino';
 import TodayIcon from '@mui/icons-material/Today';
 import { getAllSpirits } from '~/models/Spirit.server';
 
+export const meta = () => {
+  return [
+    { name: "title", content: "Spirits" },
+    { name: "description", content: "List of all Spirit Island Spirits" },
+    { property: "og:type", content: "website" },
+    { property: "og:title", content: "Spirits" },
+    { property: "og: description", content: "List of Spirit Island Spirits" },
+    { property: "og:image", content: "/images/spirits/spirits_splash.png" }
+  ];
+}
+
 export async function loader() {
   const spirits = await getAllSpirits();
 
