@@ -19,9 +19,9 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import ReplayIcon from '@mui/icons-material/Replay';
-import LinkIcon from '@mui/icons-material/Link';
-import TodayIcon from '@mui/icons-material/Today';
+import { Replay as ReplayIcon } from '@mui/icons-material';
+import { Link as LinkIcon } from '@mui/icons-material';
+import { Today as TodayIcon } from '@mui/icons-material';
 import { useStatusSnackbar, StatusSnackbar } from '~/components/StatusSnackbar';
 import { toSpiritIslandText } from '~/utils/spiritIslandText';
 import type { Spirit } from '~/types/domain';

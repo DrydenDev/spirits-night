@@ -16,8 +16,8 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import CasinoIcon from '@mui/icons-material/Casino';
-import TodayIcon from '@mui/icons-material/Today';
+import { Casino as CasinoIcon } from '@mui/icons-material';
+import { Today as TodayIcon } from '@mui/icons-material';
 import { getAllAdversaries } from '~/models/Adversary.server';
 import type { Adversary } from '~/types/domain';
 

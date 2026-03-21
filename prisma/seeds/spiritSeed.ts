@@ -17,6 +17,8 @@ interface Spirit {
   complexityValue: number;
   incarna: boolean;
   attributes: SpiritAttributes;
+  /** Aspect names (e.g. "Regrowth", "Violence") — in YAML but not yet in schema. TODO: add aspects to schema. */
+  aspects?: string[];
 }
 
 const complexityValue: {[index: string]: number} = {
@@ -36,7 +38,9 @@ export async function loadSpirits(prismaClient: PrismaClient) {
 
   const { spirits } = loadYamlFile(spiritFile);
   const augmentedSpirits = spirits.map((spirit: Spirit) => {
-    const { attributes, ...spiritFields } = spirit;
+    // Destructure out fields not yet in the schema (aspects are in the YAML
+    // but the schema migration hasn't been written yet — see TODO.md)
+    const { attributes, aspects: _unusedAspects, ...spiritFields } = spirit;
     return {
       ...spiritFields,
       ...attributes,

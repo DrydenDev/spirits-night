@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IconButton, Snackbar } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import { Close as CloseIcon } from '@mui/icons-material';
 
 interface SnackbarState {
   open: boolean;

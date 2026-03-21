@@ -12,8 +12,8 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Close as CloseIcon } from '@mui/icons-material';
+import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import { EscalationAlert, LossAlert } from '~/components/AdversaryAlerts';
 import { toSpiritIslandText } from '~/utils/spiritIslandText';
 import type { Adversary, AdversaryReference } from '~/types/domain';

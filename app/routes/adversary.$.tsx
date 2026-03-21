@@ -14,9 +14,9 @@ import {
   Tabs,
   Typography,
 } from '@mui/material';
-import CasinoIcon from '@mui/icons-material/Casino';
-import LinkIcon from '@mui/icons-material/Link';
-import TodayIcon from '@mui/icons-material/Today';
+import { Casino as CasinoIcon } from '@mui/icons-material';
+import { Link as LinkIcon } from '@mui/icons-material';
+import { Today as TodayIcon } from '@mui/icons-material';
 
 import { AdversaryCard } from '~/components/AdversaryCard';
 import { AdversaryGameplayReference } from '~/components/AdversaryGameplayReference';

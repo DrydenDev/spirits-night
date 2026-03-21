@@ -1,0 +1,211 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "routes/adversary._index": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/adversary.$": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_index": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/spirit._index": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/spirit.$slug": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "app/root.tsx",
+        "path": "",
+        "config": {}
+      },
+      "routes/adversary": {
+        "id": "routes/adversary",
+        "parentId": "root",
+        "file": "app/routes/adversary.tsx",
+        "path": "adversary",
+        "config": {}
+      },
+      "routes/adversary._index": {
+        "id": "routes/adversary._index",
+        "parentId": "routes/adversary",
+        "file": "app/routes/adversary._index.tsx",
+        "index": true,
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/adversary.$": {
+        "id": "routes/adversary.$",
+        "parentId": "routes/adversary",
+        "file": "app/routes/adversary.$.tsx",
+        "path": "*",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/_index": {
+        "id": "routes/_index",
+        "parentId": "root",
+        "file": "app/routes/_index.tsx",
+        "index": true,
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/spirit": {
+        "id": "routes/spirit",
+        "parentId": "root",
+        "file": "app/routes/spirit.tsx",
+        "path": "spirit",
+        "config": {}
+      },
+      "routes/spirit._index": {
+        "id": "routes/spirit._index",
+        "parentId": "routes/spirit",
+        "file": "app/routes/spirit._index.tsx",
+        "index": true,
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/spirit.$slug": {
+        "id": "routes/spirit.$slug",
+        "parentId": "routes/spirit",
+        "file": "app/routes/spirit.$slug.tsx",
+        "path": ":slug",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "/Users/luke.busler/Projects/spirits-night/app",
+    "basename": "/",
+    "buildDirectory": "/Users/luke.busler/Projects/spirits-night/build",
+    "future": {
+      "unstable_optimizeDeps": false,
+      "unstable_subResourceIntegrity": false,
+      "unstable_trailingSlashAwareDataRequests": false,
+      "unstable_previewServerPrerendering": false,
+      "v8_middleware": false,
+      "v8_splitRouteModules": false,
+      "v8_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "routes/adversary": {
+        "id": "routes/adversary",
+        "parentId": "root",
+        "file": "routes/adversary.tsx",
+        "path": "adversary"
+      },
+      "routes/adversary._index": {
+        "id": "routes/adversary._index",
+        "parentId": "routes/adversary",
+        "file": "routes/adversary._index.tsx",
+        "index": true
+      },
+      "routes/adversary.$": {
+        "id": "routes/adversary.$",
+        "parentId": "routes/adversary",
+        "file": "routes/adversary.$.tsx",
+        "path": "*"
+      },
+      "routes/_index": {
+        "id": "routes/_index",
+        "parentId": "root",
+        "file": "routes/_index.tsx",
+        "index": true
+      },
+      "routes/spirit": {
+        "id": "routes/spirit",
+        "parentId": "root",
+        "file": "routes/spirit.tsx",
+        "path": "spirit"
+      },
+      "routes/spirit._index": {
+        "id": "routes/spirit._index",
+        "parentId": "routes/spirit",
+        "file": "routes/spirit._index.tsx",
+        "index": true
+      },
+      "routes/spirit.$slug": {
+        "id": "routes/spirit.$slug",
+        "parentId": "routes/spirit",
+        "file": "routes/spirit.$slug.tsx",
+        "path": ":slug"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "lazy",
+      "manifestPath": "/__manifest"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true,
+    "allowedActionOrigins": false,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.tsx",
+        "children": [
+          {
+            "id": "routes/adversary",
+            "file": "routes/adversary.tsx",
+            "path": "adversary",
+            "children": [
+              {
+                "id": "routes/adversary._index",
+                "file": "routes/adversary._index.tsx",
+                "index": true
+              },
+              {
+                "id": "routes/adversary.$",
+                "file": "routes/adversary.$.tsx",
+                "path": "*"
+              }
+            ]
+          },
+          {
+            "id": "routes/_index",
+            "file": "routes/_index.tsx",
+            "index": true
+          },
+          {
+            "id": "routes/spirit",
+            "file": "routes/spirit.tsx",
+            "path": "spirit",
+            "children": [
+              {
+                "id": "routes/spirit._index",
+                "file": "routes/spirit._index.tsx",
+                "index": true
+              },
+              {
+                "id": "routes/spirit.$slug",
+                "file": "routes/spirit.$slug.tsx",
+                "path": ":slug"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}
