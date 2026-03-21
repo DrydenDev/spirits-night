@@ -13,6 +13,12 @@ Tracked tech debt and modernization items for the Spirits Night project.
 - **`engines`** — updated to `>=20.0.0`
 - **Magic number constants** — `app/constants/game.ts` with all game-level values
 - **Domain types** — `app/types/domain.ts` with `Spirit`, `Adversary`, and related interfaces
+- **`ts-node` → `tsx`** — faster Prisma seed runner
+- **`isbot` v5** — updated from v3; switched to named export
+- **ColorThief** — replaced fragile HTTP round-trip with direct filesystem read
+- **Accessibility** — `role="img"` and `aria-label` on all Spirit Island icon spans
+- **README** — rewritten with actual setup and project documentation
+- **`.devcontainer`** — Node 20 + Postgres 16; seeds DB automatically on create
 
 ---
 
