@@ -50,7 +50,7 @@
     "jsdom": "^29.0.1",
     "prettier": "^3.8.1",
     "prisma": "^5.1.0",
-    "ts-node": "^10.9.1",
+    "tsx": "^4.21.0",
     "typescript": "^5.1.6",
     "vitest": "^4.1.0"
   },
@@ -58,6 +58,6 @@
     "node": ">=20.0.0"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   }
 }
