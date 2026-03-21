@@ -1,11 +1,12 @@
-import {
-  Alert,
-  AlertTitle,
-} from "@mui/material";
-
+import { Alert, AlertTitle } from '@mui/material';
 import { toSpiritIslandText } from '~/utils/spiritIslandText';
 
-export function LossAlert({ title, description }) {
+interface LossAlertProps {
+  title: string;
+  description: string;
+}
+
+export function LossAlert({ title, description }: LossAlertProps) {
   return (
     <Alert severity="error">
       <AlertTitle>Additional Loss Condition</AlertTitle>

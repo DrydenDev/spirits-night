@@ -1,11 +1,12 @@
-import {
-  Alert,
-  AlertTitle,
-} from "@mui/material";
-
+import { Alert, AlertTitle } from '@mui/material';
 import { toSpiritIslandText } from '~/utils/spiritIslandText';
 
-export function EscalationAlert({ title, description }) {
+interface EscalationAlertProps {
+  title: string;
+  description: string;
+}
+
+export function EscalationAlert({ title, description }: EscalationAlertProps) {
   return (
     <Alert severity="warning">
       <AlertTitle>Escalation</AlertTitle>

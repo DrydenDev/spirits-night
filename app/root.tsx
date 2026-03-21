@@ -1,10 +1,9 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
-import globalStyles from "~/styles/global.css";
+import { cssBundleHref } from '@remix-run/css-bundle';
+import globalStyles from '~/styles/global.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-
 
 import {
   Links,
@@ -13,15 +12,15 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
+} from '@remix-run/react';
 
-import { TopNav } from "~/components/TopNav";
-import { Container, Link, Stack } from "@mui/material";
+import { TopNav } from '~/components/TopNav';
+import { Container } from '@mui/material';
 import { Analytics } from '@vercel/analytics/react';
 
 export const links = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-  { rel: "stylesheet", href: globalStyles },
+  ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
+  { rel: 'stylesheet', href: globalStyles },
 ];
 
 export default function App() {

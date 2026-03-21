@@ -1,0 +1,1 @@
+export { AdversaryTagBar } from './AdversaryTagBar';
