@@ -1,23 +1,28 @@
 import reactStringReplace from 'react-string-replace';
 
-const symbolMap: Record<string, string> = {
-  '[[Beast]]': 'A',
-  '[[Blight]]': 'B',
-  '[[City]]': 'C',
-  '[[Disease]]': 'D',
-  '[[Explorer]]': 'E',
-  '[[Fear]]': 'F',
-  '[[Badlands]]': 'L',
-  '[[Dahan]]': 'N',
-  '[[Strife]]': 'S',
-  '[[Town]]': 'T',
-  '[[Wilds]]': 'W',
-  '[[Presence]]': '1',
-  '[[Sacred Site]]': '2',
-  '[[Player]]': '.',
-  '[[Players]]': ':',
-  '[[Fast]]': '+',
-  '[[Slow]]': '-',
+interface TokenDefinition {
+  char: string;
+  label: string;
+}
+
+const symbolMap: Record<string, TokenDefinition> = {
+  '[[Beast]]':      { char: 'A', label: 'Beast' },
+  '[[Blight]]':     { char: 'B', label: 'Blight' },
+  '[[City]]':       { char: 'C', label: 'City' },
+  '[[Disease]]':    { char: 'D', label: 'Disease' },
+  '[[Explorer]]':   { char: 'E', label: 'Explorer' },
+  '[[Fear]]':       { char: 'F', label: 'Fear' },
+  '[[Badlands]]':   { char: 'L', label: 'Badlands' },
+  '[[Dahan]]':      { char: 'N', label: 'Dahan' },
+  '[[Strife]]':     { char: 'S', label: 'Strife' },
+  '[[Town]]':       { char: 'T', label: 'Town' },
+  '[[Wilds]]':      { char: 'W', label: 'Wilds' },
+  '[[Presence]]':   { char: '1', label: 'Presence' },
+  '[[Sacred Site]]':{ char: '2', label: 'Sacred Site' },
+  '[[Player]]':     { char: '.', label: 'Player' },
+  '[[Players]]':    { char: ':', label: 'Players' },
+  '[[Fast]]':       { char: '+', label: 'Fast' },
+  '[[Slow]]':       { char: '-', label: 'Slow' },
 };
 
 export function toSpiritIslandText(text: string | null | undefined) {
@@ -26,8 +31,13 @@ export function toSpiritIslandText(text: string | null | undefined) {
   const spiritified = Object.keys(symbolMap).reduce(
     (acc, token) =>
       reactStringReplace(acc, token, (_, i) => (
-        <span key={`${token}-${i}`} className="spirit-island-text">
-          {symbolMap[token]}
+        <span
+          key={`${token}-${i}`}
+          className="spirit-island-text"
+          role="img"
+          aria-label={symbolMap[token].label}
+        >
+          {symbolMap[token].char}
         </span>
       )),
     reactStringReplace(text) // initialize as ReactNodeArray

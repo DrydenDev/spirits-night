@@ -54,31 +54,33 @@ describe('toSpiritIslandText', () => {
     });
 
     it('replaces all known tokens', () => {
-      const tokens: Record<string, string> = {
-        '[[Beast]]': 'A',
-        '[[Blight]]': 'B',
-        '[[City]]': 'C',
-        '[[Disease]]': 'D',
-        '[[Explorer]]': 'E',
-        '[[Fear]]': 'F',
-        '[[Badlands]]': 'L',
-        '[[Dahan]]': 'N',
-        '[[Strife]]': 'S',
-        '[[Town]]': 'T',
-        '[[Wilds]]': 'W',
-        '[[Presence]]': '1',
-        '[[Sacred Site]]': '2',
-        '[[Player]]': '.',
-        '[[Players]]': ':',
-        '[[Fast]]': '+',
-        '[[Slow]]': '-',
+      const tokens: Record<string, { char: string; label: string }> = {
+        '[[Beast]]':       { char: 'A', label: 'Beast' },
+        '[[Blight]]':      { char: 'B', label: 'Blight' },
+        '[[City]]':        { char: 'C', label: 'City' },
+        '[[Disease]]':     { char: 'D', label: 'Disease' },
+        '[[Explorer]]':    { char: 'E', label: 'Explorer' },
+        '[[Fear]]':        { char: 'F', label: 'Fear' },
+        '[[Badlands]]':    { char: 'L', label: 'Badlands' },
+        '[[Dahan]]':       { char: 'N', label: 'Dahan' },
+        '[[Strife]]':      { char: 'S', label: 'Strife' },
+        '[[Town]]':        { char: 'T', label: 'Town' },
+        '[[Wilds]]':       { char: 'W', label: 'Wilds' },
+        '[[Presence]]':    { char: '1', label: 'Presence' },
+        '[[Sacred Site]]': { char: '2', label: 'Sacred Site' },
+        '[[Player]]':      { char: '.', label: 'Player' },
+        '[[Players]]':     { char: ':', label: 'Players' },
+        '[[Fast]]':        { char: '+', label: 'Fast' },
+        '[[Slow]]':        { char: '-', label: 'Slow' },
       };
 
-      for (const [token, expectedChar] of Object.entries(tokens)) {
+      for (const [token, { char, label }] of Object.entries(tokens)) {
         const { container } = render(<Rendered text={token} />);
         const span = container.querySelector('.spirit-island-text');
         expect(span, `Expected icon span for ${token}`).not.toBeNull();
-        expect(span?.textContent, `Wrong character for ${token}`).toBe(expectedChar);
+        expect(span?.textContent, `Wrong character for ${token}`).toBe(char);
+        expect(span?.getAttribute('aria-label'), `Wrong aria-label for ${token}`).toBe(label);
+        expect(span?.getAttribute('role')).toBe('img');
       }
     });
   });
