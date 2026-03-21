@@ -1,58 +1,144 @@
-# Welcome to Remix!
+# Spirits Night
 
-- [Remix Docs](https://remix.run/docs)
+A Spirit Island game night companion app. Two main uses:
 
-## Development
+1. **Match Generator** — randomly picks a Spirit and an Adversary (with difficulty level) for a game night session. A "Today" mode produces the same picks for everyone on a given calendar day, so all players see the same result.
+2. **Reference** — browse all Spirits and Adversaries, view attribute charts, playstyle notes, and per-level gameplay rules with phase-by-phase breakdowns.
 
-From your terminal:
+Live at [your-domain-here].
+
+---
+
+## Tech Stack
+
+| Layer | Tool |
+|---|---|
+| Framework | Remix v1 (SSR, React) |
+| UI | MUI v5 + Emotion |
+| Charts | Recharts |
+| Database | PostgreSQL via Supabase |
+| ORM | Prisma 5 |
+| Language | TypeScript |
+| Hosting | Vercel |
+
+---
+
+## Local Development
+
+### Prerequisites
+
+- Node.js 20+
+- A PostgreSQL database (local or via [Supabase](https://supabase.com))
+
+### Setup
 
 ```sh
+# 1. Install dependencies
+npm install
+
+# 2. Configure environment
+cp .env.template .env
+# Edit .env and fill in DATABASE_URL with your Postgres connection string
+# Example: DATABASE_URL="postgresql://user:password@localhost:5432/spirits_night"
+
+# 3. Run migrations
+npx prisma migrate dev
+
+# 4. Seed game data
+npx prisma db seed
+
+# 5. Start the dev server
 npm run dev
 ```
 
-This starts your app in development mode, rebuilding assets on file changes.
+The app will be running at http://localhost:3000.
 
-## Deployment
+### Environment Variables
 
-First, build your app for production:
+| Variable | Description |
+|---|---|
+| `DATABASE_URL` | PostgreSQL connection string |
+| `SPIRIT_FILE` | Path to the spirits YAML data file (default: `./data/spirits.yaml`) |
+| `ADVERSARY_FILE` | Path to the adversaries YAML data file (default: `./data/adversaries.yaml`) |
 
-```sh
-npm run build
+---
+
+## Game Data
+
+All game content lives in YAML files — these are the source of truth:
+
+```
+data/
+  spirits.yaml       # All spirits with attributes, complexity, playstyle
+  adversaries.yaml   # All adversaries with levels and gameplay references
 ```
 
-Then run the app in production mode:
+To add or update game content, edit the YAML files and re-run the seed:
 
 ```sh
-npm start
+npx prisma db seed
 ```
 
-Now you'll need to pick a host to deploy it to.
+The seed scripts upsert records, so they are safe to re-run.
 
-### DIY
+---
 
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
+## Scripts
 
-Make sure to deploy the output of `remix build`
+| Command | Description |
+|---|---|
+| `npm run dev` | Start dev server with hot reload |
+| `npm run build` | Production build |
+| `npm start` | Serve production build |
+| `npm test` | Run test suite |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run typecheck` | TypeScript type check |
+| `npm run lint` | ESLint |
+| `npm run format` | Prettier |
 
-- `build/`
-- `public/build/`
+---
 
-### Using a Template
+## Project Structure
 
-When you ran `npx create-remix@latest` there were a few choices for hosting. You can run that again to create a new project, then copy over relevant code/assets from your current app to the new project that's pre-configured for your target server.
-
-Most importantly, this means everything in the `app/` directory, but if you've further customized your current application outside of there it may also include:
-
-- Any assets you've added/updated in `public/`
-- Any updated versions of root files such as `.eslintrc.js`, etc.
-
-```sh
-cd ..
-# create a new project, and pick a pre-configured host
-npx create-remix@latest
-cd my-new-remix-app
-# remove the new project's app (not the old one!)
-rm -rf app
-# copy your app over
-cp -R ../my-old-remix-app/app app
 ```
+app/
+  components/     # Presentational React components (one folder per component)
+  constants/      # Game constants (level ranges, difficulty thresholds)
+  models/         # Server-side data access via Prisma (*.server.ts)
+  routes/         # Remix file-based routes
+  styles/         # Global + per-route CSS; custom Spirit Island icon font
+  types/          # Shared TypeScript interfaces (domain.ts)
+  utils/          # Shared utilities (Prisma client, random seed, SI text renderer)
+data/
+  spirits.yaml
+  adversaries.yaml
+prisma/
+  schema.prisma
+  seed.ts
+  seeds/          # spiritSeed.ts, adversarySeed.ts
+public/
+  images/         # Spirit splash art and adversary banners/avatars
+```
+
+---
+
+## Routes
+
+| Route | Description |
+|---|---|
+| `/adversary` | Adversary index — sorted list |
+| `/adversary/:slug/:level` | Adversary detail with level slider and gameplay reference |
+| `/adversary/random` | Redirects to a random adversary |
+| `/adversary/today` | Redirects to today's seeded adversary (min level 3) |
+| `/spirit` | Spirit index — sorted list |
+| `/spirit/:slug` | Spirit detail with attribute chart and playstyle |
+| `/spirit/random` | Redirects to a random spirit |
+| `/spirit/today` | Redirects to today's seeded spirit |
+
+Permalink URLs are stable — `/adversary/england/4` will always resolve to England at level 4.
+
+---
+
+## Spirit Island Text Markup
+
+Spirit and adversary descriptions use a `[[Token]]` syntax (e.g., `[[Fear]]`, `[[Dahan]]`) that renders as icons via the `FreehandSpirit04.ttf` custom font. The `toSpiritIslandText()` utility in `app/utils/spiritIslandText.tsx` handles the conversion. Rendered icon spans include `role="img"` and `aria-label` for accessibility.
