@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    image: node:20-bullseye
+    volumes:
+      - ..:/workspace:cached
+    working_dir: /workspace
+    command: sleep infinity
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/spirits_night
+      SPIRIT_FILE: ./data/spirits.yaml
+      ADVERSARY_FILE: ./data/adversaries.yaml
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: spirits_night
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres-data:

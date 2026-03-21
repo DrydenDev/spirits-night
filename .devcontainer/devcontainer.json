@@ -1,0 +1,33 @@
+{
+  "name": "Spirits Night",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+
+  // Install deps, generate Prisma client, run migrations, seed DB
+  "postCreateCommand": "npm install && npx prisma migrate dev && npx prisma db seed",
+
+  "forwardPorts": [3000, 5432],
+  "portsAttributes": {
+    "3000": { "label": "App", "onAutoForward": "openBrowser" },
+    "5432": { "label": "Postgres" }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "Prisma.prisma",
+        "bradlc.vscode-tailwindcss"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        }
+      }
+    }
+  }
+}
