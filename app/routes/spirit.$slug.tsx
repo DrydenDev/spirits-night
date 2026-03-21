@@ -160,7 +160,7 @@ export default function SpiritDetails() {
               onClick={() => linkPage('today')}
               startIcon={<TodayIcon />}
             >
-              Today's Spirit
+              Today&apos;s Spirit
             </Button>
           </Stack>
         </CardActions>
@@ -195,6 +195,28 @@ interface SpiritChartData {
   attribute: number;
 }
 
+function AttributeTooltip({
+  active,
+  payload,
+  label,
+}: {
+  active?: boolean;
+  payload?: { value: number }[];
+  label?: string;
+}) {
+  if (active && payload?.length) {
+    return (
+      <Paper sx={{ padding: '1em' }}>
+        <div>
+          <strong>{label}: </strong>
+          {payload[0].value}
+        </div>
+      </Paper>
+    );
+  }
+  return null;
+}
+
 function SpiritChart({ spirit, color }: { spirit: Spirit; color: number[] }) {
   const spiritChartData: SpiritChartData[] = [
     { name: 'Offense', attribute: spirit.offense },
@@ -208,28 +230,6 @@ function SpiritChart({ spirit, color }: { spirit: Spirit; color: number[] }) {
   const maxTick = Math.max(5, ...spiritChartData.map((s) => s.attribute));
   const ticks = Array.from({ length: maxTick - minTick + 1 }, (_, i) => i + minTick);
   const backgroundColor = getBackgroundColor(color);
-
-  const AttributeTooltip = ({
-    active,
-    payload,
-    label,
-  }: {
-    active?: boolean;
-    payload?: { value: number }[];
-    label?: string;
-  }) => {
-    if (active && payload?.length) {
-      return (
-        <Paper sx={{ padding: '1em' }}>
-          <div>
-            <strong>{label}: </strong>
-            {payload[0].value}
-          </div>
-        </Paper>
-      );
-    }
-    return null;
-  };
 
   return (
     <Box className="spirit-chart" sx={{ backgroundColor: `rgb(${backgroundColor.color})` }}>

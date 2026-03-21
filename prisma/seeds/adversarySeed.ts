@@ -39,13 +39,6 @@ interface AdversaryReference {
   description: string;
 }
 
-const complexityValue: {[index: string]: number} = {
-  "Low": 0,
-  "Moderate": 1,
-  "High": 2,
-  "Very High": 3
-}
-
 function validAdversary(adversary: Adversary) {
   return validExpansion(adversary.expansion);
 }

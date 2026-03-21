@@ -158,7 +158,7 @@ export default function AdversaryDetails() {
               onClick={() => linkPage('today')}
               startIcon={<TodayIcon />}
             >
-              Today's Adversary
+              Today&apos;s Adversary
             </Button>
           </Stack>
         </CardActions>
