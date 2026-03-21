@@ -1,4 +1,5 @@
 {
+  "framework": null,
   "buildCommand": "react-router build",
   "outputDirectory": "build/client",
   "installCommand": "npm install"
