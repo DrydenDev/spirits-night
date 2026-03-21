@@ -1,9 +1,9 @@
+import path from 'path';
 import { json, redirect } from '@remix-run/node';
 import type { LoaderArgs } from '@remix-run/node';
 import { useLoaderData, useNavigate } from '@remix-run/react';
 import type { V2_MetaFunction } from '@remix-run/react';
 import { BarChart, Bar, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-// TODO: Replace ColorThief with direct filesystem read (see TODO.md — fragile HTTP round-trip)
 import ColorThief from 'colorthief';
 
 import { getRandomSpirit, getSpiritBySlug } from '~/models/Spirit.server';
@@ -27,12 +27,21 @@ import { useStatusSnackbar, StatusSnackbar } from '~/components/StatusSnackbar';
 import { toSpiritIslandText } from '~/utils/spiritIslandText';
 import type { Spirit } from '~/types/domain';
 
-async function getSpiritColor(url: URL, spirit: Spirit): Promise<number[]> {
+async function getSpiritColor(spirit: Spirit): Promise<number[]> {
   try {
-    // TODO: Replace with direct filesystem read — passing a URL string to ColorThief is non-standard (see TODO.md)
-    const palette = await (ColorThief as unknown as { getPalette: (url: string) => Promise<number[][]> }).getPalette(
-      `http://${url.hostname}:${url.port}/images/spirits/${spirit.slug}/splash.png`
+    // ColorThief's Node.js API exposes static methods (not a class constructor),
+    // which differs from the browser API described in @types/colorthief — hence the cast.
+    const imagePath = path.join(
+      process.cwd(),
+      'public',
+      'images',
+      'spirits',
+      spirit.slug,
+      'splash.png'
     );
+    const palette = await (
+      ColorThief as unknown as { getPalette: (p: string, count: number) => Promise<number[][]> }
+    ).getPalette(imagePath, 5);
     return palette[Math.floor(Math.random() * palette.length)];
   } catch {
     // Default: purple that shows nicely on the background
@@ -77,7 +86,7 @@ export const meta: V2_MetaFunction = ({
   ];
 };
 
-export async function loader({ params, request }: LoaderArgs) {
+export async function loader({ params }: LoaderArgs) {
   const { slug } = params;
   if (!slug) throw new Response(null, { status: 404, statusText: 'Spirit not found' });
 
@@ -87,14 +96,14 @@ export async function loader({ params, request }: LoaderArgs) {
     return redirect(`/spirit/${randomSpirit.slug}`);
   }
 
-  // Resolve the spirit before calling getSpiritColor so a missing slug throws 404
+  // Resolve spirit before getSpiritColor so a missing slug 404s cleanly
   // rather than crashing inside getSpiritColor with a null spirit
   const spirit = await getSpiritBySlug(slug);
   if (!spirit) {
     throw new Response(null, { status: 404, statusText: 'Spirit not found' });
   }
 
-  const spiritColor = await getSpiritColor(new URL(request.url), spirit);
+  const spiritColor = await getSpiritColor(spirit);
   return json({ spirit, spiritColor });
 }
 
