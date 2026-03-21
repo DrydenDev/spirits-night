@@ -13,6 +13,8 @@ Tracked tech debt and modernization items for the Spirits Night project.
 - **`engines`** — updated to `>=20.0.0`
 - **Magic number constants** — `app/constants/game.ts` with all game-level values
 - **Domain types** — `app/types/domain.ts` with `Spirit`, `Adversary`, and related interfaces
+- **React Router v7 upgrade** — replaced Remix v1; Vite build, updated all imports, `json()` → plain objects, `LiveReload` removed, CSS imports use `?url`
+- **ESLint v9 flat config** — replaced `@remix-run/eslint-config` with `@eslint/js` + `typescript-eslint` + React plugins
 - **`ts-node` → `tsx`** — faster Prisma seed runner
 - **`isbot` v5** — updated from v3; switched to named export
 - **ColorThief** — replaced fragile HTTP round-trip with direct filesystem read
@@ -22,24 +24,7 @@ Tracked tech debt and modernization items for the Spirits Night project.
 
 ---
 
-## 🔴 High Priority
-
-### Upgrade Remix v1 → React Router v7 (Remix v2 successor)
-- Remix v1 is end-of-life. The `remix.config.js` already opts into all v2 future flags, which means the app is in a halfway state.
-- React Router v7 is the official successor to Remix. Migration guide: https://reactrouter.com/upgrading/remix
-- Remove `remix.config.js` in favor of `vite.config.ts` (RRv7 uses Vite natively).
-- Remove `@remix-run/css-bundle` (deprecated in Remix v2+; use Vite CSS handling instead).
-- Remove `@remix-run/serve` and `@remix-run/dev`; replace with `@react-router/dev` and `@react-router/serve`.
-- Update all `@remix-run/*` imports to `react-router` / `@react-router/*`.
-- ESLint flat config migration can be bundled here since `@remix-run/eslint-config` will be replaced too.
-
----
-
 ## 🟡 Medium Priority
-
-### Migrate ESLint to flat config (ESLint v9)
-- `.eslintrc.js` uses the legacy config format. ESLint v9 defaults to flat config (`eslint.config.js`).
-- Best done alongside the React Router v7 upgrade since `@remix-run/eslint-config` gets replaced then anyway.
 
 ### Fix `ColorThief` server-side image loading
 - In `spirit.$slug.tsx`, `ColorThief` fetches the spirit splash image by constructing an `http://hostname:port/...` URL from the incoming request, then making an HTTP request back to itself. This is fragile (breaks when port is absent, breaks behind proxies, adds a round-trip).
