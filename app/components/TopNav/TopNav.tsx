@@ -1,5 +1,5 @@
 import { Link, Stack } from '@mui/material';
-import { Link as RemixLink } from '@remix-run/react';
+import { Link as RemixLink } from 'react-router';
 import { toSpiritIslandText } from '~/utils/spiritIslandText';
 
 export function TopNav() {

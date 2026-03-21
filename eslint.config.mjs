@@ -45,6 +45,11 @@ export default tseslint.config(
       // Named function components don't need explicit displayName
       'react/display-name': 'off',
       ...reactHooksPlugin.configs.recommended.rules,
+      // Ignore intentionally unused variables/params prefixed with _
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+      ],
     },
   },
 

@@ -1,6 +1,5 @@
 import { Fragment, useMemo } from 'react';
-import { json } from '@remix-run/node';
-import { useLoaderData, useNavigate } from '@remix-run/react';
+import { useLoaderData, useNavigate } from 'react-router';
 import {
   Avatar,
   BottomNavigation,
@@ -33,7 +32,7 @@ export const meta = () => [
 
 export async function loader() {
   const spirits = await getAllSpirits();
-  return json({ spirits });
+  return { spirits };
 }
 
 export default function SpiritIndex() {

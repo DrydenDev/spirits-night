@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { json, redirect } from '@remix-run/node';
-import type { LoaderArgs } from '@remix-run/node';
-import { useLoaderData, useNavigate } from '@remix-run/react';
-import type { V2_MetaFunction } from '@remix-run/react';
-import type { Adversary } from '~/types/domain';
+import { redirect } from 'react-router';
+import type { LoaderFunctionArgs, MetaFunction } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import {
   Box,
   Button,
@@ -40,11 +38,7 @@ const TAB_TYPE = {
 
 type TabType = (typeof TAB_TYPE)[keyof typeof TAB_TYPE];
 
-export const meta: V2_MetaFunction = ({
-  data,
-}: {
-  data: { adversary: Adversary; level: number } | undefined;
-}) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!data) return [];
   const { adversary, level } = data;
   return [
@@ -57,7 +51,7 @@ export const meta: V2_MetaFunction = ({
   ];
 };
 
-export async function loader({ params }: LoaderArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
   const [slug, rawLevel] = (params['*'] ?? '').split('/');
   const parsedLevel = rawLevel !== undefined ? parseInt(rawLevel, 10) : null;
   const clampedLevel =
@@ -75,7 +69,7 @@ export async function loader({ params }: LoaderArgs) {
 
   const adversary = await getAdversaryBySlug(slug);
   if (adversary) {
-    return json({ adversary, level: clampedLevel ?? ADVERSARY_MAX_LEVEL });
+    return { adversary, level: clampedLevel ?? ADVERSARY_MAX_LEVEL };
   }
 
   throw new Response(null, { status: 404, statusText: 'Adversary not found' });

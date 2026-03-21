@@ -1,5 +1,5 @@
-import spiritStyles from '~/styles/spirit.css';
-import { Outlet } from '@remix-run/react';
+import spiritStyles from '~/styles/spirit.css?url';
+import { Outlet } from 'react-router';
 
 export const links = () => [{ rel: 'stylesheet', href: spiritStyles }];
 

@@ -1,7 +1,2 @@
-/// <reference types="@remix-run/dev" />
-/// <reference types="@remix-run/node" />
-
-declare module '*.css' {
-  const href: string;
-  export default href;
-}
+/// <reference types="vite/client" />
+/// <reference types="@react-router/dev/vite/client" />

@@ -1,9 +1,9 @@
 import { PassThrough } from 'node:stream';
-import { Response } from '@remix-run/node';
-import type { EntryContext } from '@remix-run/node';
-import { RemixServer } from '@remix-run/react';
-import { isbot } from 'isbot';
+import { createReadableStreamFromReadable } from '@react-router/node';
+import type { EntryContext } from 'react-router';
+import { ServerRouter } from 'react-router';
 import { renderToPipeableStream } from 'react-dom/server';
+import { isbot } from 'isbot';
 
 const ABORT_DELAY = 5_000;
 
@@ -27,13 +27,14 @@ function handleBotRequest(
   return new Promise((resolve, reject) => {
     let shellRendered = false;
     const { pipe, abort } = renderToPipeableStream(
-      <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />,
+      <ServerRouter context={remixContext} url={request.url} />,
       {
         onAllReady() {
           shellRendered = true;
           const body = new PassThrough();
+          const stream = createReadableStreamFromReadable(body);
           responseHeaders.set('Content-Type', 'text/html');
-          resolve(new Response(body, { headers: responseHeaders, status: responseStatusCode }));
+          resolve(new Response(stream, { headers: responseHeaders, status: responseStatusCode }));
           pipe(body);
         },
         onShellError(error) {
@@ -58,13 +59,14 @@ function handleBrowserRequest(
   return new Promise((resolve, reject) => {
     let shellRendered = false;
     const { pipe, abort } = renderToPipeableStream(
-      <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />,
+      <ServerRouter context={remixContext} url={request.url} />,
       {
         onShellReady() {
           shellRendered = true;
           const body = new PassThrough();
+          const stream = createReadableStreamFromReadable(body);
           responseHeaders.set('Content-Type', 'text/html');
-          resolve(new Response(body, { headers: responseHeaders, status: responseStatusCode }));
+          resolve(new Response(stream, { headers: responseHeaders, status: responseStatusCode }));
           pipe(body);
         },
         onShellError(error) {

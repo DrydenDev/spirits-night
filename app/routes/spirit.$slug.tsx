@@ -1,8 +1,7 @@
 import path from 'path';
-import { json, redirect } from '@remix-run/node';
-import type { LoaderArgs } from '@remix-run/node';
-import { useLoaderData, useNavigate } from '@remix-run/react';
-import type { V2_MetaFunction } from '@remix-run/react';
+import { redirect } from 'react-router';
+import type { LoaderFunctionArgs, MetaFunction } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import { BarChart, Bar, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import ColorThief from 'colorthief';
 
@@ -69,11 +68,7 @@ function getBackgroundColor(color: number[]): { font: string; color: number[] } 
   }
 }
 
-export const meta: V2_MetaFunction = ({
-  data,
-}: {
-  data: { spirit: Spirit } | undefined;
-}) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!data) return [];
   const { spirit } = data;
   return [
@@ -86,7 +81,7 @@ export const meta: V2_MetaFunction = ({
   ];
 };
 
-export async function loader({ params }: LoaderArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
   const { slug } = params;
   if (!slug) throw new Response(null, { status: 404, statusText: 'Spirit not found' });
 
@@ -104,7 +99,7 @@ export async function loader({ params }: LoaderArgs) {
   }
 
   const spiritColor = await getSpiritColor(spirit);
-  return json({ spirit, spiritColor });
+  return { spirit, spiritColor };
 }
 
 export default function SpiritDetails() {
