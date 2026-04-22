@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { redirect } from 'react-router';
-import type { LoaderFunctionArgs, MetaFunction } from 'react-router';
+import type { ClientLoaderFunctionArgs, MetaFunction } from 'react-router';
 import { useLoaderData, useNavigate } from 'react-router';
 import {
   Box,
@@ -23,7 +23,7 @@ import { AdversaryGameplayReference } from '~/components/AdversaryGameplayRefere
 import { AdversarySlider } from '~/components/AdversarySlider';
 import { AdversaryTagBar } from '~/components/AdversaryTagBar';
 import { useStatusSnackbar, StatusSnackbar } from '~/components/StatusSnackbar';
-import { getRandomAdversary, getAdversaryBySlug } from '~/models/Adversary.server';
+import { getRandomAdversary, getAdversaryBySlug } from '~/models/Adversary';
 import { getTodaySeed } from '~/utils/random';
 import {
   ADVERSARY_MIN_LEVEL,
@@ -38,7 +38,7 @@ const TAB_TYPE = {
 
 type TabType = (typeof TAB_TYPE)[keyof typeof TAB_TYPE];
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<typeof clientLoader> = ({ data }) => {
   if (!data) return [];
   const { adversary, level } = data;
   return [
@@ -51,7 +51,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function clientLoader({ params }: ClientLoaderFunctionArgs) {
   const [slug, rawLevel] = (params['*'] ?? '').split('/');
   const parsedLevel = rawLevel !== undefined ? parseInt(rawLevel, 10) : null;
   const clampedLevel =
@@ -76,7 +76,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 }
 
 export default function AdversaryDetails() {
-  const { adversary, level } = useLoaderData<typeof loader>();
+  const { adversary, level } = useLoaderData<typeof clientLoader>();
   const { openSnackbar, closeSnackbar, open: snackbarOpen, text: snackbarText } = useStatusSnackbar();
   const [sliderLevel, setSliderLevel] = useState<number | null>(null);
   const [currentTab, setCurrentTab] = useState<TabType>(TAB_TYPE.card);

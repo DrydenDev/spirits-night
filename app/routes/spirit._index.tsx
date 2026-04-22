@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 import { Casino as CasinoIcon } from '@mui/icons-material';
 import { Today as TodayIcon } from '@mui/icons-material';
-import { getAllSpirits } from '~/models/Spirit.server';
+import { getAllSpirits } from '~/models/Spirit';
 import type { Spirit } from '~/types/domain';
 
 export const meta = () => [
@@ -30,13 +30,13 @@ export const meta = () => [
   { property: 'og:image', content: '/images/spirits/spirits_splash.png' },
 ];
 
-export async function loader() {
-  const spirits = await getAllSpirits();
+export async function clientLoader() {
+  const spirits = getAllSpirits();
   return { spirits };
 }
 
 export default function SpiritIndex() {
-  const { spirits } = useLoaderData<typeof loader>();
+  const { spirits } = useLoaderData<typeof clientLoader>();
   const navigate = useNavigate();
 
   return (

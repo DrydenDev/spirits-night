@@ -1,4 +1,0 @@
-{
-  "framework": "react-router",
-  "buildCommand": "npm run build"
-}

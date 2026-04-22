@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 import { Casino as CasinoIcon } from '@mui/icons-material';
 import { Today as TodayIcon } from '@mui/icons-material';
-import { getAllAdversaries } from '~/models/Adversary.server';
+import { getAllAdversaries } from '~/models/Adversary';
 import type { Adversary } from '~/types/domain';
 
 export const meta = () => [
@@ -30,13 +30,13 @@ export const meta = () => [
   { property: 'og:image', content: '/images/adversaries/adversary_splash.jpg' },
 ];
 
-export async function loader() {
-  const adversaries = await getAllAdversaries();
+export async function clientLoader() {
+  const adversaries = getAllAdversaries();
   return { adversaries };
 }
 
 export default function AdversaryIndex() {
-  const { adversaries } = useLoaderData<typeof loader>();
+  const { adversaries } = useLoaderData<typeof clientLoader>();
   const navigate = useNavigate();
 
   return (

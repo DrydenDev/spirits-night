@@ -1,11 +1,11 @@
-import path from 'path';
 import { redirect } from 'react-router';
-import type { LoaderFunctionArgs, MetaFunction } from 'react-router';
+import type { ClientLoaderFunctionArgs, MetaFunction } from 'react-router';
 import { useLoaderData, useNavigate } from 'react-router';
+import { useState, useEffect } from 'react';
 import { BarChart, Bar, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import ColorThief from 'colorthief';
 
-import { getRandomSpirit, getSpiritBySlug } from '~/models/Spirit.server';
+import { getRandomSpirit, getSpiritBySlug } from '~/models/Spirit';
 import { getTodaySeed } from '~/utils/random';
 import {
   Box,
@@ -26,27 +26,7 @@ import { useStatusSnackbar, StatusSnackbar } from '~/components/StatusSnackbar';
 import { toSpiritIslandText } from '~/utils/spiritIslandText';
 import type { Spirit } from '~/types/domain';
 
-async function getSpiritColor(spirit: Spirit): Promise<number[]> {
-  try {
-    // ColorThief's Node.js API exposes static methods (not a class constructor),
-    // which differs from the browser API described in @types/colorthief — hence the cast.
-    const imagePath = path.join(
-      process.cwd(),
-      'public',
-      'images',
-      'spirits',
-      spirit.slug,
-      'splash.png'
-    );
-    const palette = await (
-      ColorThief as unknown as { getPalette: (p: string, count: number) => Promise<number[][]> }
-    ).getPalette(imagePath, 5);
-    return palette[Math.floor(Math.random() * palette.length)];
-  } catch {
-    // Default: purple that shows nicely on the background
-    return [65, 51, 93];
-  }
-}
+const DEFAULT_SPIRIT_COLOR = [65, 51, 93];
 
 function getBackgroundColor(color: number[]): { font: string; color: number[] } {
   const brightness = (r: number, g: number, b: number) =>
@@ -68,7 +48,7 @@ function getBackgroundColor(color: number[]): { font: string; color: number[] } 
   }
 }
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<typeof clientLoader> = ({ data }) => {
   if (!data) return [];
   const { spirit } = data;
   return [
@@ -81,30 +61,37 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function clientLoader({ params }: ClientLoaderFunctionArgs) {
   const { slug } = params;
   if (!slug) throw new Response(null, { status: 404, statusText: 'Spirit not found' });
 
   if (slug === 'random' || slug === 'today') {
     const randomSeed = slug === 'today' ? getTodaySeed() : null;
-    const randomSpirit = await getRandomSpirit(randomSeed);
+    const randomSpirit = getRandomSpirit(randomSeed);
     return redirect(`/spirit/${randomSpirit.slug}`);
   }
 
-  // Resolve spirit before getSpiritColor so a missing slug 404s cleanly
-  // rather than crashing inside getSpiritColor with a null spirit
-  const spirit = await getSpiritBySlug(slug);
+  const spirit = getSpiritBySlug(slug);
   if (!spirit) {
     throw new Response(null, { status: 404, statusText: 'Spirit not found' });
   }
 
-  const spiritColor = await getSpiritColor(spirit);
-  return { spirit, spiritColor };
+  return { spirit };
 }
 
 export default function SpiritDetails() {
-  const { spirit, spiritColor } = useLoaderData<typeof loader>();
+  const { spirit } = useLoaderData<typeof clientLoader>();
   const navigate = useNavigate();
+  const [spiritColor, setSpiritColor] = useState<number[]>(DEFAULT_SPIRIT_COLOR);
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => {
+      const palette = new ColorThief().getPalette(img, 5) as number[][];
+      setSpiritColor(palette[Math.floor(Math.random() * palette.length)]);
+    };
+    img.src = `/images/spirits/${spirit.slug}/splash.png`;
+  }, [spirit.slug]);
   const linkPage = (slugLink: string) => navigate(`/spirit/${slugLink}`);
   const { openSnackbar, closeSnackbar, open: snackbarOpen, text: snackbarText } = useStatusSnackbar();
 

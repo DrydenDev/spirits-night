@@ -5,13 +5,11 @@
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
-    "start": "react-router-serve build/server/index.js",
     "typecheck": "tsc",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "eslint app prisma",
-    "format": "prettier --write \"app/**/*.{ts,tsx,css}\"",
-    "postinstall": "prisma generate"
+    "lint": "eslint app",
+    "format": "prettier --write \"app/**/*.{ts,tsx,css}\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -20,11 +18,8 @@
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.2",
     "@mui/x-data-grid": "^6.10.2",
-    "@prisma/client": "^5.1.0",
     "@react-router/node": "^7.13.1",
     "@react-router/serve": "^7.13.1",
-    "@vercel/analytics": "^1.0.1",
-    "@vercel/react-router": "^1.2.6",
     "colorthief": "^2.4.0",
     "isbot": "^5.1.36",
     "react": "^18.2.0",
@@ -32,13 +27,13 @@
     "react-router": "^7.13.1",
     "react-string-replace": "^1.1.1",
     "recharts": "^2.7.2",
-    "seedrandom": "^3.0.5",
-    "yaml": "^2.3.1"
+    "seedrandom": "^3.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
     "@react-router/dev": "^7.13.1",
     "@react-router/fs-routes": "^7.13.1",
+    "@rollup/plugin-yaml": "^4.1.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -54,7 +49,6 @@
     "globals": "^17.4.0",
     "jsdom": "^29.0.1",
     "prettier": "^3.8.1",
-    "prisma": "^5.1.0",
     "tsx": "^4.21.0",
     "typescript": "^5.1.6",
     "typescript-eslint": "^8.57.1",
@@ -64,8 +58,5 @@
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
   }
 }

@@ -1,5 +1,5 @@
 import { redirect } from 'react-router';
 
-export async function loader() {
+export async function clientLoader() {
   return redirect('/adversary');
 }
