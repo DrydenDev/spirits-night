@@ -1,23 +1,6 @@
-import { Fragment, useMemo } from 'react';
-import { useLoaderData, useNavigate } from 'react-router';
-import {
-  Avatar,
-  BottomNavigation,
-  BottomNavigationAction,
-  Card,
-  CardContent,
-  CardMedia,
-  Divider,
-  Link,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { Casino as CasinoIcon } from '@mui/icons-material';
-import { Today as TodayIcon } from '@mui/icons-material';
+import { useMemo } from 'react';
+import { Link, useLoaderData, useNavigate } from 'react-router';
+import { Shuffle, Calendar } from 'lucide-react';
 import { getAllAdversaries } from '~/models/Adversary';
 import type { Adversary } from '~/types/domain';
 
@@ -31,8 +14,7 @@ export const meta = () => [
 ];
 
 export async function clientLoader() {
-  const adversaries = getAllAdversaries();
-  return { adversaries };
+  return { adversaries: getAllAdversaries() };
 }
 
 export default function AdversaryIndex() {
@@ -40,73 +22,96 @@ export default function AdversaryIndex() {
   const navigate = useNavigate();
 
   return (
-    <>
-      <Card square>
-        <CardMedia
-          sx={{ height: 140 }}
-          image="/images/adversaries/adversary_splash.jpg"
-          title="Spirit Island Adversaries"
+    <div>
+      <div className="relative -mx-4 h-52 mb-6 overflow-hidden">
+        <img
+          src="/images/adversaries/adversary_splash.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <CardContent className="adversary-list">
-          <Stack direction="column" spacing={2}>
-            <Typography align="center" variant="h3">
-              Adversaries
-            </Typography>
-            <AdversaryList adversaries={adversaries} />
-          </Stack>
-        </CardContent>
-      </Card>
-      <BottomNavigation
-        showLabels
-        onChange={(_, selectedValue) => navigate(`/adversary/${selectedValue}`)}
-      >
-        <BottomNavigationAction label="Random" value="random" icon={<CasinoIcon />} />
-        <BottomNavigationAction label="Today" value="today" icon={<TodayIcon />} />
-      </BottomNavigation>
-    </>
+        <div className="absolute inset-0 bg-linear-to-b from-depth-950/10 via-depth-950/55 to-depth-950" />
+        <div className="absolute bottom-5 left-5">
+          <h1 className="font-display text-3xl font-bold text-white tracking-widest uppercase">
+            Adversaries
+          </h1>
+          <p className="text-slate-500 text-sm mt-1">{adversaries.length} adversaries</p>
+        </div>
+      </div>
+
+      <AdversaryList adversaries={adversaries} />
+
+      <div className="flex justify-center gap-3 mt-8">
+        <ActionButton icon={<Shuffle className="w-4 h-4" />} onClick={() => navigate('/adversary/random')}>
+          Random
+        </ActionButton>
+        <ActionButton icon={<Calendar className="w-4 h-4" />} onClick={() => navigate('/adversary/today')} muted>
+          Today
+        </ActionButton>
+      </div>
+    </div>
   );
 }
 
 function AdversaryList({ adversaries }: { adversaries: Adversary[] }) {
   const difficultyRange = (adversary: Adversary) => {
-    const maxDifficulty = Math.max(...adversary.levels.map((level) => level.difficulty));
-    return `${adversary.difficulty} - ${maxDifficulty}`;
+    const max = Math.max(...adversary.levels.map((l) => l.difficulty));
+    return `${adversary.difficulty}–${max}`;
   };
 
-  const sortedAdversaries = useMemo(
+  const sorted = useMemo(
     () => [...adversaries].sort((a, b) => a.name.localeCompare(b.name)),
     [adversaries]
   );
 
   return (
-    <List>
-      {sortedAdversaries.map((adversary, index) => (
-        <Fragment key={adversary.id}>
-          {index > 0 && <Divider variant="inset" component="li" />}
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar
-                alt={adversary.name}
-                src={`/images/adversaries/${adversary.slug}/avatar.png`}
-                sx={{ width: 56, height: 56, marginRight: '0.5em', border: '1px solid lightgray' }}
-              />
-            </ListItemAvatar>
-            <ListItemText
-              primary={<Link href={`/adversary/${adversary.slug}`}>{adversary.name}</Link>}
-              secondary={
-                <Typography
-                  sx={{ display: 'inline', fontWeight: '400', fontSize: '0.75rem' }}
-                  component="span"
-                  variant="subtitle2"
-                  color="text.secondary"
-                >
-                  Difficulty Range: {difficultyRange(adversary)}
-                </Typography>
-              }
-            />
-          </ListItem>
-        </Fragment>
+    <div className="bg-depth-800 border border-depth-600 rounded-xl overflow-hidden divide-y divide-depth-600/40">
+      {sorted.map((adversary) => (
+        <Link
+          key={adversary.id}
+          to={`/adversary/${adversary.slug}`}
+          className="flex items-center gap-4 px-4 py-3.5 hover:bg-depth-700/50 transition-colors"
+        >
+          <img
+            src={`/images/adversaries/${adversary.slug}/avatar.png`}
+            alt={adversary.name}
+            className="w-12 h-12 rounded-full object-cover border border-depth-500/60 shrink-0"
+          />
+          <div className="min-w-0">
+            <p className="font-display text-sm text-teal-400 tracking-wide truncate">
+              {adversary.name}
+            </p>
+            <p className="text-slate-500 text-sm">Difficulty {difficultyRange(adversary)}</p>
+          </div>
+        </Link>
       ))}
-    </List>
+    </div>
+  );
+}
+
+function ActionButton({
+  icon,
+  onClick,
+  children,
+  muted,
+}: {
+  icon: React.ReactNode;
+  onClick: () => void;
+  children: React.ReactNode;
+  muted?: boolean;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={[
+        'flex items-center gap-2 px-5 py-2.5 rounded-lg border transition-colors',
+        'font-display text-xs tracking-widest uppercase',
+        muted
+          ? 'border-depth-500 text-slate-500 hover:text-slate-200 hover:bg-depth-700/50'
+          : 'border-teal-600/50 text-teal-400 hover:bg-teal-500/10 hover:border-teal-500',
+      ].join(' ')}
+    >
+      {icon}
+      {children}
+    </button>
   );
 }

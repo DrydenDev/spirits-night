@@ -1,30 +1,23 @@
 import globalStyles from '~/styles/global.css?url';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/react';
-
+import { Toaster } from 'sonner';
 import { TopNav } from '~/components/TopNav';
-import { Container } from '@mui/material';
-
-// prepend:true inserts Emotion's <style> tag at the top of <head>, before
-// React's reconciled children, so hydrateRoot's head reconciliation leaves it alone.
-const emotionCache = createCache({ key: 'css', prepend: true });
 
 export const links = () => [{ rel: 'stylesheet', href: globalStyles }];
 
 export default function App() {
   return (
-    <CacheProvider value={emotionCache}>
     <html lang="en">
       <head>
         <title>Spirits Night</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+          rel="stylesheet"
+        />
         <Meta />
         <Links />
         {/* GitHub Pages SPA routing: decode the ?/ redirect from 404.html */}
@@ -43,14 +36,28 @@ export default function App() {
         ` }} />
       </head>
       <body>
-        <Container maxWidth="lg">
+        <div className="min-h-screen">
           <TopNav />
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-        </Container>
+          <main className="max-w-3xl mx-auto px-4 pb-16">
+            <Outlet />
+          </main>
+        </div>
+        <Toaster
+          position="bottom-center"
+          theme="dark"
+          toastOptions={{
+            style: {
+              background: '#0e1d32',
+              border: '1px solid #1b3050',
+              color: '#dde5f0',
+              fontFamily: "'Crimson Text', Georgia, serif",
+              fontSize: '1rem',
+            },
+          }}
+        />
+        <ScrollRestoration />
+        <Scripts />
       </body>
     </html>
-    </CacheProvider>
   );
 }

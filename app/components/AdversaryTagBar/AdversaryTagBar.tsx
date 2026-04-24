@@ -1,5 +1,3 @@
-import { Chip, Stack } from '@mui/material';
-import type { ChipProps } from '@mui/material';
 import { DIFFICULTY_WARNING_THRESHOLD, DIFFICULTY_ERROR_THRESHOLD } from '~/constants/game';
 import type { Adversary } from '~/types/domain';
 
@@ -8,33 +6,33 @@ interface AdversaryTagBarProps {
   level: number;
 }
 
+const chip = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-display tracking-wide border';
+
 export function AdversaryTagBar({ adversary, level }: AdversaryTagBarProps) {
-  const difficulty = adversary.levels.find(
-    (adversaryLevel) => adversaryLevel.level === level
-  )?.difficulty;
+  const difficulty = adversary.levels.find((l) => l.level === level)?.difficulty;
 
   return (
-    <Stack sx={{ justifyContent: 'center' }} direction="row" spacing={1}>
-      <LevelChip level={level} />
-      <DifficultyChip difficulty={difficulty} />
-      <Chip label={adversary.expansion} />
-    </Stack>
+    <div className="flex flex-wrap justify-center gap-2">
+      <span className={`${chip} bg-teal-900/30 border-teal-600/40 text-teal-300`}>
+        Level {level}
+      </span>
+      {difficulty !== undefined && <DifficultyChip difficulty={difficulty} />}
+      <span className={`${chip} bg-depth-700 border-depth-500 text-slate-400`}>
+        {adversary.expansion}
+      </span>
+    </div>
   );
 }
 
-function LevelChip({ level }: { level: number }) {
-  return <Chip color="primary" label={`Level ${level}`} />;
-}
-
-function DifficultyChip({ difficulty }: { difficulty: number | undefined }) {
-  if (!difficulty) return null;
-
-  const dangerColor: ChipProps['color'] =
+function DifficultyChip({ difficulty }: { difficulty: number }) {
+  const color =
     difficulty > DIFFICULTY_ERROR_THRESHOLD
-      ? 'error'
+      ? 'bg-red-900/30 border-red-500/40 text-red-300'
       : difficulty > DIFFICULTY_WARNING_THRESHOLD
-        ? 'warning'
-        : 'success';
+        ? 'bg-amber-900/30 border-amber-500/40 text-amber-300'
+        : 'bg-green-900/30 border-green-600/40 text-green-300';
 
-  return <Chip color={dangerColor} variant="filled" label={`Difficulty ${difficulty}`} />;
+  return (
+    <span className={`${chip} ${color}`}>Difficulty {difficulty}</span>
+  );
 }

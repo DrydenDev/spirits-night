@@ -4,48 +4,32 @@ import { useLoaderData, useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import { BarChart, Bar, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import ColorThief from 'colorthief';
+import { toast } from 'sonner';
+import { RotateCcw, Link2, Calendar } from 'lucide-react';
 
 import { getRandomSpirit, getSpiritBySlug } from '~/models/Spirit';
 import { getTodaySeed } from '~/utils/random';
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Chip,
-  Paper,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { Replay as ReplayIcon } from '@mui/icons-material';
-import { Link as LinkIcon } from '@mui/icons-material';
-import { Today as TodayIcon } from '@mui/icons-material';
-import { useStatusSnackbar, StatusSnackbar } from '~/components/StatusSnackbar';
 import { toSpiritIslandText } from '~/utils/spiritIslandText';
 import type { Spirit } from '~/types/domain';
 
-const DEFAULT_SPIRIT_COLOR = [65, 51, 93];
+const DEFAULT_COLOR = [20, 184, 166];
 
-function getBackgroundColor(color: number[]): { font: string; color: number[] } {
-  const brightness = (r: number, g: number, b: number) =>
-    Math.sqrt(r * r * 0.241 + g * g * 0.691 + b * b * 0.068);
-  const brighten = (facet: number) => Math.min(255, facet * 1.5);
-  const darken = (facet: number) => facet * 0.5;
-
-  let backgroundColor = color;
-  if (brightness(...(color as [number, number, number])) > 130) {
-    while (brightness(...(backgroundColor as [number, number, number])) > 50) {
-      backgroundColor = backgroundColor.map(darken);
-    }
-    return { font: 'white', color: [...backgroundColor] };
-  } else {
-    while (brightness(...(backgroundColor as [number, number, number])) < 200) {
-      backgroundColor = backgroundColor.map(brighten);
-    }
-    return { font: 'black', color: [...backgroundColor, 0.3] };
+function getChartTheme(color: number[]): { bg: string; barFill: string; labelColor: string } {
+  const [r, g, b] = color;
+  const brightness = Math.sqrt(r * r * 0.241 + g * g * 0.691 + b * b * 0.068);
+  if (brightness > 130) {
+    const dark = color.map((c) => Math.floor(c * 0.25));
+    return {
+      bg: `rgba(${dark.join(',')}, 0.9)`,
+      barFill: `rgb(${color.join(',')})`,
+      labelColor: '#f1f5f9',
+    };
   }
+  return {
+    bg: `rgba(${r},${g},${b}, 0.2)`,
+    barFill: `rgba(${Math.min(r + 90, 255)},${Math.min(g + 90, 255)},${Math.min(b + 90, 255)}, 1)`,
+    labelColor: '#f1f5f9',
+  };
 }
 
 export const meta: MetaFunction<typeof clientLoader> = ({ data }) => {
@@ -67,117 +51,115 @@ export async function clientLoader({ params }: ClientLoaderFunctionArgs) {
 
   if (slug === 'random' || slug === 'today') {
     const randomSeed = slug === 'today' ? getTodaySeed() : null;
-    const randomSpirit = getRandomSpirit(randomSeed);
-    return redirect(`/spirit/${randomSpirit.slug}`);
+    return redirect(`/spirit/${getRandomSpirit(randomSeed).slug}`);
   }
 
   const spirit = getSpiritBySlug(slug);
-  if (!spirit) {
-    throw new Response(null, { status: 404, statusText: 'Spirit not found' });
-  }
-
+  if (!spirit) throw new Response(null, { status: 404, statusText: 'Spirit not found' });
   return { spirit };
 }
 
 export default function SpiritDetails() {
   const { spirit } = useLoaderData<typeof clientLoader>();
   const navigate = useNavigate();
-  const [spiritColor, setSpiritColor] = useState<number[]>(DEFAULT_SPIRIT_COLOR);
+  const [color, setColor] = useState<number[]>(DEFAULT_COLOR);
 
   useEffect(() => {
     const img = new Image();
+    img.crossOrigin = 'anonymous';
     img.onload = () => {
-      const palette = new ColorThief().getPalette(img, 5) as number[][];
-      setSpiritColor(palette[Math.floor(Math.random() * palette.length)]);
+      try {
+        const palette = new ColorThief().getPalette(img, 5) as number[][];
+        setColor(palette[Math.floor(Math.random() * palette.length)]);
+      } catch {
+        // keep default on error
+      }
     };
     img.src = `/images/spirits/${spirit.slug}/splash.png`;
   }, [spirit.slug]);
+
+  const theme = getChartTheme(color);
   const linkPage = (slugLink: string) => navigate(`/spirit/${slugLink}`);
-  const { openSnackbar, closeSnackbar, open: snackbarOpen, text: snackbarText } = useStatusSnackbar();
 
   return (
-    <>
-      <Card square>
-        <CardMedia
-          sx={{ height: 200 }}
-          image={`/images/spirits/${spirit.slug}/splash.png`}
-          title={spirit.name}
+    <div>
+      <div className="relative -mx-4 h-60 mb-6 overflow-hidden">
+        <img
+          src={`/images/spirits/${spirit.slug}/splash.png`}
+          alt={spirit.name}
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <CardContent className="spirit-card">
-          <Typography align="center" gutterBottom variant="h3">
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-depth-950/40 to-depth-950" />
+        <div className="absolute bottom-4 left-5 right-5">
+          <h1 className="font-display text-2xl font-bold text-white tracking-widest uppercase leading-tight">
             {spirit.name}
-          </Typography>
-          <PlaystyleCard text={spirit.playstyle} color={spiritColor} />
-          <SpiritChart spirit={spirit} color={spiritColor} />
-          <Stack sx={{ justifyContent: 'center' }} direction="row" spacing={1}>
-            <Chip variant="outlined" label={`${spirit.complexity} Complexity`} />
-            <Chip label={spirit.expansion} />
-          </Stack>
-        </CardContent>
-        <CardActions sx={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 4 }}>
-            <Button
-              variant="outlined"
-              size="medium"
-              color="primary"
-              onClick={() => linkPage('random')}
-              startIcon={<ReplayIcon />}
-            >
-              Random Spirit
-            </Button>
-            <Button
-              size="medium"
-              color="primary"
-              onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
-                openSnackbar('Permalink copied!');
-              }}
-              startIcon={<LinkIcon />}
-            >
-              Permalink
-            </Button>
-            <Button
-              size="medium"
-              color="primary"
-              onClick={() => linkPage('today')}
-              startIcon={<TodayIcon />}
-            >
-              Today&apos;s Spirit
-            </Button>
-          </Stack>
-        </CardActions>
-      </Card>
-      <StatusSnackbar open={snackbarOpen} onClose={closeSnackbar} text={snackbarText} />
-    </>
+          </h1>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-5">
+        {spirit.playstyle && <PlaystyleCard text={spirit.playstyle} accentColor={color} />}
+
+        <SpiritChart spirit={spirit} theme={theme} />
+
+        <div className="flex flex-wrap justify-center gap-2">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-display tracking-wide border bg-teal-900/30 border-teal-600/40 text-teal-300">
+            {spirit.complexity} Complexity
+          </span>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-display tracking-wide border bg-depth-700 border-depth-500 text-slate-400">
+            {spirit.expansion}
+          </span>
+          {spirit.incarna && (
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-display tracking-wide border bg-amber-900/30 border-amber-500/40 text-amber-300">
+              Incarna
+            </span>
+          )}
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-3 py-2">
+          <ActionButton icon={<RotateCcw className="w-4 h-4" />} onClick={() => linkPage('random')}>
+            Random
+          </ActionButton>
+          <ActionButton
+            icon={<Link2 className="w-4 h-4" />}
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              toast('Permalink copied!');
+            }}
+          >
+            Permalink
+          </ActionButton>
+          <ActionButton icon={<Calendar className="w-4 h-4" />} onClick={() => linkPage('today')}>
+            Today
+          </ActionButton>
+        </div>
+      </div>
+    </div>
   );
 }
 
-function PlaystyleCard({ text, color }: { text: string | null; color: number[] }) {
+function PlaystyleCard({ text, accentColor }: { text: string; accentColor: number[] }) {
+  const [r, g, b] = accentColor;
   return (
-    <Stack
-      direction="column"
-      className="playstyle-card"
-      sx={{ maxWidth: { sm: '100%', md: '75%' } }}
-    >
-      <Typography
-        variant="h6"
-        component="h4"
-        gutterBottom
-        sx={{ backgroundColor: `rgb(${[...color, 0.2]})` }}
+    <div className="rounded-xl overflow-hidden border border-depth-600 max-w-xl mx-auto w-full">
+      <div
+        className="px-4 py-2.5 border-b border-white/10"
+        style={{ backgroundColor: `rgba(${r},${g},${b},0.25)` }}
       >
-        Playstyle
-      </Typography>
-      <Typography variant="body2">{toSpiritIslandText(text)}</Typography>
-    </Stack>
+        <h3 className="font-display text-[0.65rem] uppercase tracking-widest text-white/80">
+          Playstyle
+        </h3>
+      </div>
+      <div className="bg-depth-800 px-4 py-4">
+        <p className="text-slate-200 whitespace-pre-wrap text-base leading-relaxed">
+          {toSpiritIslandText(text)}
+        </p>
+      </div>
+    </div>
   );
 }
 
-interface SpiritChartData {
-  name: string;
-  attribute: number;
-}
-
-function AttributeTooltip({
+function TooltipContent({
   active,
   payload,
   label,
@@ -186,21 +168,23 @@ function AttributeTooltip({
   payload?: { value: number }[];
   label?: string;
 }) {
-  if (active && payload?.length) {
-    return (
-      <Paper sx={{ padding: '1em' }}>
-        <div>
-          <strong>{label}: </strong>
-          {payload[0].value}
-        </div>
-      </Paper>
-    );
-  }
-  return null;
+  if (!active || !payload?.length) return null;
+  return (
+    <div className="bg-depth-800 border border-depth-600 rounded-lg px-3 py-2 text-sm shadow-xl">
+      <span className="text-slate-400">{label}: </span>
+      <span className="text-slate-100 font-semibold tabular-nums">{payload[0].value}</span>
+    </div>
+  );
 }
 
-function SpiritChart({ spirit, color }: { spirit: Spirit; color: number[] }) {
-  const spiritChartData: SpiritChartData[] = [
+function SpiritChart({
+  spirit,
+  theme,
+}: {
+  spirit: Spirit;
+  theme: { bg: string; barFill: string; labelColor: string };
+}) {
+  const data = [
     { name: 'Offense', attribute: spirit.offense },
     { name: 'Control', attribute: spirit.control },
     { name: 'Fear', attribute: spirit.fear },
@@ -208,29 +192,55 @@ function SpiritChart({ spirit, color }: { spirit: Spirit; color: number[] }) {
     { name: 'Utility', attribute: spirit.utility },
   ];
 
-  const minTick = Math.min(0, ...spiritChartData.map((s) => s.attribute));
-  const maxTick = Math.max(5, ...spiritChartData.map((s) => s.attribute));
+  const minTick = Math.min(0, ...data.map((d) => d.attribute));
+  const maxTick = Math.max(5, ...data.map((d) => d.attribute));
   const ticks = Array.from({ length: maxTick - minTick + 1 }, (_, i) => i + minTick);
-  const backgroundColor = getBackgroundColor(color);
 
   return (
-    <Box className="spirit-chart" sx={{ backgroundColor: `rgb(${backgroundColor.color})` }}>
-      <ResponsiveContainer width="100%" height={240} minWidth={300}>
-        <BarChart data={spiritChartData}>
-          <YAxis hide ticks={ticks} />
+    <div
+      className="rounded-xl overflow-hidden max-w-md mx-auto w-full"
+      style={{ backgroundColor: theme.bg }}
+    >
+      <ResponsiveContainer width="100%" height={210}>
+        <BarChart data={data} margin={{ top: 16, right: 12, left: -24, bottom: 0 }}>
+          <YAxis hide ticks={ticks} domain={[minTick, maxTick]} />
           <XAxis
             dataKey="name"
             tickLine={false}
             interval={0}
-            tick={{ fontWeight: 400, fill: backgroundColor.font }}
+            tick={{
+              fontWeight: 600,
+              fill: theme.labelColor,
+              fontSize: 11,
+              fontFamily: 'Cinzel, Georgia, serif',
+            }}
           />
-          <Tooltip
-            cursor={{ fill: `rgb(${[...color, 0.1]})` }}
-            content={<AttributeTooltip />}
-          />
-          <Bar dataKey="attribute" fill={`rgb(${color})`} />
+          <Tooltip cursor={{ fill: 'rgba(255,255,255,0.05)' }} content={<TooltipContent />} />
+          <Bar dataKey="attribute" fill={theme.barFill} radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
-    </Box>
+    </div>
+  );
+}
+
+function ActionButton({
+  icon,
+  onClick,
+  children,
+}: {
+  icon: React.ReactNode;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="flex items-center gap-2 px-4 py-2 rounded-lg border border-depth-500
+                 text-slate-400 hover:text-teal-400 hover:border-teal-600/50 transition-colors
+                 font-display text-[0.65rem] tracking-widest uppercase"
+    >
+      {icon}
+      {children}
+    </button>
   );
 }

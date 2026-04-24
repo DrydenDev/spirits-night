@@ -1,22 +1,64 @@
-
-body {
-    background: #79E0EE;
-}
+@import "tailwindcss";
 
 @font-face {
   font-family: "SpiritIsland";
   src: url("./fonts/FreehandSpirit04.ttf");
 }
 
-.spirit-island-text {
-  font-family: 'SpiritIsland';
+@theme {
+  --font-display: 'Cinzel', Georgia, serif;
+  --font-body: 'Crimson Text', Georgia, serif;
+
+  --color-depth-950: #060c18;
+  --color-depth-900: #091422;
+  --color-depth-800: #0e1d32;
+  --color-depth-700: #142540;
+  --color-depth-600: #1b3050;
+  --color-depth-500: #233d62;
+  --color-depth-400: #2d4e78;
 }
 
-.root-nav {
-  background-color: #e5fcff;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 600;
-  text-transform: uppercase;
+@layer base {
+  body {
+    background-color: #060c18;
+    color: #dde5f0;
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', Georgia, serif;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #e8f0fa;
+  }
+
+  *:focus-visible {
+    outline: 2px solid #2dd4bf;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+/* Spirit Island custom glyph font */
+.spirit-island-text {
+  font-family: 'SpiritIsland', serif;
+  font-size: 1.1em;
+}
+
+/* Radix Slider thumb focus ring */
+.slider-thumb:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.35);
+}
+
+/* <details> accordion: hide native marker */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
 }

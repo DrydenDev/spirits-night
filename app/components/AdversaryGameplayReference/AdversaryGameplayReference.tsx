@@ -1,19 +1,5 @@
 import { useState } from 'react';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
-import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
+import { ChevronDown, X } from 'lucide-react';
 import { EscalationAlert, LossAlert } from '~/components/AdversaryAlerts';
 import { toSpiritIslandText } from '~/utils/spiritIslandText';
 import type { Adversary, AdversaryReference } from '~/types/domain';
@@ -46,13 +32,11 @@ export function AdversaryGameplayReference({ adversary, level }: AdversaryGamepl
   });
 
   return (
-    <Paper elevation={2} className="adversary-card">
-      <Stack direction="column" spacing={2}>
-        {PHASE_ORDER.map((phase) => (
-          <PhaseAccordion key={phase} references={levelReferences} phase={phase} />
-        ))}
-      </Stack>
-    </Paper>
+    <div className="bg-depth-800 border border-depth-600 rounded-xl overflow-hidden divide-y divide-depth-600/40">
+      {PHASE_ORDER.map((phase) => (
+        <PhaseAccordion key={phase} references={levelReferences} phase={phase} />
+      ))}
+    </div>
   );
 }
 
@@ -62,72 +46,53 @@ interface PhaseAccordionProps {
 }
 
 function PhaseAccordion({ references, phase }: PhaseAccordionProps) {
-  const [hideAccordion, setHideAccordion] = useState(false);
-  if (hideAccordion) return null;
+  const [dismissed, setDismissed] = useState(false);
+  if (dismissed) return null;
 
-  const phaseReferences = references.filter(
+  const phaseRefs = references.filter(
     (ref) => ref.phase.toUpperCase() === phase.toUpperCase()
   );
-  if (!phaseReferences.length) return null;
-
-  const phaseLossConditionMarkup = phaseReferences.map((ref) => {
-    if (ref.type !== 'Loss Condition') return null;
-    return <LossAlert key={ref.id} title={ref.title} description={ref.description} />;
-  });
-
-  const phaseEscalationMarkup = phaseReferences.map((ref) => {
-    if (ref.type !== 'Escalation') return null;
-    return <EscalationAlert key={ref.id} title={ref.title} description={ref.description} />;
-  });
-
-  const phaseAbilityMarkup = (
-    <List>
-      {phaseReferences.map((ref) => {
-        if (ref.type === 'Escalation' || ref.type === 'Loss Condition') return null;
-        return (
-          <ListItem key={ref.id}>
-            <ListItemText primary={ref.title} secondary={toSpiritIslandText(ref.description)} />
-          </ListItem>
-        );
-      })}
-    </List>
-  );
+  if (!phaseRefs.length) return null;
 
   return (
-    <Accordion defaultExpanded>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ backgroundColor: '#ebf2f6' }}>
-        <Typography variant="h6" component="h3">
+    <details open className="group">
+      <summary className="flex items-center justify-between cursor-pointer px-4 py-3.5 hover:bg-depth-700/40 transition-colors select-none">
+        <span className="font-display text-[0.65rem] uppercase tracking-[0.15em] text-teal-300">
           {phase}
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        {phaseLossConditionMarkup}
-        {phaseEscalationMarkup}
-        {phaseAbilityMarkup}
-        <DismissButton phase={phase} onClick={() => setHideAccordion(true)} />
-      </AccordionDetails>
-    </Accordion>
-  );
-}
-
-interface DismissButtonProps {
-  phase: string;
-  onClick: () => void;
-}
-
-function DismissButton({ phase, onClick }: DismissButtonProps) {
-  if (phase.toUpperCase() !== 'SETUP') return null;
-  return (
-    <Box textAlign="center">
-      <Button
-        color="primary"
-        size="medium"
-        variant="contained"
-        startIcon={<CloseIcon />}
-        onClick={onClick}
-      >
-        Dismiss Setup
-      </Button>
-    </Box>
+        </span>
+        <ChevronDown className="w-4 h-4 text-teal-600 transition-transform duration-200 group-open:rotate-180" />
+      </summary>
+      <div className="px-4 pb-4 flex flex-col gap-3">
+        {phaseRefs.map((ref) => {
+          if (ref.type === 'Loss Condition') {
+            return <LossAlert key={ref.id} title={ref.title} description={ref.description} />;
+          }
+          if (ref.type === 'Escalation') {
+            return <EscalationAlert key={ref.id} title={ref.title} description={ref.description} />;
+          }
+          return (
+            <div key={ref.id}>
+              <p className="font-semibold text-slate-100 mb-0.5">{ref.title}</p>
+              <p className="text-slate-300 text-base leading-relaxed">
+                {toSpiritIslandText(ref.description)}
+              </p>
+            </div>
+          );
+        })}
+        {phase.toUpperCase() === 'SETUP' && (
+          <div className="flex justify-center mt-1">
+            <button
+              onClick={() => setDismissed(true)}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-depth-500
+                         text-slate-500 hover:text-slate-200 hover:border-depth-400
+                         transition-colors font-display text-[0.65rem] tracking-widest uppercase"
+            >
+              <X className="w-3 h-3" />
+              Dismiss Setup
+            </button>
+          </div>
+        )}
+      </div>
+    </details>
   );
 }
