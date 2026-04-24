@@ -5,14 +5,21 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
 
 import { TopNav } from '~/components/TopNav';
 import { Container } from '@mui/material';
+
+// prepend:true inserts Emotion's <style> tag at the top of <head>, before
+// React's reconciled children, so hydrateRoot's head reconciliation leaves it alone.
+const emotionCache = createCache({ key: 'css', prepend: true });
 
 export const links = () => [{ rel: 'stylesheet', href: globalStyles }];
 
 export default function App() {
   return (
+    <CacheProvider value={emotionCache}>
     <html lang="en">
       <head>
         <title>Spirits Night</title>
@@ -44,5 +51,6 @@ export default function App() {
         </Container>
       </body>
     </html>
+    </CacheProvider>
   );
 }
