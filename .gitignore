@@ -6,3 +6,7 @@ node_modules
 .env
 /.react-router
 
+# Supabase CLI local state (not used — project is fully static)
+/supabase/
+/public_schema.sql
+
