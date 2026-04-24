@@ -7,7 +7,7 @@
 
 @theme {
   --font-display: 'Cinzel', Georgia, serif;
-  --font-body: 'Crimson Text', Georgia, serif;
+  --font-body: 'Lora', Georgia, serif;
 
   --color-depth-950: #060c18;
   --color-depth-900: #091422;
@@ -22,7 +22,7 @@
   body {
     background-color: #060c18;
     color: #dde5f0;
-    font-family: 'Crimson Text', Georgia, serif;
+    font-family: 'Lora', Georgia, serif;
     font-size: 1.1rem;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
@@ -31,7 +31,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cinzel', Georgia, serif;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.2;
     color: #e8f0fa;
   }

@@ -15,7 +15,7 @@ export default function App() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
           rel="stylesheet"
         />
         <Meta />
@@ -50,7 +50,7 @@ export default function App() {
               background: '#0e1d32',
               border: '1px solid #1b3050',
               color: '#dde5f0',
-              fontFamily: "'Crimson Text', Georgia, serif",
+              fontFamily: "'Lora', Georgia, serif",
               fontSize: '1rem',
             },
           }}

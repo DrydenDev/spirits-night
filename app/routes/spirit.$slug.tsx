@@ -202,8 +202,8 @@ function SpiritChart({
       style={{ backgroundColor: theme.bg }}
     >
       <ResponsiveContainer width="100%" height={210}>
-        <BarChart data={data} margin={{ top: 16, right: 12, left: -24, bottom: 0 }}>
-          <YAxis hide ticks={ticks} domain={[minTick, maxTick]} />
+        <BarChart data={data} margin={{ top: 16, right: 12, left: 4, bottom: 0 }}>
+          <YAxis hide ticks={ticks} domain={[minTick, maxTick]} width={0} />
           <XAxis
             dataKey="name"
             tickLine={false}
