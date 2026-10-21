@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spirits Night</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // GitHub Pages redirects deep links through /?/; restore the shared permalink first.
+      const search = window.location.search;
+      if (search.startsWith('?/')) {
+        const decoded = search
+          .slice(1)
+          .split('&')
+          .map((part) => part.replace(/~and~/g, '&'))
+          .join('?');
+        window.history.replaceState(null, '', decoded + window.location.hash);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/app/main.ts"></script>
+  </body>
+</html>

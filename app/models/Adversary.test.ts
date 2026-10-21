@@ -60,6 +60,15 @@ describe('Adversary model', () => {
       expect(first.level).toBe(second.level);
     });
 
+    it.each([
+      ['1/15/2024', 'bradenburg-prussia', 3],
+      ['10/21/2026', 'sweden', 4],
+    ])('preserves the daily adversary and level for seed %s', (seed, expectedSlug, expectedLevel) => {
+      const result = getRandomAdversary(seed);
+      expect(result.adversary.slug).toBe(expectedSlug);
+      expect(result.level).toBe(expectedLevel);
+    });
+
     it('returns different adversaries for different seeds (probabilistically)', () => {
       const results = new Set(['a', 'b', 'c', 'd', 'e'].map((s) => getRandomAdversary(s).adversary.slug));
       expect(results.size).toBeGreaterThan(1);

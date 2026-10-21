@@ -11,13 +11,12 @@ A Spirit Island game night companion app. It serves two main purposes:
 
 | Layer | Tool |
 |---|---|
-| Framework | Remix v1 (React, SSR) — **needs upgrading to Remix v2 / React Router v7** |
-| UI | MUI v5 (Material UI) + Emotion |
-| Charts | Recharts |
-| Database | PostgreSQL via Supabase |
-| ORM | Prisma 5 |
-| Language | TypeScript (partially — see TODO.md) |
-| Hosting | Vercel (`@vercel/analytics` is wired in) |
+| Framework | Vue 3 + Vue Router, built with Vite |
+| UI | Tailwind CSS 4 and the custom Spirit Island icon font |
+| Charts | Accessible HTML/CSS attribute bars |
+| Data | YAML bundled into the static site at build time |
+| Language | TypeScript and Vue single-file components |
+| Hosting | GitHub Pages with a custom domain |
 
 ---
 
@@ -25,18 +24,16 @@ A Spirit Island game night companion app. It serves two main purposes:
 
 ```
 app/
-  components/     # Presentational React components (one folder per component)
-  models/         # Server-side data access via Prisma (*.server.js/ts)
-  routes/         # Remix file-based routes
-  styles/         # Global + per-route CSS; custom Spirit Island icon font
-  utils/          # Shared utilities (prisma client, random seed, SI text renderer)
+  features/       # Vue screens and domain-specific logic
+  shared/         # Shared Vue components and text parser
+  models/         # Data lookups and random selection
+  data/           # YAML-to-domain mapping
+  router.ts       # Client-side routes and daily/random redirects
+  styles/         # Global CSS and custom Spirit Island icon font
+  utils/          # Shared utilities, including the date seed
 data/
   spirits.yaml    # Source-of-truth Spirit data
   adversaries.yaml # Source-of-truth Adversary data
-prisma/
-  schema.prisma   # DB schema
-  seed.ts         # Entry point; delegates to seeds/
-  seeds/          # spiritSeed.ts, adversarySeed.ts — read YAML, upsert to DB
 public/
   images/         # Spirit splash art and adversary banners/avatars
 ```
@@ -61,7 +58,7 @@ Each adversary has:
 - `references` — per-phase gameplay rules (`type`, `phase`, `level`, `maxLevel`, `description`)
 
 ### Spirit Island Text Markup
-Descriptions use a custom `[[Token]]` syntax (e.g., `[[Fear]]`, `[[Dahan]]`, `[[Blight]]`) that maps to characters in the `FreehandSpirit04.ttf` custom font. The `toSpiritIslandText()` utility in `app/utils/spiritIslandText.jsx` handles rendering these as `<span class="spirit-island-text">`. Also supports `*bold*` and `_italic_`.
+Descriptions use a custom `[[Token]]` syntax (e.g., `[[Fear]]`, `[[Dahan]]`, `[[Blight]]`) that maps to characters in the `FreehandSpirit04.ttf` custom font. `app/shared/SpiritText.vue` handles rendering these as accessible icon spans. It also supports `*bold*` and `_italic_`.
 
 ---
 
@@ -70,11 +67,11 @@ Descriptions use a custom `[[Token]]` syntax (e.g., `[[Fear]]`, `[[Dahan]]`, `[[
 | Route | Purpose |
 |---|---|
 | `/adversary` | Adversary index — sorted list |
-| `/adversary/[slug]/[level]` | Adversary detail with level slider and gameplay reference |
+| `/adversary/:slug/:level?` | Adversary detail with level slider and gameplay reference |
 | `/adversary/random` | Redirects to a random adversary at a random level |
 | `/adversary/today` | Redirects to today's seeded adversary (min level 3) |
 | `/spirit` | Spirit index — sorted list |
-| `/spirit/[slug]` | Spirit detail with attribute chart and playstyle card |
+| `/spirit/:slug` | Spirit detail with attribute bars and playstyle card |
 | `/spirit/random` | Redirects to a random spirit |
 | `/spirit/today` | Redirects to today's seeded spirit |
 
@@ -84,29 +81,26 @@ Permalink URLs are stable — `/adversary/england/4` will always show England at
 
 ## Seeded Randomness
 
-The "Today" feature uses `getTodaySeed()` (returns today's date as a locale string) combined with the `seedrandom` library to deterministically pick the same Spirit/Adversary for everyone on the same calendar day. **Do not change the seed format or the order of `prisma.adversary.findMany()` / `prisma.spirit.findMany()` calls without understanding the downstream impact on daily picks.**
+The "Today" feature uses `getTodaySeed()` (today's local date as an `en-US` string) with `seedrandom` to deterministically pick a Spirit and Adversary. **Do not change the seed format, selection formulas, or record order in the YAML files without understanding the downstream impact on daily picks.**
 
 ---
 
 ## Data Source of Truth
 
-`data/spirits.yaml` and `data/adversaries.yaml` are the canonical source of game content. Changes to game data should be made there first, then re-run the seed:
+`data/spirits.yaml` and `data/adversaries.yaml` are the canonical source of game content. Changes to game data should be made there first, then rebuild:
 
 ```sh
-npx prisma db seed
+npm run build
 ```
 
-The seed scripts parse YAML and upsert records — they are safe to re-run.
+The data modules import YAML directly; there is no runtime database or seed script.
 
 ---
 
 ## Development Setup
 
 ```sh
-npm install          # also runs prisma generate via postinstall
-cp .env.template .env  # fill in DATABASE_URL
-npx prisma migrate dev
-npx prisma db seed
+npm ci
 npm run dev
 ```
 
@@ -114,19 +108,19 @@ npm run dev
 
 ## Conventions
 
-- **Component folders**: each component lives in its own folder with an `index.jsx` re-export and a same-named implementation file (e.g., `AdversaryCard/index.jsx` + `AdversaryCard/AdversaryCard.jsx`).
-- **Server models**: data-access files are suffixed `.server.js` (or `.server.ts`) so Remix excludes them from the client bundle.
-- **Path alias**: `~/` maps to `app/` (configured in both `tsconfig.json` and `jsconfig.json`).
-- **Styling**: global styles in `app/styles/global.css`; route-specific styles exported via Remix `links()`.
+- **Feature folders**: group screens and related logic under `app/features/adversaries/` or `app/features/spirits/`.
+- **Path alias**: `~/` maps to `app/` in Vite, Vitest, and TypeScript.
+- **Styling**: Tailwind utilities and shared rules in `app/styles/global.css`.
+- **Hosting**: Vite emits `dist/`; GitHub Pages uses `public/404.html` for direct visits to permalinks.
 
 ---
 
 ## Agent Rules
 
-- **Always write tests** for any logic added or changed. There are currently none — every new piece of work should add coverage. Start with model functions and utilities.
+- **Always write tests** for any logic added or changed. Favor model, utility, and user-visible component behavior.
 - **Do not change URL structures** for existing spirit/adversary slugs — these are used as permalinks that users share.
 - **Do not alter the seeded randomness logic** without explicit approval — it affects the "Today" feature that multiple users rely on.
-- **TypeScript is the target** — new files should be `.ts`/`.tsx`. Do not add new `.jsx` files.
-- **YAML data files are the source of truth** — never edit game content directly in the database or seed scripts; edit the YAML.
+- **TypeScript is the target** — new logic files should be `.ts`, and Vue components should be `.vue` with `<script setup lang="ts">`. Do not add `.jsx` files.
+- **YAML data files are the source of truth** — edit game content in YAML, never in generated bundles.
 - **Ask before adding dependencies** — the bundle is already heavy (MUI + Emotion + Recharts). Justify any addition.
 - **No magic numbers** — adversary levels (0–6), attribute score ranges, and difficulty values should be named constants, not inline literals.

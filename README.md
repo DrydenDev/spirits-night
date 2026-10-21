@@ -1,144 +1,72 @@
 # Spirits Night
 
-A Spirit Island game night companion app. Two main uses:
+A static Spirit Island companion for choosing a spirit and adversary, then checking their abilities during game night. Browse the reference, generate a random pick, or use **Today** to get a repeatable pick for the current local calendar date.
 
-1. **Match Generator** — randomly picks a Spirit and an Adversary (with difficulty level) for a game night session. A "Today" mode produces the same picks for everyone on a given calendar day, so all players see the same result.
-2. **Reference** — browse all Spirits and Adversaries, view attribute charts, playstyle notes, and per-level gameplay rules with phase-by-phase breakdowns.
+## Stack
 
-Live at [your-domain-here].
+- Vue 3 and Vue Router with TypeScript
+- Vite and Tailwind CSS
+- Vitest and Vue Test Utils
+- GitHub Pages hosting
+- YAML content bundled at build time; no database, API, account, or runtime server
 
----
+## Run locally
 
-## Tech Stack
-
-| Layer | Tool |
-|---|---|
-| Framework | Remix v1 (SSR, React) |
-| UI | MUI v5 + Emotion |
-| Charts | Recharts |
-| Database | PostgreSQL via Supabase |
-| ORM | Prisma 5 |
-| Language | TypeScript |
-| Hosting | Vercel |
-
----
-
-## Local Development
-
-### Prerequisites
-
-- Node.js 20+
-- A PostgreSQL database (local or via [Supabase](https://supabase.com))
-
-### Setup
+Use Node.js 20.19 or newer.
 
 ```sh
-# 1. Install dependencies
-npm install
-
-# 2. Configure environment
-cp .env.template .env
-# Edit .env and fill in DATABASE_URL with your Postgres connection string
-# Example: DATABASE_URL="postgresql://user:password@localhost:5432/spirits_night"
-
-# 3. Run migrations
-npx prisma migrate dev
-
-# 4. Seed game data
-npx prisma db seed
-
-# 5. Start the dev server
+npm ci
 npm run dev
 ```
 
-The app will be running at http://localhost:3000.
+Open the URL printed by Vite. No environment variables, migrations, or seed command are needed.
 
-### Environment Variables
+## Commands
 
-| Variable | Description |
+| Command | Purpose |
 |---|---|
-| `DATABASE_URL` | PostgreSQL connection string |
-| `SPIRIT_FILE` | Path to the spirits YAML data file (default: `./data/spirits.yaml`) |
-| `ADVERSARY_FILE` | Path to the adversaries YAML data file (default: `./data/adversaries.yaml`) |
+| `npm run dev` | Start the local Vite server |
+| `npm test` | Run the behavior tests |
+| `npm run typecheck` | Check TypeScript and Vue templates |
+| `npm run lint` | Check TypeScript and Vue source |
+| `npm run format` | Format app source |
+| `npm run build` | Build the static site into `dist/` |
 
----
+The GitHub Pages workflow runs tests, typecheck, lint, and build before publishing `dist/`. The build includes `404.html` for direct visits to shared URLs and `CNAME` for the custom domain.
 
-## Game Data
+## Content and routes
 
-All game content lives in YAML files — these are the source of truth:
+`data/spirits.yaml` and `data/adversaries.yaml` are the source of truth. Edit those files and rebuild the site to change reference content. The app's data modules convert YAML into the typed models used by the UI.
 
-```
-data/
-  spirits.yaml       # All spirits with attributes, complexity, playstyle
-  adversaries.yaml   # All adversaries with levels and gameplay references
-```
-
-To add or update game content, edit the YAML files and re-run the seed:
-
-```sh
-npx prisma db seed
-```
-
-The seed scripts upsert records, so they are safe to re-run.
-
----
-
-## Scripts
-
-| Command | Description |
+| Route | Purpose |
 |---|---|
-| `npm run dev` | Start dev server with hot reload |
-| `npm run build` | Production build |
-| `npm start` | Serve production build |
-| `npm test` | Run test suite |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run typecheck` | TypeScript type check |
-| `npm run lint` | ESLint |
-| `npm run format` | Prettier |
+| `/adversary` | Browse adversaries |
+| `/adversary/:slug/:level?` | View adversary rules at a level |
+| `/adversary/random` | Random adversary and level |
+| `/adversary/today` | Daily adversary with a minimum level of 3 |
+| `/spirit` | Browse spirits |
+| `/spirit/:slug` | View a spirit's playstyle and attributes |
+| `/spirit/random` | Random spirit |
+| `/spirit/today` | Daily spirit |
 
----
+The daily pick uses the existing `en-US` date string, `seedrandom`, YAML record order, and selection formulas. Changing any of those changes daily results. The existing permalink structure is kept so shared links continue to work.
 
-## Project Structure
+Spirit Island descriptions use `[[Token]]` markup for symbols from `FreehandSpirit04.ttf`, plus `*bold*` and `_italic_` emphasis. `app/shared/SpiritText.vue` renders that markup with accessible icon labels.
 
-```
+## Project layout
+
+```text
 app/
-  components/     # Presentational React components (one folder per component)
-  constants/      # Game constants (level ranges, difficulty thresholds)
-  models/         # Server-side data access via Prisma (*.server.ts)
-  routes/         # Remix file-based routes
-  styles/         # Global + per-route CSS; custom Spirit Island icon font
-  types/          # Shared TypeScript interfaces (domain.ts)
-  utils/          # Shared utilities (Prisma client, random seed, SI text renderer)
-data/
-  spirits.yaml
-  adversaries.yaml
-prisma/
-  schema.prisma
-  seed.ts
-  seeds/          # spiritSeed.ts, adversarySeed.ts
-public/
-  images/         # Spirit splash art and adversary banners/avatars
+  features/adversaries/  Adversary screens and rules
+  features/spirits/     Spirit screens and chart
+  shared/               Shared text renderer and not-found page
+  data/                 YAML-to-model mapping
+  models/               Lookups and existing random selection
+  constants/            Game-level limits and thresholds
+  styles/               Global styles and icon font
+  router.ts             Browser routes and permalink redirects
+data/                   Canonical game content
+public/                 Art, favicon, 404 fallback, and CNAME
 ```
 
----
-
-## Routes
-
-| Route | Description |
-|---|---|
-| `/adversary` | Adversary index — sorted list |
-| `/adversary/:slug/:level` | Adversary detail with level slider and gameplay reference |
-| `/adversary/random` | Redirects to a random adversary |
-| `/adversary/today` | Redirects to today's seeded adversary (min level 3) |
-| `/spirit` | Spirit index — sorted list |
-| `/spirit/:slug` | Spirit detail with attribute chart and playstyle |
-| `/spirit/random` | Redirects to a random spirit |
-| `/spirit/today` | Redirects to today's seeded spirit |
-
-Permalink URLs are stable — `/adversary/england/4` will always resolve to England at level 4.
-
----
-
-## Spirit Island Text Markup
-
-Spirit and adversary descriptions use a `[[Token]]` syntax (e.g., `[[Fear]]`, `[[Dahan]]`) that renders as icons via the `FreehandSpirit04.ttf` custom font. The `toSpiritIslandText()` utility in `app/utils/spiritIslandText.tsx` handles the conversion. Rendered icon spans include `role="img"` and `aria-label` for accessibility.
+The [roadmap](MIGRATION_PLAN.md) outlines possible game-night features, including a browser-only play log and difficulty calibration. Those features are proposals and are not part of the current app.

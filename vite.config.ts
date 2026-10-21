@@ -1,14 +1,12 @@
-import { defineConfig } from 'vite';
-import { reactRouter } from '@react-router/dev/vite';
-import tsconfigPaths from 'vite-plugin-tsconfig-paths';
+import { fileURLToPath, URL } from 'node:url';
+import vue from '@vitejs/plugin-vue';
 import yaml from '@rollup/plugin-yaml';
 import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [
-    tailwindcss(),
-    reactRouter(),
-    tsconfigPaths(),
-    yaml(),
-  ],
+  plugins: [vue(), yaml(), tailwindcss()],
+  resolve: {
+    alias: { '~': fileURLToPath(new URL('./app', import.meta.url)) },
+  },
 });

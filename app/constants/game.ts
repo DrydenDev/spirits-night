@@ -4,6 +4,8 @@ export const ADVERSARY_MAX_LEVEL = 6;
 export const ADVERSARY_LEVEL_COUNT = ADVERSARY_MAX_LEVEL - ADVERSARY_MIN_LEVEL + 1;
 /** Minimum level used when picking today's adversary */
 export const TODAY_MIN_ADVERSARY_LEVEL = 3;
+export const DEFAULT_FEAR_CARDS = '3/3/3';
+export const ATTRIBUTE_MAX_SCORE = 5;
 
 /** Difficulty above which the chip turns yellow (warning) */
 export const DIFFICULTY_WARNING_THRESHOLD = 4;

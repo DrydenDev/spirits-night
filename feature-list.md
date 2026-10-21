@@ -12,16 +12,16 @@
 - [ ] Add support for multiple spirit generation
 - [x] Add quick lookup/reference for what each adversary does on each level, by spirit phase (e.g., WHEN RAVAGING, WHEN BUILDING, AFTER BUILDING, etc)
 - [ ] Add fun water wave + island animation to bottom of screen (start with 404 page)
-- [ ] Add .devcontainer to install packages, prisma, seed DB, etc
+- [x] Keep the .devcontainer aligned with the static Vue site (Node only)
 - [ ] Fix long title like Thunderspeaker on mobile
 - [x] Add index page for Spirits, sortable by complexity and name
 - [x] Add index page for Adversaries, sortable by difficulty and name
 - [x] Make adversary page able to take an optional difficulty at the end and use it for permalinks
 - [ ] Make spirit island icons more accessible via aria-hidden and sr-only labels?
-- [ ] Spirit island "text" causes lots of key issues in React
+- [x] Render Spirit Island text in Vue with accessible icon labels
 - [x] Make spirit random/today redirect to permanent slug, and permalink copy to clipboard
 - [x] Add basic nav between pages
-- [ ] Add navbbar at top instead of pure links
+- [x] Add navigation at the top of the site
 - [x] Add spirit charts showing what they're good at
 - [ ] Add playstyle description to each spirit
 - [ ] Add tags to each spirit for things like elements, strengths,, etc

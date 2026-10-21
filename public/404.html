@@ -5,9 +5,9 @@
   <title>Spirits Night</title>
   <script>
     // GitHub Pages SPA redirect: forward unknown paths to the SPA
-    // so React Router can handle client-side routing.
+    // so Vue Router can handle client-side routing.
     var l = window.location;
-    l.replace(l.origin + '/?/' + l.pathname.slice(1) + l.search + l.hash);
+    l.replace(l.origin + '/?/' + l.pathname.slice(1) + l.search.replace(/&/g, '~and~') + l.hash);
   </script>
 </head>
 </html>

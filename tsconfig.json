@@ -1,25 +1,20 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "vitest.config.ts"],
+  "include": ["app/**/*.ts", "app/**/*.vue", "vite.config.ts", "vitest.config.ts"],
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "isolatedModules": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
     "moduleResolution": "bundler",
     "module": "ESNext",
     "resolveJsonModule": true,
-    "target": "ES2019",
+    "target": "ES2022",
     "strict": true,
     "skipLibCheck": true,
-    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "types": ["vite/client", "vitest/globals"],
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"]
-    },
-
-    // Remix takes care of building everything in `remix build`.
-    "noEmit": true
+    }
   }
 }

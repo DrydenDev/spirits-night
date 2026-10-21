@@ -1,24 +1,17 @@
 {
   "name": "Spirits Night",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "app",
-  "workspaceFolder": "/workspace",
-
-  // Install deps, generate Prisma client, run migrations, seed DB
-  "postCreateCommand": "npm install && npx prisma migrate dev && npx prisma db seed",
-
-  "forwardPorts": [3000, 5432],
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22",
+  "postCreateCommand": "npm ci",
+  "forwardPorts": [5173],
   "portsAttributes": {
-    "3000": { "label": "App", "onAutoForward": "openBrowser" },
-    "5432": { "label": "Postgres" }
+    "5173": { "label": "Spirits Night", "onAutoForward": "openBrowser" }
   },
-
   "customizations": {
     "vscode": {
       "extensions": [
+        "Vue.volar",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "Prisma.prisma",
         "bradlc.vscode-tailwindcss"
       ],
       "settings": {

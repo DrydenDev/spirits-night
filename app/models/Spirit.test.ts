@@ -47,6 +47,13 @@ describe('Spirit model', () => {
       expect(first).toEqual(second);
     });
 
+    it.each([
+      ['1/15/2024', 'earthquakes'],
+      ['10/21/2026', 'fractured-days'],
+    ])('preserves the daily pick for seed %s', (seed, expectedSlug) => {
+      expect(getRandomSpirit(seed).slug).toBe(expectedSlug);
+    });
+
     it('returns different spirits for different seeds (probabilistically)', () => {
       const results = new Set(['a', 'b', 'c', 'd', 'e'].map((s) => getRandomSpirit(s).slug));
       expect(results.size).toBeGreaterThan(1);

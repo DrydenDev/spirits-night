@@ -5,6 +5,7 @@ on:
     branches: [main]
 
 permissions:
+  contents: read
   pages: write
   id-token: write
 
@@ -21,9 +22,12 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run lint
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: build/client
+          path: dist
       - id: deploy
         uses: actions/deploy-pages@v4

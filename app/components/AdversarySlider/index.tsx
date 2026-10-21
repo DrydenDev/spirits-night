@@ -1,1 +1,0 @@
-export { AdversarySlider } from './AdversarySlider';

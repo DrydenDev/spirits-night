@@ -1,17 +1,17 @@
-import { defineConfig } from 'vitest/config';
-import path from 'path';
+import { fileURLToPath, URL } from 'node:url';
+import vue from '@vitejs/plugin-vue';
 import yaml from '@rollup/plugin-yaml';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  plugins: [yaml()],
+  plugins: [vue(), yaml()],
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: ['./app/test/setup.ts'],
   },
   resolve: {
     alias: {
-      '~': path.resolve(__dirname, './app'),
+      '~': fileURLToPath(new URL('./app', import.meta.url)),
     },
   },
 });
