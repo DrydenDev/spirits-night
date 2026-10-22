@@ -16,18 +16,18 @@ The old React, React Router, Recharts, and ColorThief packages were removed. Fiv
 - **Quick difficulty controls:** Choose a target difficulty or range, and optionally exclude spirits or expansions unavailable that night. Use adversary difficulty ratings rather than treating level numbers as equivalent across adversaries.
 - **Share a lineup:** Encode the chosen lineup in a URL so everyone can open it without an account or saved server state.
 
-### Next: a local play log
+### Shipped: a local play log
 
 - Store date, adversary, level, spirit lineup, player count, win/loss, and an “easy / right / hard” rating in the browser.
 - Show recent plays and support editing and deletion.
-- Add JSON export and import before relying on stored history. Browser storage can be cleared and does not sync across devices.
+- Export and import JSON. Browser storage can be cleared and does not sync across devices.
 - Surface storage failures and invalid imports clearly; do not silently replace or discard an existing log.
 
-### Then: calibrate difficulty
+### Shipped: first-pass difficulty calibration
 
-- Summarize win rate and felt difficulty by adversary difficulty rating, with sample counts next to every statistic.
-- Start with a transparent suggestion based on recent results: raise the target after repeated easy wins, lower it after repeated hard losses, otherwise hold. Show which games informed the suggestion and avoid precise predictions from a small sample.
-- Let the group choose the target manually. Revisit the heuristic after real play data shows whether it helps.
+- Summarize wins and felt difficulty by adversary difficulty rating, with sample counts next to every statistic.
+- Suggest one difficulty point above the recent median after three easy wins, one below after three hard losses, and otherwise hold. Show which games informed the suggestion; wait for three games before suggesting a target.
+- The group still chooses its target manually. Revisit the heuristic after real play data shows whether it helps.
 
 ### Later
 

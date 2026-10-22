@@ -1,6 +1,6 @@
 # Spirits Night
 
-A static Spirit Island companion for choosing a spirit and adversary, then checking their abilities during game night. Browse the reference, generate a random pick, or use **Today** to get a repeatable pick for the current local calendar date.
+A static Spirit Island companion for choosing a spirit and adversary, checking their abilities, and recording game nights. Browse the reference, generate a random pick, or use **Today** to get a repeatable pick for the current local calendar date.
 
 ## Stack
 
@@ -48,10 +48,17 @@ The GitHub Pages workflow runs tests, typecheck, lint, and build before publishi
 | `/spirit/:slug` | View a spirit's playstyle and attributes |
 | `/spirit/random` | Random spirit |
 | `/spirit/today` | Daily spirit |
+| `/plays` | Browser-only game log and difficulty summary |
 
 The daily pick uses the existing `en-US` date string, `seedrandom`, YAML record order, and selection formulas. Changing any of those changes daily results. The existing permalink structure is kept so shared links continue to work.
 
 Spirit Island descriptions use `[[Token]]` markup for symbols from `FreehandSpirit04.ttf`, plus `*bold*` and `_italic_` emphasis. `app/shared/SpiritText.vue` renders that markup with accessible icon labels.
+
+## Game night log
+
+The **Game nights** page records the date, adversary and level, spirit lineup, player count, result, and how hard the game felt. You can edit or delete entries. It groups results by the adversary's difficulty rating and suggests a nearby target after three recent easy wins or hard losses. Every summary shows its sample count.
+
+Plays are stored only in this browser's `localStorage`; they do not sync between devices. **Export JSON** downloads a backup. **Import JSON** validates the whole file and adds games whose IDs are not already present, without replacing existing games. Export before clearing browser data or switching devices.
 
 ## Project layout
 
@@ -59,6 +66,7 @@ Spirit Island descriptions use `[[Token]]` markup for symbols from `FreehandSpir
 app/
   features/adversaries/  Adversary screens and rules
   features/spirits/     Spirit screens and chart
+  features/plays/       Local play log, storage, and calibration
   shared/               Shared text renderer and not-found page
   data/                 YAML-to-model mapping
   models/               Lookups and existing random selection
@@ -69,4 +77,4 @@ data/                   Canonical game content
 public/                 Art, favicon, 404 fallback, and CNAME
 ```
 
-The [roadmap](MIGRATION_PLAN.md) outlines possible game-night features, including a browser-only play log and difficulty calibration. Those features are proposals and are not part of the current app.
+The [roadmap](MIGRATION_PLAN.md) outlines possible follow-up features, including a combined match generator and more flexible filters.

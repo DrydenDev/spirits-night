@@ -1,8 +1,8 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
-  font-family: "SpiritIsland";
-  src: url("./fonts/FreehandSpirit04.ttf");
+  font-family: 'SpiritIsland';
+  src: url('./fonts/FreehandSpirit04.ttf');
 }
 
 @theme {
@@ -29,7 +29,12 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Cinzel', Georgia, serif;
     font-weight: 700;
     line-height: 1.2;
@@ -61,7 +66,10 @@
     text-transform: uppercase;
   }
 
-  .nav-link:hover, .nav-link-active { color: #5eead4; }
+  .nav-link:hover,
+  .nav-link-active {
+    color: #5eead4;
+  }
 
   .action-link {
     display: inline-flex;
@@ -79,7 +87,10 @@
     cursor: pointer;
   }
 
-  .action-link:hover { color: #5eead4; border-color: #0d9488; }
+  .action-link:hover {
+    color: #5eead4;
+    border-color: #0d9488;
+  }
 
   .tag {
     display: inline-flex;
@@ -103,8 +114,38 @@
     cursor: pointer;
   }
 
-  .detail-tab:hover { color: #cbd5e1; }
-  .detail-tab-active { color: #2dd4bf; border-bottom-color: #2dd4bf; }
+  .detail-tab:hover {
+    color: #cbd5e1;
+  }
+  .detail-tab-active {
+    color: #2dd4bf;
+    border-bottom-color: #2dd4bf;
+  }
+
+  .field-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: #cbd5e1;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 0.75rem;
+  }
+
+  .field-input {
+    display: block;
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid #2d4e78;
+    border-radius: 0.5rem;
+    color: #e8f0fa;
+    background: #091422;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.9rem;
+  }
+
+  .field-input:focus {
+    border-color: #2dd4bf;
+  }
 }
 
 /* <details> accordion: hide native marker */

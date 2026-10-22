@@ -4,6 +4,7 @@ A Spirit Island game night companion app. It serves two main purposes:
 
 1. **Match Generator** — Randomly picks a Spirit and an Adversary (with difficulty level) for a game night session, with a "Today" mode that produces the same picks for everyone on a given calendar day.
 2. **Reference** — Browse all Spirits and Adversaries, view stats, playstyle notes, and per-level gameplay rules.
+3. **Game Nights** — Record plays in browser storage and review difficulty by adversary rating.
 
 ---
 
@@ -57,6 +58,9 @@ Each adversary has:
 - `levels` — 0–6, each with `title`, `difficulty`, `fearCards`, `description`
 - `references` — per-phase gameplay rules (`type`, `phase`, `level`, `maxLevel`, `description`)
 
+### Plays
+`app/features/plays/` owns the browser-only log. Versioned records in `localStorage` include date, adversary and level, spirit lineup, player count, result, and felt difficulty. JSON import validates every record before merging by ID; no server stores plays. Calibration groups games by the adversary level's difficulty rating and uses the three most recent games for a suggestion.
+
 ### Spirit Island Text Markup
 Descriptions use a custom `[[Token]]` syntax (e.g., `[[Fear]]`, `[[Dahan]]`, `[[Blight]]`) that maps to characters in the `FreehandSpirit04.ttf` custom font. `app/shared/SpiritText.vue` handles rendering these as accessible icon spans. It also supports `*bold*` and `_italic_`.
 
@@ -74,6 +78,7 @@ Descriptions use a custom `[[Token]]` syntax (e.g., `[[Fear]]`, `[[Dahan]]`, `[[
 | `/spirit/:slug` | Spirit detail with attribute bars and playstyle card |
 | `/spirit/random` | Redirects to a random spirit |
 | `/spirit/today` | Redirects to today's seeded spirit |
+| `/plays` | Browser-only play log and difficulty summary |
 
 Permalink URLs are stable — `/adversary/england/4` will always show England at level 4.
 
@@ -108,7 +113,7 @@ npm run dev
 
 ## Conventions
 
-- **Feature folders**: group screens and related logic under `app/features/adversaries/` or `app/features/spirits/`.
+- **Feature folders**: group screens and related logic under `app/features/adversaries/`, `app/features/spirits/`, or `app/features/plays/`.
 - **Path alias**: `~/` maps to `app/` in Vite, Vitest, and TypeScript.
 - **Styling**: Tailwind utilities and shared rules in `app/styles/global.css`.
 - **Hosting**: Vite emits `dist/`; GitHub Pages uses `public/404.html` for direct visits to permalinks.

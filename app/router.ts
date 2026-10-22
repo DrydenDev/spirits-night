@@ -5,6 +5,7 @@ import AdversaryDetail from '~/features/adversaries/AdversaryDetail.vue';
 import SpiritIndex from '~/features/spirits/SpiritIndex.vue';
 import SpiritDetail from '~/features/spirits/SpiritDetail.vue';
 import NotFound from '~/shared/NotFound.vue';
+import PlayLog from '~/features/plays/PlayLog.vue';
 import { resolveAdversaryShortcut } from '~/features/adversaries/selection';
 import { resolveSpiritShortcut } from '~/features/spirits/selection';
 
@@ -35,6 +36,7 @@ export function createSpiritsRouter(history: RouterHistory = createWebHistory())
         path: '/spirit/:slug',
         component: SpiritDetail,
       },
+      { path: '/plays', component: PlayLog },
       { path: '/:pathMatch(.*)*', component: NotFound },
     ],
     scrollBehavior: () => ({ top: 0 }),

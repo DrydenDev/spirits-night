@@ -7,10 +7,11 @@
 - Replaced the chart library with accessible attribute bars and removed React-only packages.
 - Added Vue component, route, daily-pick, reference, and text-rendering tests.
 - Updated CI to require tests, typecheck, lint, and build before publishing.
+- Added browser-only play tracking, JSON backup/import, and a three-game difficulty suggestion.
 
 ## Next product work
 
-See [MIGRATION_PLAN.md](MIGRATION_PLAN.md) for the prioritized feature proposal. A combined match generator is the best first step; local play tracking and difficulty calibration can follow.
+See [MIGRATION_PLAN.md](MIGRATION_PLAN.md) for the remaining proposals. A combined match generator could make choosing a lineup faster.
 
 ## Content work
 

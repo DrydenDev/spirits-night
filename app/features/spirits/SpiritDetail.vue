@@ -79,6 +79,9 @@ async function copyPermalink(): Promise<void> {
         <RouterLink to="/spirit/random" class="action-link">Random</RouterLink>
         <button type="button" class="action-link" @click="copyPermalink">Permalink</button>
         <RouterLink to="/spirit/today" class="action-link">Today</RouterLink>
+        <RouterLink :to="{ path: '/plays', query: { spirit: spirit.slug } }" class="action-link"
+          >Log a play</RouterLink
+        >
       </div>
       <p v-if="status" role="status" class="text-center text-sm text-slate-300">{{ status }}</p>
     </div>

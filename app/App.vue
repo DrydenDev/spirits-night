@@ -29,6 +29,13 @@ function isSectionActive(sectionPath: string): boolean {
           <SpiritText text="[[Presence]]" class="text-base leading-none" />
           <span>Spirits</span>
         </RouterLink>
+        <RouterLink
+          to="/plays"
+          class="nav-link"
+          :class="{ 'nav-link-active': isSectionActive('/plays') }"
+        >
+          <span>Game nights</span>
+        </RouterLink>
       </div>
     </nav>
     <main class="max-w-3xl mx-auto px-4 pb-16">

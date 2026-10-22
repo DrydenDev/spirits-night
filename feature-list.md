@@ -21,6 +21,7 @@
 - [x] Render Spirit Island text in Vue with accessible icon labels
 - [x] Make spirit random/today redirect to permanent slug, and permalink copy to clipboard
 - [x] Add basic nav between pages
+- [x] Track game nights locally with edit/delete, JSON backup, and difficulty summaries
 - [x] Add navigation at the top of the site
 - [x] Add spirit charts showing what they're good at
 - [ ] Add playstyle description to each spirit
