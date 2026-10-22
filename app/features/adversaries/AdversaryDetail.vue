@@ -11,6 +11,7 @@ import { getAdversaryBySlug } from '~/models/Adversary';
 import NotFound from '~/shared/NotFound.vue';
 import AdversaryCard from './AdversaryCard.vue';
 import AdversaryReference from './AdversaryReference.vue';
+import CommunityAdversarySheet from './CommunityAdversarySheet.vue';
 import { PLAYTEST_CONFIDENCE_LABELS } from './playtest';
 import { parseAdversaryLevel } from './selection';
 
@@ -24,7 +25,7 @@ const routeLevel = computed(
     parseAdversaryLevel(route.params.level as string | undefined, maxLevel.value) ?? maxLevel.value
 );
 const selectedLevel = ref(routeLevel.value);
-const currentTab = ref<'card' | 'reference'>('card');
+const currentTab = ref<'card' | 'reference' | 'full-card'>('card');
 const status = ref('');
 const levels = computed(() =>
   Array.from({ length: maxLevel.value - ADVERSARY_MIN_LEVEL + 1 }, (_, index) => index)
@@ -125,7 +126,7 @@ async function copyPermalink(): Promise<void> {
           :class="currentTab === 'card' ? 'detail-tab-active' : ''"
           @click="currentTab = 'card'"
         >
-          Card
+          Breakdown
         </button>
         <button
           type="button"
@@ -136,11 +137,34 @@ async function copyPermalink(): Promise<void> {
         >
           Reference
         </button>
+        <button
+          v-if="adversary.sourceUrl"
+          type="button"
+          :aria-pressed="currentTab === 'full-card'"
+          class="detail-tab"
+          :class="currentTab === 'full-card' ? 'detail-tab-active' : ''"
+          @click="currentTab = 'full-card'"
+        >
+          Adversary card
+        </button>
       </div>
 
-      <section :aria-label="currentTab === 'card' ? 'Adversary card' : 'Gameplay reference'">
+      <section
+        :aria-label="
+          currentTab === 'card'
+            ? 'Adversary breakdown'
+            : currentTab === 'reference'
+              ? 'Gameplay reference'
+              : 'Community adversary card'
+        "
+      >
         <AdversaryCard v-if="currentTab === 'card'" :adversary="adversary" :level="selectedLevel" />
-        <AdversaryReference v-else :adversary="adversary" :level="selectedLevel" />
+        <AdversaryReference
+          v-else-if="currentTab === 'reference'"
+          :adversary="adversary"
+          :level="selectedLevel"
+        />
+        <CommunityAdversarySheet v-else :adversary="adversary" :level="selectedLevel" />
       </section>
 
       <div class="flex flex-wrap justify-center gap-2">

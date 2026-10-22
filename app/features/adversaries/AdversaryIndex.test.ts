@@ -16,6 +16,41 @@ describe('community adversary pages', () => {
     return wrapper;
   }
 
+  const communitySlugs = [
+    'nestene-invasion',
+    'principality-of-monaco',
+    'dutch-east-india-company',
+    'papal-states',
+    'denmark-norway',
+    'horde-of-zombies',
+    'ottoman-empire',
+    'byzantine-empire',
+    'dutch-republic',
+    'mongol-empire',
+  ];
+
+  it.each(communitySlugs)('shows a full card alongside the breakdown for %s', async (slug) => {
+    const detail = await openPage(`/adversary/${slug}/2`);
+    expect(detail.get('[aria-label="Adversary breakdown"]').text()).toBeTruthy();
+
+    await detail.get('[aria-label="Adversary view"] button:last-child').trigger('click');
+
+    const sheet = detail.get('[aria-label="Full community adversary card"]');
+    expect(sheet.findAll('.sheet-level')).toHaveLength(slug === 'principality-of-monaco' ? 7 : 6);
+    expect(sheet.get('[aria-current="step"] .sheet-numeral').text()).toBe('2');
+    expect(sheet.get('a').attributes('href')).toBeTruthy();
+    expect(detail.find('[aria-label="Adversary breakdown"]').exists()).toBe(false);
+
+    await detail.get('[aria-label="Adversary view"] button:first-child').trigger('click');
+    expect(detail.get('[aria-label="Adversary breakdown"]').text()).toBeTruthy();
+  });
+
+  it('keeps official adversaries on their existing views', async () => {
+    const detail = await openPage('/adversary/england/4');
+    expect(detail.get('[aria-label="Adversary view"]').findAll('button')).toHaveLength(2);
+    expect(detail.find('[aria-label="Full community adversary card"]').exists()).toBe(false);
+  });
+
   it('opens a complete community card with its original source', async () => {
     const wrapper = await openPage('/adversary/nestene-invasion/4');
     expect(wrapper.text()).toContain('Nestene Consciousness');
