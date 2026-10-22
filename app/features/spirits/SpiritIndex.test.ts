@@ -143,4 +143,71 @@ describe('Spirit picker screen', () => {
     ).toBeDefined();
     expect(wrapper.findAll('button[aria-label^="Pick "]')).toHaveLength(getAllSpirits().length);
   });
+
+  it('suggests stronger shared themes as the lineup grows and filters the next pick', async () => {
+    const wrapper = await openSpirits();
+    const wildfire = getSpiritBySlug('wildfire')!;
+    const lightning = getSpiritBySlug('lightning')!;
+    const volcano = getSpiritBySlug('volcano')!;
+
+    await wrapper.get(`button[aria-label="Pick ${wildfire.name}"]`).trigger('click');
+    expect(wrapper.get('[aria-label="Suggested themes"]').text()).toContain('From your pick');
+    await wrapper.get(`button[aria-label="Pick ${lightning.name}"]`).trigger('click');
+    expect(
+      wrapper.get('[aria-label="Suggested themes"] button[aria-label^="Fire:"]').text()
+    ).toContain('All picks');
+
+    await wrapper
+      .get('[aria-label="Suggested themes"] button[aria-label^="Fire:"]')
+      .trigger('click');
+    expect(wrapper.findAll('button[aria-label^="Pick "]')).toHaveLength(4);
+    await wrapper.get(`button[aria-label="Pick ${volcano.name}"]`).trigger('click');
+    expect(
+      wrapper.get('[aria-label="Suggested themes"] button[aria-label^="Blight:"]').text()
+    ).toContain('Most picks');
+    expect(
+      wrapper.get('[aria-label="Suggested themes"] button[aria-label^="Earth:"]').text()
+    ).toContain('One pick');
+  });
+
+  it('lets the group browse themes before picking a Spirit', async () => {
+    const wrapper = await openSpirits();
+    expect(wrapper.find('[aria-label="Suggested themes"]').exists()).toBe(false);
+    await wrapper.get('[aria-label="All themes"] button[aria-label^="Dahan:"]').trigger('click');
+    expect(wrapper.findAll('button[aria-label^="Pick "]')).toHaveLength(4);
+    expect(
+      wrapper
+        .get('[aria-label="Suggested themes"] button[aria-label^="Dahan:"]')
+        .attributes('aria-pressed')
+    ).toBe('true');
+  });
+
+  it('uses tied highest attribute scores for strength filters and combines them with themes', async () => {
+    const wrapper = await openSpirits();
+    const strengthButtons = wrapper.get('fieldset');
+    await strengthButtons
+      .findAll('button')
+      .find((button) => button.text() === 'Offense')!
+      .trigger('click');
+    expect(
+      wrapper.find(`button[aria-label="Pick ${getSpiritBySlug('wildfire')!.name}"]`).exists()
+    ).toBe(true);
+    expect(
+      wrapper.find(`button[aria-label="Pick ${getSpiritBySlug('eyes')!.name}"]`).exists()
+    ).toBe(false);
+    await strengthButtons
+      .findAll('button')
+      .find((button) => button.text() === 'Defense')!
+      .trigger('click');
+    expect(
+      wrapper.find(`button[aria-label="Pick ${getSpiritBySlug('eyes')!.name}"]`).exists()
+    ).toBe(true);
+    await wrapper.get('[aria-label="All themes"] button[aria-label^="Fire:"]').trigger('click');
+    expect(
+      wrapper.find(`button[aria-label="Pick ${getSpiritBySlug('eyes')!.name}"]`).exists()
+    ).toBe(false);
+    expect(
+      wrapper.find(`button[aria-label="Pick ${getSpiritBySlug('wildfire')!.name}"]`).exists()
+    ).toBe(true);
+  });
 });

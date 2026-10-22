@@ -1,3 +1,5 @@
+import type { SpiritThemeId } from '~/data/spiritThemes';
+
 export interface Spirit {
   id: string;
   name: string;
@@ -7,6 +9,7 @@ export interface Spirit {
   complexity: string;
   complexityValue: number;
   incarna: boolean;
+  themes: SpiritThemeId[];
   offense: number;
   control: number;
   fear: number;

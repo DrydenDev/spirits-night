@@ -68,6 +68,10 @@ The **Spirits** page starts with the full roster. Pick up to six unique Spirits 
 
 History filters use the plays saved in the current browser. **Never played** excludes Spirits in any logged game. **Out of rotation** excludes Spirits from the five most recent logged games. **Go-tos** shows Spirits played at least twice. Filters can be combined. **Random shortlist** deals up to five Spirits from the currently filtered pool; reshuffling leaves the other filters in place. If play history cannot be read, the history filters are disabled and the full roster remains available.
 
+**Theme threads** appear after a Spirit is picked. Up to four suggestions are ordered by how many picked Spirits share each theme, with a visual match count and the number of remaining candidates. The full catalog is under **Browse all themes**. Theme filters require every selected theme; they also work with history and strength filters. Theme membership is curated in `data/spirits.yaml`, while labels and descriptions live in `app/data/spiritThemes.ts`.
+
+**Strongest at** filters use the highest of each Spirit's five attribute scores: offense, control, fear, defense, and utility. Tied highest scores count in every matching category. Multiple selected strengths show Spirits matching any of them.
+
 ## Project layout
 
 ```text

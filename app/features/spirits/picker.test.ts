@@ -5,9 +5,12 @@ import {
   availableSpirits,
   dealShortlist,
   GO_TO_MINIMUM_PLAYS,
+  getThemeOptions,
   RECENT_GAME_COUNT,
   SHORTLIST_SIZE,
+  strongestAttributes,
   summarizeSpiritHistory,
+  themeStrengthLabel,
 } from './picker';
 
 const spirits = getAllSpirits();
@@ -84,5 +87,62 @@ describe('Spirit picker', () => {
     expect(shortlist.every((slug) => originalOrder.includes(slug))).toBe(true);
     expect(eligible.map((spirit) => spirit.slug)).toEqual(originalOrder);
     expect(dealShortlist(eligible.slice(0, 2), () => 0)).toHaveLength(2);
+  });
+
+  it('combines theme filters with the existing pool', () => {
+    const history = summarizeSpiritHistory([]);
+    const filtered = availableSpirits(
+      spirits,
+      ['volcano'],
+      new Set(),
+      history,
+      new Set(['fire', 'earth'])
+    );
+    expect(filtered.map((spirit) => spirit.slug)).toEqual(['heat-dragon']);
+  });
+
+  it('classifies tied top scores in every matching strength and combines strength choices as alternatives', () => {
+    const tied = {
+      ...spirits[0],
+      offense: 5,
+      control: 5,
+      fear: 2,
+      defense: 3,
+      utility: 4,
+    };
+    expect(strongestAttributes(tied)).toEqual(['offense', 'control']);
+    const filtered = availableSpirits(
+      [tied, { ...spirits[1], offense: 1, control: 1, fear: 5, defense: 2, utility: 2 }],
+      [],
+      new Set(),
+      summarizeSpiritHistory([]),
+      new Set(),
+      new Set(['offense', 'control'])
+    );
+    expect(filtered).toEqual([tied]);
+  });
+
+  it('ranks themes by lineup overlap and counts candidates under active themes', () => {
+    const picked = spirits.filter((spirit) =>
+      ['wildfire', 'lightning', 'volcano'].includes(spirit.slug)
+    );
+    const pool = spirits.filter((spirit) => !picked.includes(spirit));
+    const options = getThemeOptions(picked, pool, new Set(['fire']));
+    const fire = options.find((option) => option.theme.id === 'fire')!;
+    const earth = options.find((option) => option.theme.id === 'earth')!;
+    const wind = options.find((option) => option.theme.id === 'wind')!;
+    expect(fire.matchingPicks).toBe(3);
+    expect(earth.matchingPicks).toBe(1);
+    expect(earth.availableCount).toBe(1);
+    expect(wind.availableCount).toBe(0);
+    expect(options[0].matchingPicks).toBe(3);
+    expect(options.indexOf(fire)).toBeLessThan(options.indexOf(earth));
+  });
+
+  it('describes all, most, and one-pick theme strength', () => {
+    expect(themeStrengthLabel(1, 1)).toBe('From your pick');
+    expect(themeStrengthLabel(3, 3)).toBe('All picks');
+    expect(themeStrengthLabel(2, 3)).toBe('Most picks');
+    expect(themeStrengthLabel(1, 3)).toBe('One pick');
   });
 });

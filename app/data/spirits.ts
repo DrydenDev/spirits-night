@@ -1,4 +1,5 @@
 import rawData from '../../data/spirits.yaml';
+import { SPIRIT_THEMES, type SpiritThemeId } from './spiritThemes';
 import type { Spirit } from '~/types/domain';
 
 interface SpiritYaml {
@@ -8,6 +9,7 @@ interface SpiritYaml {
   expansion: string;
   complexity: string;
   incarna?: boolean;
+  themes?: unknown;
   attributes: {
     offense: number;
     control: number;
@@ -30,6 +32,19 @@ const COMPLEXITY_VALUE: Record<string, number> = {
 };
 
 const { spirits: raw } = rawData as SpiritsYaml;
+const knownThemes = new Set<string>(SPIRIT_THEMES.map((theme) => theme.id));
+
+export function parseSpiritThemes(value: unknown, spiritSlug: string): SpiritThemeId[] {
+  if (
+    !Array.isArray(value) ||
+    value.length === 0 ||
+    new Set(value).size !== value.length ||
+    !value.every((theme: unknown) => typeof theme === 'string' && knownThemes.has(theme))
+  ) {
+    throw new Error(`Invalid theme tags for Spirit: ${spiritSlug}`);
+  }
+  return value as SpiritThemeId[];
+}
 
 export const spirits: Spirit[] = raw.map((s) => ({
   id: s.slug,
@@ -40,6 +55,7 @@ export const spirits: Spirit[] = raw.map((s) => ({
   complexity: s.complexity,
   complexityValue: COMPLEXITY_VALUE[s.complexity] ?? 0,
   incarna: s.incarna ?? false,
+  themes: parseSpiritThemes(s.themes, s.slug),
   offense: s.attributes.offense,
   control: s.attributes.control,
   fear: s.attributes.fear,

@@ -1,0 +1,35 @@
+export const SPIRIT_THEMES = [
+  { id: 'beasts', label: 'Beasts', description: 'Wild creatures shape the fight.' },
+  { id: 'blight', label: 'Blight', description: 'The wounded land is part of the story.' },
+  { id: 'dahan', label: 'Dahan', description: 'The island’s people are central allies.' },
+  { id: 'darkness', label: 'Darkness', description: 'Shadows, dreams, and unseen threats.' },
+  { id: 'destruction', label: 'Destruction', description: 'Big turns that tear invaders down.' },
+  { id: 'earth', label: 'Earth', description: 'Stone, mountains, and the ground itself.' },
+  { id: 'fear', label: 'Fear', description: 'Terror is a path to victory.' },
+  { id: 'fire', label: 'Fire', description: 'Flame, heat, lightning, and eruption.' },
+  { id: 'growth', label: 'Growth', description: 'Spread, recover, or become something new.' },
+  { id: 'guardians', label: 'Guardians', description: 'Hold ground and protect the island.' },
+  { id: 'hunters', label: 'Hunters', description: 'Stalk and pick off isolated invaders.' },
+  { id: 'incarna', label: 'Incarna', description: 'A powerful presence moves on the board.' },
+  { id: 'late-bloomers', label: 'Late bloomers', description: 'Patience pays off in later turns.' },
+  { id: 'movement', label: 'Movement', description: 'Reposition pieces and redraw the map.' },
+  { id: 'plants', label: 'Plants', description: 'Roots, leaves, and spreading green.' },
+  { id: 'support', label: 'Support', description: 'Make other Spirits stronger.' },
+  { id: 'time', label: 'Time', description: 'Plan ahead and bend the pace of play.' },
+  {
+    id: 'transformation',
+    label: 'Transformation',
+    description: 'Change form or find a new nature.',
+  },
+  { id: 'tricksters', label: 'Tricksters', description: 'Mischief and uncertainty are tools.' },
+  {
+    id: 'vengeance',
+    label: 'Vengeance',
+    description: 'Strike back when the island is threatened.',
+  },
+  { id: 'water', label: 'Water', description: 'Rivers, rain, oceans, mist, and wetlands.' },
+  { id: 'wilds', label: 'Wilds', description: 'The untamed island fights back.' },
+  { id: 'wind', label: 'Wind', description: 'Air, storms, and restless motion.' },
+] as const;
+
+export type SpiritThemeId = (typeof SPIRIT_THEMES)[number]['id'];
