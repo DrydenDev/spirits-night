@@ -89,6 +89,19 @@ describe('game night play log', () => {
     expect((wrapper.get('#play-spirit-0').element as HTMLSelectElement).value).toBe('river');
   });
 
+  it('prefills a valid picker lineup', async () => {
+    const { wrapper } = await openLog('/plays?spirits=river,earthquakes');
+    expect((wrapper.get('#play-spirit-0').element as HTMLSelectElement).value).toBe('river');
+    expect((wrapper.get('#play-spirit-1').element as HTMLSelectElement).value).toBe('earthquakes');
+    expect((wrapper.get('#play-players').element as HTMLInputElement).value).toBe('2');
+  });
+
+  it('rejects duplicate Spirits in a picker lineup', async () => {
+    const fresh = await openLog('/plays?spirits=river,river');
+    expect((fresh.wrapper.get('#play-spirit-0').element as HTMLSelectElement).value).toBe('');
+    expect(fresh.wrapper.find('#play-spirit-1').exists()).toBe(false);
+  });
+
   it('shows a storage failure without adding an unsaved game to the list', async () => {
     const { wrapper } = await openLog();
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});

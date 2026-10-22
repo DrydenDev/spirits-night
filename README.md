@@ -44,7 +44,7 @@ The GitHub Pages workflow runs tests, typecheck, lint, and build before publishi
 | `/adversary/:slug/:level?` | View adversary rules at a level |
 | `/adversary/random` | Random adversary and level |
 | `/adversary/today` | Daily adversary with a minimum level of 3 |
-| `/spirit` | Browse spirits |
+| `/spirit` | Browse spirits and build a lineup with history filters or a random shortlist |
 | `/spirit/:slug` | View a spirit's playstyle and attributes |
 | `/spirit/random` | Random spirit |
 | `/spirit/today` | Daily spirit |
@@ -61,6 +61,12 @@ Spirit Island descriptions use `[[Token]]` markup for symbols from `FreehandSpir
 The **Game nights** page records the date, adversary and level, spirit lineup, player count, result, and how hard the game felt. You can edit or delete entries. It groups results by the adversary's difficulty rating and suggests a nearby target after three recent easy wins or hard losses. Every summary shows its sample count.
 
 Plays are stored only in this browser's `localStorage`; they do not sync between devices. **Export JSON** downloads a backup. **Import JSON** validates the whole file and adds games whose IDs are not already present, without replacing existing games. Export before clearing browser data or switching devices.
+
+## Spirit picker
+
+The **Spirits** page starts with the full roster. Pick up to six unique Spirits for a lineup, remove picks freely, and open a Spirit's detail page in a new tab while keeping the lineup in place. **Log a game with this lineup** preselects those Spirits in the game night form.
+
+History filters use the plays saved in the current browser. **Never played** excludes Spirits in any logged game. **Out of rotation** excludes Spirits from the five most recent logged games. **Go-tos** shows Spirits played at least twice. Filters can be combined. **Random shortlist** deals up to five Spirits from the currently filtered pool; reshuffling leaves the other filters in place. If play history cannot be read, the history filters are disabled and the full roster remains available.
 
 ## Project layout
 

@@ -8,7 +8,9 @@ import PlaySummary from './PlaySummary.vue';
 import { difficultyForPlay } from './summary';
 import {
   loadPlays,
+  MAX_PLAYER_COUNT,
   mergeImportedPlays,
+  MIN_PLAYER_COUNT,
   parsePlayArchive,
   PLAY_STORAGE_KEY,
   savePlays,
@@ -32,12 +34,23 @@ const sortedPlays = computed(() =>
 const prefill = computed(() => {
   const adversarySlug = typeof route.query.adversary === 'string' ? route.query.adversary : '';
   const spiritSlug = typeof route.query.spirit === 'string' ? route.query.spirit : '';
+  const lineupQuery = typeof route.query.spirits === 'string' ? route.query.spirits : '';
+  const lineup = lineupQuery ? lineupQuery.split(',') : [];
+  const validLineup =
+    lineup.length >= MIN_PLAYER_COUNT &&
+    lineup.length <= MAX_PLAYER_COUNT &&
+    new Set(lineup).size === lineup.length &&
+    lineup.every((slug) => getSpiritBySlug(slug) !== null);
   const level = Number(route.query.level);
   const adversary = getAdversaryBySlug(adversarySlug);
   return {
     ...(adversary ? { adversarySlug } : {}),
     ...(adversary?.levels.some((row) => row.level === level) ? { level } : {}),
-    ...(getSpiritBySlug(spiritSlug) ? { spiritSlugs: [spiritSlug] } : {}),
+    ...(validLineup
+      ? { spiritSlugs: lineup }
+      : getSpiritBySlug(spiritSlug)
+        ? { spiritSlugs: [spiritSlug] }
+        : {}),
   };
 });
 
