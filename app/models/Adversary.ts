@@ -2,6 +2,7 @@ import seedrandom from 'seedrandom';
 import { adversaries } from '~/data/adversaries';
 import type { Adversary } from '~/types/domain';
 import { ADVERSARY_MAX_LEVEL } from '~/constants/game';
+import { communityAdversaries } from '~/features/adversaries/communityAdversaries';
 
 export function getRandomAdversary(seed: string | null): { adversary: Adversary; level: number } {
   const generator = seedrandom(seed ?? undefined);
@@ -11,9 +12,9 @@ export function getRandomAdversary(seed: string | null): { adversary: Adversary;
 }
 
 export function getAdversaryBySlug(slug: string): Adversary | null {
-  return adversaries.find((a) => a.slug === slug) ?? null;
+  return getAllAdversaries().find((a) => a.slug === slug) ?? null;
 }
 
 export function getAllAdversaries(): Adversary[] {
-  return adversaries;
+  return [...adversaries, ...communityAdversaries];
 }

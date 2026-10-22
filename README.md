@@ -36,7 +36,7 @@ The GitHub Pages workflow runs tests, typecheck, lint, and build before publishi
 
 ## Content and routes
 
-`data/spirits.yaml` and `data/adversaries.yaml` are the source of truth. Edit those files and rebuild the site to change reference content. The app's data modules convert YAML into the typed models used by the UI.
+`data/spirits.yaml` and `data/adversaries.yaml` are the source of truth for official content. Community adversaries live in `data/community-adversaries.yaml`, with original-rule links, testing evidence, balance impressions, and play notes. Edit the YAML and rebuild to change reference content. The app's data modules convert YAML into the typed models used by the UI.
 
 | Route | Purpose |
 |---|---|
@@ -51,6 +51,8 @@ The GitHub Pages workflow runs tests, typecheck, lint, and build before publishi
 | `/plays` | Browser-only game log and difficulty summary |
 
 The daily pick uses the existing `en-US` date string, `seedrandom`, YAML record order, and selection formulas. Changing any of those changes daily results. The existing permalink structure is kept so shared links continue to work.
+
+Community adversaries can be browsed and logged. Random and Today picks continue to use only official adversaries, preserving their existing selection behavior.
 
 Spirit Island descriptions use `[[Token]]` markup for symbols from `FreehandSpirit04.ttf`, plus `*bold*` and `_italic_` emphasis. `app/shared/SpiritText.vue` renders that markup with accessible icon labels.
 

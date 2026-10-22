@@ -6,11 +6,14 @@ import {
 import { getRandomAdversary } from '~/models/Adversary';
 import { getTodaySeed } from '~/utils/random';
 
-export function parseAdversaryLevel(rawLevel: string | undefined): number | null {
+export function parseAdversaryLevel(
+  rawLevel: string | undefined,
+  maxLevel = ADVERSARY_MAX_LEVEL
+): number | null {
   if (rawLevel === undefined) return null;
   const parsedLevel = parseInt(rawLevel, 10);
   if (Number.isNaN(parsedLevel)) return null;
-  return Math.min(Math.max(parsedLevel, ADVERSARY_MIN_LEVEL), ADVERSARY_MAX_LEVEL);
+  return Math.min(Math.max(parsedLevel, ADVERSARY_MIN_LEVEL), maxLevel);
 }
 
 export function resolveAdversaryShortcut(slug: string, rawLevel?: string): string | null {

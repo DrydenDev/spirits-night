@@ -7,6 +7,7 @@ interface AdversaryLevelYaml {
   difficulty: number;
   fear: string;
   description: string;
+  phase?: string;
 }
 
 interface AdversaryReferenceYaml {
@@ -26,7 +27,17 @@ interface AdversaryYaml {
   loss_condition?: { title: string; description: string };
   escalation: { title: string; description: string };
   levels: AdversaryLevelYaml[];
-  reference: AdversaryReferenceYaml[];
+  reference?: AdversaryReferenceYaml[];
+  creator?: string;
+  source_url?: string;
+  discussion_url?: string;
+  source_note?: string;
+  special_rules?: { title: string; phase: string; description: string }[];
+  playtest_confidence?: 'more' | 'some' | 'limited';
+  playtest_evidence?: string;
+  impressions?: string;
+  balance_note?: string;
+  play_notes?: string[];
 }
 
 interface AdversariesYaml {
@@ -35,7 +46,7 @@ interface AdversariesYaml {
 
 const { adversaries: raw } = rawData as AdversariesYaml;
 
-export const adversaries: Adversary[] = raw.map((a) => {
+export function mapAdversary(a: AdversaryYaml): Adversary {
   const levels: AdversaryLevel[] = a.levels.map((l) => ({
     id: `${a.slug}-level-${l.level}`,
     adversaryId: a.slug,
@@ -46,7 +57,22 @@ export const adversaries: Adversary[] = raw.map((a) => {
     description: l.description,
   }));
 
-  const references: AdversaryReference[] = a.reference.map((r, i) => ({
+  const referenceRows: AdversaryReferenceYaml[] = a.reference ?? [
+    ...(a.special_rules ?? []).map((rule) => ({ ...rule, level: 0, type: 'Special Rule' })),
+    { ...a.escalation, level: 0, type: 'Escalation', phase: 'Explore' },
+    ...(a.loss_condition
+      ? [{ ...a.loss_condition, level: 0, type: 'Loss Condition', phase: 'Traits' }]
+      : []),
+    ...a.levels.map((level) => ({
+      title: level.title,
+      level: level.level,
+      type: 'Level',
+      phase: level.phase ?? 'Traits',
+      description: level.description,
+    })),
+  ];
+
+  const references: AdversaryReference[] = referenceRows.map((r, i) => ({
     id: `${a.slug}-ref-${i}`,
     adversaryId: a.slug,
     title: r.title,
@@ -70,5 +96,17 @@ export const adversaries: Adversary[] = raw.map((a) => {
     },
     levels,
     references,
+    creator: a.creator,
+    sourceUrl: a.source_url,
+    discussionUrl: a.discussion_url,
+    sourceNote: a.source_note,
+    specialRules: a.special_rules?.map(({ title, description }) => ({ title, description })),
+    playtestConfidence: a.playtest_confidence,
+    playtestEvidence: a.playtest_evidence,
+    impressions: a.impressions,
+    balanceNote: a.balance_note,
+    playNotes: a.play_notes,
   };
-});
+}
+
+export const adversaries: Adversary[] = raw.map(mapAdversary);

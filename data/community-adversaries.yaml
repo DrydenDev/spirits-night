@@ -1,0 +1,568 @@
+adversaries:
+  - name: The Nestene Invasion
+    slug: nestene-invasion
+    expansion: Community adversary
+    creator: P.D. Magnus
+    source_url: https://www.fecundity.com/codex/si-adversaries.pdf
+    discussion_url: https://boardgamegeek.com/thread/2956689/custom-adversary-the-nestene-invasion
+    source_note: Version 21, March 31, 2026. Doctor Who crossover. Uses Energy tokens to mark Nestene Consciousness.
+    playtest_confidence: more
+    playtest_evidence: Creator calls it well tested; the BGG discussion includes a positive two-player report.
+    impressions: A complex fight against an extra objective. The plastic consciousness keeps pressure on the Spirits even after Invaders are cleared.
+    balance_note: Reported as fun, but the extra rules and objective make its difficulty less directly comparable with official adversaries.
+    difficulty: 0
+    special_rules:
+      - title: Nestene Consciousness
+        phase: Traits
+        description: 'Use Energy tokens to mark Nestene Consciousness. The Spirits cannot win while any Consciousness remains on the island. If another Fear Card is earned after the Fear Deck is empty, draw one at random from unused Fear Cards. Each point of Damage may remove 1 Consciousness instead of damaging Invaders. A Destroy [[Town]] effect may remove 2 Consciousness instead; Destroy [[City]] may remove 3. For Destroy All effects, use the number of matching Invaders in that land to determine how many Consciousness may be removed.'
+    escalation:
+      title: Spearhead
+      description: 'On each board, add 3 Nestene Consciousness to the lowest-numbered matching land.'
+    levels:
+      - level: 1
+        title: Auton Scouts
+        difficulty: 1
+        fear: 3/3/3
+        phase: Explore
+        description: 'When Invaders Explore a land containing or adjacent to Nestene Consciousness, add 1 extra [[Explorer]].'
+      - level: 2
+        title: Crown Consciousness
+        difficulty: 3
+        fear: 3/3/4
+        phase: Setup
+        description: 'On each board, add 9 Nestene Consciousness to land #8.'
+      - level: 3
+        title: Early Construction
+        difficulty: 4
+        fear: 4/4/5
+        phase: Setup
+        description: 'On each board, add 1 [[City]] to land #5 and 1 [[Town]] to land #7.'
+      - level: 4
+        title: Persistence of Plastic
+        difficulty: 6
+        fear: 4/5/6
+        phase: Traits
+        description: 'After a [[City]] is destroyed on a board with Nestene Consciousness, add 1 [[Town]] one land closer to a Consciousness on that board, or in the same land if none is closer. After a [[Town]] is destroyed on a board with Consciousness, add 1 [[Explorer]] the same way.'
+      - level: 5
+        title: Alien Factories
+        difficulty: 7
+        fear: 5/6/6
+        phase: Build
+        description: 'After Invaders Build a [[City]], add 1 Nestene Consciousness to that land.'
+      - level: 6
+        title: Staggered Fleets
+        difficulty: 9
+        fear: 5/6/6
+        phase: Setup
+        description: 'Use the Surges of Colonization scenario rules. [[Explorer]] are Invader sources. Build the Invader Deck as paired cards: I+I / I+II / II+II / II+III / III+III / III+III / loss. Follow the scenario for surge timing.'
+  - name: The Principality of Monaco
+    slug: principality-of-monaco
+    expansion: Community adversary
+    creator: P.D. Magnus
+    source_url: https://www.fecundity.com/codex/si-adversaries.pdf
+    discussion_url: https://boardgamegeek.com/thread/2111330/adversary-principality-monaco
+    source_note: March 31, 2026 rules card. Level 7 is an additional fan level.
+    playtest_confidence: some
+    playtest_evidence: Creator calls the design well tested and fairly simple; level 7 was added later.
+    impressions: A Dahan-focused adversary that makes settlement near Dahan the central problem.
+    balance_note: The creator reports a stable core design; the newer level 7 has less visible testing evidence.
+    difficulty: 0
+    loss_condition:
+      title: Refugees
+      description: 'The Invaders win if there are ever fewer than 2 lands with [[Dahan]] per player.'
+    escalation:
+      title: Pursuit of Exotic Natives
+      description: "During every step of the Invader Phase, a card with an Escalation symbol also matches one land on each board that has [[Dahan]] but does not have the card's terrain."
+    levels:
+      - level: 1
+        title: Summer Homes
+        difficulty: 3
+        fear: 3/3/3
+        phase: Explore
+        description: 'When Invaders successfully Explore a land with [[Dahan]], add the first Invader as a [[Town]] instead of an [[Explorer]].'
+      - level: 2
+        title: Mutual Aid
+        difficulty: 4
+        fear: 3/4/3
+        phase: Traits
+        description: 'When [[Dahan]] would be destroyed in a land with Invaders, replace each with a [[Town]] instead.'
+      - level: 3
+        title: Search for Novelty
+        difficulty: 5
+        fear: 3/4/4
+        phase: Explore
+        description: 'Invader Explore sources reach 1 additional land away.'
+      - level: 4
+        title: Early Contact
+        difficulty: 6
+        fear: 4/4/4
+        phase: Setup
+        description: 'In each land with [[Dahan]], add 1 [[Explorer]] per [[Dahan]] during setup.'
+      - level: 5
+        title: Early Residences
+        difficulty: 7
+        fear: 4/4/5
+        phase: Setup
+        description: 'During setup, add 1 [[Town]] to every land with at least 2 [[Dahan]].'
+      - level: 6
+        title: Grand Mansions
+        difficulty: 9
+        fear: 4/5/6
+        phase: Explore
+        description: 'During Stages II and III, when Invaders successfully Explore a land with [[Dahan]], add the first Invader as a [[City]] instead of an [[Explorer]] or [[Town]].'
+      - level: 7
+        title: Surge of Interest
+        difficulty: 10
+        fear: 4/5/6
+        phase: Setup
+        description: 'During setup, put the top Stage I card face-up under the bottom Stage II card. When that face-up Stage I card is revealed, discard it and add 1 [[Town]] to each matching land.'
+  - name: The Dutch East India Company
+    slug: dutch-east-india-company
+    expansion: Community adversary
+    creator: Krister Dahlgren
+    source_url: https://boardgamegeek.com/image/7173405
+    discussion_url: https://boardgamegeek.com/thread/2969207/custom-adversary-collection
+    source_note: BGG collection card v1.5, November 2022. Later Discord revisions may exist.
+    playtest_confidence: limited
+    playtest_evidence: The collection was developed with Discord feedback; one BGG player reported enjoying this adversary and wanting to play it again.
+    impressions: A Blight-focused resource extraction challenge. The island flipping to Blighted can suddenly accelerate Builds.
+    balance_note: Reception is positive in the available play report, but there is too little public evidence to judge balance across levels.
+    difficulty: 1
+    escalation:
+      title: Manufactories
+      description: 'After Explore, on each board replace 1 [[Explorer]] with 1 [[Town]] in each of two lands.'
+    levels:
+      - level: 1
+        title: Explore and Exploit
+        difficulty: 3
+        fear: 3/4/3
+        phase: Explore
+        description: 'While the island is Healthy, after the Explore step add 1 [[Explorer]] to the highest-numbered land on each board where Invaders successfully Explored. When the island turns Blighted, immediately place the top card of the Invader Deck in the Build space.'
+      - level: 2
+        title: Production Quotas
+        difficulty: 5
+        fear: 4/3/4
+        phase: Ravage
+        description: 'During play, Invaders deal +1 total Damage when Ravaging.'
+      - level: 3
+        title: Merchant Settlers
+        difficulty: 6
+        fear: 4/4/4
+        phase: Traits
+        description: 'After [[Blight]] is removed from a land, add 1 [[Town]] there if Invaders are present; otherwise add 1 [[Explorer]].'
+      - level: 4
+        title: Company HQ
+        difficulty: 7
+        fear: 5/4/3
+        phase: Setup
+        description: 'On each board, add 1 [[City]] to land #5. Move any [[Blight]] there to land #4.'
+      - level: 5
+        title: Despoil
+        difficulty: 8
+        fear: 5/4/4
+        phase: Ravage
+        description: 'After a Ravage Action adds [[Blight]] to a land, if no [[Presence]] was destroyed, destroy 1 [[Presence]] in that land or an adjacent land. Cascading [[Blight]] does not trigger this effect.'
+      - level: 6
+        title: Extraction Centers
+        difficulty: 10
+        fear: 5/5/4
+        phase: Ravage
+        description: 'After a Ravage Action adds at least 1 [[Blight]] to a land with a [[City]], add 1 extra [[Blight]] there. That extra [[Blight]] does not destroy [[Presence]] or cause a cascade.'
+  - name: The Papal States
+    slug: papal-states
+    expansion: Community adversary
+    creator: Krister Dahlgren
+    source_url: https://boardgamegeek.com/image/7173410
+    discussion_url: https://boardgamegeek.com/thread/2969207/custom-adversary-collection
+    source_note: BGG collection card v2.1, November 2022. Later Discord revisions may exist.
+    playtest_confidence: limited
+    playtest_evidence: A four-player level 6 BGG report called it thematic and fun, but easier than expected.
+    impressions: Conversion of Dahan into Towns gives this adversary a strong theme and makes preserving Dahan central to play.
+    balance_note: The reported level 6 game felt too easy for its printed difficulty; treat that rating as tentative.
+    difficulty: 1
+    loss_condition:
+      title: Dahan Abandon All Hope
+      description: 'Track [[Dahan]] destroyed by Spirit Actions separately. If their number ever exceeds the number of [[Dahan]] on the island, the Invaders win.'
+    escalation:
+      title: Convert the Heathens
+      description: 'On each board, Build in the land with the most [[Dahan]].'
+    levels:
+      - level: 1
+        title: Foreign Faith
+        difficulty: 3
+        fear: 3/4/3
+        phase: Build
+        description: 'After Invaders successfully Build in a land with 3 or more Invaders, replace 1 [[Dahan]] there with 1 [[Town]]. Spirits may prevent this by destroying 1 [[Presence]] in or adjacent to that land. For each [[Dahan]] destroyed by a Ravage Action, add 1 [[Town]] to that land.'
+      - level: 2
+        title: Devoted Missionaries
+        difficulty: 5
+        fear: 4/4/3
+        phase: Build
+        description: 'During the Build and Ravage steps, when Invaders would Build or Ravage in a land with [[Dahan]] or [[Presence]] but no Invaders (or just 1 [[Explorer]] for Ravage), they Explore instead.'
+      - level: 3
+        title: Early Contact
+        difficulty: 6
+        fear: 4/4/4
+        phase: Setup
+        description: 'On each board during setup, add 1 [[Explorer]] to each of the two highest-numbered lands with [[Dahan]] and the fewest Invaders.'
+      - level: 4
+        title: Cathedral Building
+        difficulty: 7
+        fear: 4/5/4
+        phase: Build
+        description: 'In lands with 3 or more Invaders, Build Actions always add a [[City]].'
+      - level: 5
+        title: Clerics and Preachers
+        difficulty: 8
+        fear: 5/4/5
+        phase: Build
+        description: 'Foreign Faith can also replace 1 [[Dahan]] in an adjacent land with 1 [[Town]] if there are 5 or more Invaders in the land that Built and no [[Dahan]] or [[Presence]] was affected.'
+      - level: 6
+        title: Bastion of Faith
+        difficulty: 10
+        fear: 5/4/5
+        phase: Setup
+        description: 'During setup, add 1 extra Fear token to the Fear Pool per player. During play, [[City]] have +1 Health.'
+  - name: The Kingdom of Denmark-Norway
+    slug: denmark-norway
+    expansion: Community adversary
+    creator: Krister Dahlgren
+    source_url: https://boardgamegeek.com/image/7173406
+    discussion_url: https://boardgamegeek.com/thread/2969207/custom-adversary-collection
+    source_note: BGG collection card v1.3, November 2022. Later Discord revisions may exist.
+    playtest_confidence: some
+    playtest_evidence: Multiple players reported enjoyable level 6 games in the BGG discussion, including a later 2025 report.
+    impressions: A relatively simple ruleset with bursts of extra Builds and Ravage damage when Fear Cards do not resolve.
+    balance_note: The level 6 reception is positive, though the public reports do not establish a precise difficulty curve across all levels.
+    difficulty: 1
+    escalation:
+      title: Write New Saga
+      description: 'On each board, add 2 [[Town]] to the land with the fewest Invaders that does not have the shown terrain.'
+    levels:
+      - level: 1
+        title: Viking Legacy
+        difficulty: 3
+        fear: 3/3/3
+        phase: Traits
+        description: 'When reaching Terror Level II or III, immediately place the top card of the Invader Deck in the Build space. The Fear Pool has 4 tokens per player at each Terror Level.'
+      - level: 2
+        title: Colonial Ventures
+        difficulty: 5
+        fear: 3/3/3
+        phase: Build
+        description: 'During the Build step, if no Fear Cards resolved this Invader Phase, on each board add 1 [[City]] to X lands with the fewest Invaders, where X is the Terror Level. When reaching Terror Level II, add 2 Fear tokens per player to the Fear Pool (making its distribution 4/6/6).'
+      - level: 3
+        title: Berserker Warriors
+        difficulty: 6
+        fear: 3/3/3
+        phase: Ravage
+        description: 'During the Ravage step, if no Fear Cards resolved this Invader Phase, Invaders deal +X total Damage when Ravaging, where X is the Terror Level. When reaching Terror Level III, add 2 Fear tokens per player to the Fear Pool (making its distribution 4/6/8).'
+      - level: 4
+        title: Coastal Raiders
+        difficulty: 7
+        fear: 3/3/3
+        phase: Setup
+        description: 'On each board during setup, add 1 [[Town]] to each of the two Coastal lands with the fewest Invaders.'
+      - level: 5
+        title: We Know No Fear
+        difficulty: 8
+        fear: 3/3/3
+        phase: Setup
+        description: 'During setup, add 1 extra Fear token to the Fear Pool per player (making its distribution 5/7/9).'
+      - level: 6
+        title: Valhalla Awaits the Brave
+        difficulty: 9
+        fear: 3/3/3
+        phase: Traits
+        description: 'When reaching Terror Level II, add 1 Fear token per player to the Fear Pool. When reaching Terror Level III, add 2 Fear tokens per player (making its distribution 5/8/12).'
+  - name: Horde of Zombies
+    slug: horde-of-zombies
+    expansion: Community adversary
+    creator: APForLoops
+    source_url: https://i.redd.it/ha0gcxaf9wya1.png
+    discussion_url: https://www.reddit.com/r/spiritisland/comments/13dafd7/custom_adversary_horde_of_zombies/
+    source_note: Reddit v0 card, May 2023. Closest public match found for the group's zombie adversary; it may differ from the version previously played.
+    playtest_confidence: limited
+    playtest_evidence: The creator said this version was being rebalanced and advised against playing it yet. The discussion contains rules and balance suggestions, but no settled revision was found.
+    impressions: A strongly themed outbreak where Dahan become Explorers and Disease helps the horde spread.
+    balance_note: Treat the printed difficulty ratings as experimental. Commenters disagreed on difficulty, with several expecting Terror Level II or III victories to come too easily.
+    play_notes:
+      - At level 5, use the Coastal Lands card as a placeholder for the custom Lands With Dahan card, as the creator suggests in the discussion.
+      - Level 2's printed rule moves Explorers after each land Ravages. A commenter suggested moving them after the whole Ravage step to avoid repeated Ravages; that is an optional house adjustment, not part of the card.
+      - Keep track of Dahan carefully; the additional loss condition triggers as soon as none remain on the island.
+    difficulty: 1
+    loss_condition:
+      title: Consumed All Life
+      description: 'If there are ever no [[Dahan]] on the island, the Invaders win.'
+    escalation:
+      title: Overrun By Zombies
+      description: 'After Invaders Explore into each land this phase, if that land has at least as many Invaders as [[Dahan]], replace 1 [[Dahan]] there with 2 [[Explorer]].'
+    levels:
+      - level: 1
+        title: Infectious Bite
+        difficulty: 3
+        fear: 3/3/3
+        phase: Ravage
+        description: 'After a [[Dahan]] takes Damage from an Invader, replace that [[Dahan]] with 1 [[Explorer]], even if the Damage would have destroyed it.'
+      - level: 2
+        title: Shambling Zombies
+        difficulty: 4
+        fear: 3/3/4
+        phase: Ravage
+        description: 'After a land Ravages, Push all [[Explorer]] in that land to as many different lands as possible.'
+      - level: 3
+        title: Spreading Infection
+        difficulty: 5
+        fear: 3/4/4
+        phase: Traits
+        description: 'When [[Blight]] is added, also add 1 [[Disease]]. Whenever a [[Disease]] token is used up, add 3 [[Explorer]] there.'
+      - level: 4
+        title: Swarming Island
+        difficulty: 7
+        fear: 4/4/4
+        phase: Setup
+        description: 'During setup, add 1 [[Explorer]] to each land with no [[Dahan]]. Add 1 [[Disease]] and 1 [[Explorer]] to each land with a Town or Blight setup symbol.'
+      - level: 5
+        title: Huge Wave of Zombies
+        difficulty: 9
+        fear: 4/5/4
+        phase: Setup
+        description: 'Before choosing Stage II cards, remove the Stage II Coastal Lands card. Put a custom Lands With Dahan card in place of the second Stage II card. New deck order: I-I-I / II-L-II-II / III-III-III-III-III, where L is Lands With Dahan. The Escalation ignores L.'
+      - level: 6
+        title: Rise out of the Diseased Soil
+        difficulty: 10
+        fear: 4/5/4
+        phase: Explore
+        description: 'After the Explore step, add 1 [[Explorer]] to each land with [[Disease]].'
+  - name: The Ottoman Empire
+    slug: ottoman-empire
+    expansion: Community adversary
+    creator: Krister Dahlgren
+    source_url: https://boardgamegeek.com/image/7173409
+    discussion_url: https://boardgamegeek.com/thread/2969207/custom-adversary-collection
+    source_note: BGG collection card v2.2, November 2022. Later Discord revisions may exist.
+    playtest_confidence: some
+    playtest_evidence: A 2023 group reported a fun, appropriately difficult level 6 game; a 2025 player reported that early Isolate made level 6 much easier.
+    impressions: Armies of Explorers march into upcoming Build lands, creating a race to prevent every land on a board from blighting.
+    balance_note: Level 6 has a positive play report, but its pressure appears matchup dependent; Isolate can sharply weaken the Explorer buildup.
+    play_notes:
+      - The level 2 card says to add 1 Strife when Explorers are Pushed, without specifying a target. Agree on where to place that Strife before playing.
+    difficulty: 1
+    loss_condition:
+      title: Ransack the Island
+      description: 'If all lands on a single board have [[Blight]], the Invaders win.'
+    escalation:
+      title: Army Camp Construction
+      description: 'After Exploring, on each board, add 1 [[Town]] to a land with [[Explorer]]. Then, add 1 [[Explorer]] to the adjacent land with the fewest Invaders.'
+    levels:
+      - level: 1
+        title: Army of the Sultan
+        difficulty: 3
+        fear: 3/3/4
+        phase: Explore
+        description: 'Except during Setup, after Invaders successfully Explore into a land with no [[Blight]], add 1 [[Explorer]] there.'
+      - level: 2
+        title: Janissaries
+        difficulty: 4
+        fear: 4/3/3
+        phase: Traits
+        description: 'When an Action would Destroy more than 1 [[Explorer]] in a land: If possible, all except 1 of those [[Explorer]] are instead Pushed. Add 1 [[Strife]] when you do so.'
+      - level: 3
+        title: Military Deployment
+        difficulty: 5
+        fear: 4/3/4
+        phase: Build
+        description: 'After the normal Build Step: In each land matching a Build Card, Gather [[Explorer]] from lands not matching a Build Card until there are 5 [[Explorer]] there. (In board/land order, starting with lands without [[Blight]]. Gather the [[Explorer]] from lands in low-to-high order.)'
+      - level: 4
+        title: Akinji Raiders
+        difficulty: 7
+        fear: 4/4/3
+        phase: Ravage
+        description: 'If a Ravage Action adds [[Blight]] to a land with 3 or more [[Explorer]], it always cascades as if the land already had [[Blight]].'
+      - level: 5
+        title: Scout the Island
+        difficulty: 8
+        fear: 4/5/3
+        phase: Setup
+        description: 'During Setup, before the initial Explore, discard the top Invader Deck card. On each board, place 1 [[Explorer]] in each land of that terrain.'
+      - level: 6
+        title: Grand Vizier
+        difficulty: 10
+        fear: 5/4/4
+        phase: Build
+        description: 'Build Cards also match the non-matching land on each board with the most [[Explorer]] (minimum 1).'
+  - name: The Byzantine Empire
+    slug: byzantine-empire
+    expansion: Community adversary
+    creator: Krister Dahlgren
+    source_url: https://boardgamegeek.com/image/7173384
+    discussion_url: https://boardgamegeek.com/thread/2969207/custom-adversary-collection
+    source_note: BGG collection card v4.2, November 2022. Older individual threads show earlier rules; later Discord revisions may exist.
+    playtest_confidence: some
+    playtest_evidence: A 2023 player called level 5 quite good and praised level 2, while flagging unclear level 3 and 6 timing; a 2025 level 6 game was too easy to assess with a strong Spirit and powers.
+    impressions: A fortified, City-focused adversary that turns empty Builds into Explorers and protects Cities behind Towns.
+    balance_note: The City-protection interaction can materially affect difficulty, and public level 6 reports do not establish a stable balance estimate.
+    play_notes:
+      - A BGG player asked whether Damage from one Action can destroy a Town and then its protected City in the same land. No creator clarification was found in the collection thread; agree on a ruling before play.
+    difficulty: 1
+    escalation:
+      title: Citadel Building
+      description: 'On each board, in the land with the fewest [[City]], replace 1 [[Town]] with a [[City]].'
+    levels:
+      - level: 1
+        title: Theodosian Walls
+        difficulty: 3
+        fear: 3/4/3
+        phase: Traits
+        description: 'During Setup, on each board, replace an Inland [[Town]] with a [[City]] and add 1 [[Town]] to land #2. During Play, after a [[City]] is Destroyed, add 1 [[Town]] to that land.'
+      - level: 2
+        title: Roman Legacy
+        difficulty: 5
+        fear: 4/4/3
+        phase: Traits
+        description: 'During the Build Step, in matching lands without Invaders, Invaders instead Explore. When Invaders would Ravage a land with only 1 [[Explorer]], they instead Build.'
+      - level: 3
+        title: Indestructible Citadels
+        difficulty: 6
+        fear: 4/4/4
+        phase: Traits
+        description: '[[City]] in lands with [[Town]] cannot be Destroyed. Actions that would directly Destroy [[City]] in such lands instead deal 3 Damage for each [[City]] it would Destroy. (This Damage can be dealt to any Invaders in the land.)'
+      - level: 4
+        title: Zealous Crusaders
+        difficulty: 7
+        fear: 4/5/4
+        phase: Setup
+        description: 'During Setup, before the initial Explore, discard the top Invader Card. On each board, add 1 [[Town]] to the land of that terrain with the fewest Invaders.'
+      - level: 5
+        title: Cultivate the Lands
+        difficulty: 8
+        fear: 5/4/4
+        phase: Traits
+        description: 'If [[Blight]] would be removed from a land with [[City]], Push the [[Blight]] instead.'
+      - level: 6
+        title: Fortified Garrisons
+        difficulty: 10
+        fear: 5/5/4
+        phase: Traits
+        description: '[[Town]] in lands with [[Explorer]] cannot be Destroyed. Actions that would directly Destroy [[Town]] in such lands instead deal 2 Damage for each [[Town]] it would Destroy. (This Damage can be dealt to any Invaders in the land.)'
+  - name: The Dutch Republic
+    slug: dutch-republic
+    expansion: Community adversary
+    creator: Coolpabloo7
+    source_url: https://www.reddit.com/r/spiritisland/comments/wur0sx/custom_adversary_the_dutch_republic/
+    source_note: Original text rules posted August 2022. The level 3 wording incorporates the creator's clarification in the discussion.
+    playtest_confidence: some
+    playtest_evidence: Creator reports level 3 games with every Spirit solo and more than 25 two-Spirit combinations, plus higher-level games. Independent play reports were not found.
+    impressions: Coastal trade hubs draw Dahan into extra Builds, while the Ocean becomes a special Invader land and an Event spreads Disease.
+    balance_note: The reported testing is substantial but creator-reported. The custom Event and Ocean interactions add rules overhead; commenters flagged ambiguous wording and difficult Ocean matchups.
+    play_notes:
+      - Level 3 says to replace a Town on each board, following the creator's clarification rather than the original post's island-wide wording.
+      - Level 5's original wording says Powers that move Towns. The discussion raises unresolved questions about effects from Spirit special rules, so agree on an interpretation before play.
+      - The custom Coastal Swamps Event is required at level 2 and above. Keep its full text handy when inserting it under the top three Event cards.
+    difficulty: 0
+    loss_condition:
+      title: No Dahan Remain
+      description: 'If there are no [[Dahan]] left on the island, the Invaders win.'
+    escalation:
+      title: Blooming Trade Post
+      description: 'On each board, Build in the lowest-numbered Coastal land.'
+    levels:
+      - level: 1
+        title: Creating Fertile Polders
+        difficulty: 1
+        fear: 3/3/3
+        phase: Traits
+        description: 'The Ocean (land #0) counts as a land type not present in lands #1–3; on Board D it is Sands. This overrides Ocean and Scotland special rules. Invader pieces there do not automatically Drown. Lands #1–3 still count as Coastal lands of their printed terrain.'
+      - level: 2
+        title: Local Trade
+        difficulty: 4
+        fear: 3/4/3
+        phase: Build
+        description: 'After the Build Step, in each land matching a Build Card that successfully Built this turn, Gather 1 [[Dahan]] from a land not matching a Build Card. If at least 1 [[City]] and 1 [[Dahan]] are then present, perform an additional Build. During Setup, insert the custom "Coastal Swamps Are Ground for New Diseases" Event under the top three Event cards. Event: The land with the most [[Town]] and [[City]] Gathers 1 [[Dahan]] if possible and performs an additional Build. Add 1 [[Disease]] to a land with the most Invaders and [[Dahan]] (minimum 1 of each); if none exists, add 1 [[Disease]] to the lowest-numbered Coastal land. Stage I–II, Local Outbreak: Deal 2 Damage to Invaders and 2 Damage to [[Dahan]] in a land with [[Disease]], then return this Event to the Event Deck as during Setup. Stage III, Plague Epidemic: In all lands with [[Disease]], each [[Disease]] deals 2 Damage to Invaders and 2 Damage to [[Dahan]]. Then [[Dahan]] become immune to Damage from [[Disease]]; leave the Event out as a reminder. Dahan effect, Flee the Fever: Choose a land with [[Disease]] and Push all [[Dahan]] from it.'
+      - level: 3
+        title: Early Trade Posts
+        difficulty: 6
+        fear: 3/4/4
+        phase: Setup
+        description: 'During Setup, replace 1 [[Town]] with a [[City]] on each board. Land #0 starts with 1 [[Town]] and 1 [[City]].'
+      - level: 4
+        title: Enforcement of Trade Monopoly
+        difficulty: 8
+        fear: 4/4/4
+        phase: Ravage
+        description: 'If a [[City]] is within Range 1 of a Ravaging land, Invaders deal +3 Damage to [[Dahan]] there, not to the land.'
+      - level: 5
+        title: Resilient Foundations
+        difficulty: 9
+        fear: 3/4/5
+        phase: Traits
+        description: 'Powers that normally move [[Town]] cannot move [[Town]]; instead generate 2 [[Fear]]. Powers that can move [[City]] or any Invader piece can still move [[Town]].'
+      - level: 6
+        title: Resettling of Empty Lands
+        difficulty: 10
+        fear: 3/5/5
+        phase: Ravage
+        description: 'Replace every [[Dahan]] killed by a Ravage with 1 [[Town]].'
+  - name: The Mongol Empire
+    slug: mongol-empire
+    expansion: Community adversary
+    creator: tomchowder
+    source_url: https://i.redd.it/bc3c4ukq40k91.png
+    discussion_url: https://www.reddit.com/r/spiritisland/comments/wx7wdz/custom_adversary_the_mongol_empire/
+    source_note: Creator's original 2022 card and expanded Reddit rules; the card's level 1 title appears to contain a typo.
+    playtest_confidence: some
+    playtest_evidence: Creator reports testing most levels with varied one- and two-Spirit games and credits another tester. The thread has design feedback, but little independent game reporting.
+    impressions: A mobile Warlord unit is hard to remove, buffs nearby Invaders, and can spread Blight as armies move across the island.
+    balance_note: The creator says levels 5–6 are much harder than comparable official levels. Commenters raised concerns about the long Fear Deck and especially harsh fear-focused matchups; start at level 2 or 3.
+    play_notes:
+      - Use distinguishable pieces or dice for Warlords, including tracking their 4 Health. Each Warlord counts as one Invader; choose whether it counts as a City or Explorer for each Action until level 5, but it is always a City for victory or loss conditions and Builds.
+      - The escalation adds a Warlord to a land matching the Explore Card even if Explore is skipped; it needs no Invader source and can be placed in an Isolated land.
+      - At level 4, Blight from moving a Warlord comes from the box, not the Blight Card. Setup and Escalation placement do not trigger that rule.
+    difficulty: 1
+    special_rules:
+      - title: Warlords
+        phase: Traits
+        description: 'A Warlord is one Invader with 4 Health and 4 Ravage Damage. For game mechanics it can count as an [[Explorer]] or [[City]], chosen for each Action; it always counts as a [[City]] during Builds and for victory and loss conditions. Use a distinct piece to represent each Warlord.'
+    loss_condition:
+      title: Unstoppable Army
+      description: 'If 3 or more Warlords are in a single land during Time Passes, the Invaders win.'
+    escalation:
+      title: Warlords Arrive
+      description: 'On each board, add 1 Warlord to a land matching the Explore Card.'
+    levels:
+      - level: 1
+        title: Tactical Manoeuvering
+        difficulty: 3
+        fear: 3/4/4
+        phase: Traits
+        description: 'Warlords can only be Destroyed by numerical Damage. Remove, Replace, or Destroy effects instead Push the Warlord into an adjacent land.'
+      - level: 2
+        title: Relentless Devastation
+        difficulty: 6
+        fear: 3/4/4
+        phase: Ravage
+        description: 'After each Ravage in a land with Warlords, Push each Warlord from that land to an adjacent land with the most Invaders. Each Warlord gives all non-Warlord Invaders within Range 1 +1 Damage.'
+      - level: 3
+        title: Organized Military
+        difficulty: 8
+        fear: 3/4/5
+        phase: Setup
+        description: 'During Setup, add 1 Warlord to land #5 on each board. Do not include the Stage II Coastal card in the Invader Deck. Alternate Stage II and III cards. New deck order: I-I-I / II-III-II-III-II-III-II-III-III.'
+      - level: 4
+        title: Destructive Nature
+        difficulty: 9
+        fear: 4/4/5
+        phase: Traits
+        description: 'When a Warlord is Pushed or Gathered into a land without [[Blight]], add 1 [[Blight]] there from the game box.'
+      - level: 5
+        title: Art of War
+        difficulty: 11
+        fear: 4/5/5
+        phase: Traits
+        description: 'Whenever a Warlord is dealt Damage, reduce it by 1. If it still takes Damage, resolve the Damage, then Push it to an adjacent land with the fewest Invaders. Warlords now count only as [[City]] for all game mechanics.'
+      - level: 6
+        title: Merciless Display of Power
+        difficulty: 12
+        fear: 4/5/6
+        phase: Ravage
+        description: 'During Ravage, [[Dahan]] do not fight back in lands with Warlords. Each Warlord gives all non-Warlord Invaders within Range 1 +1 Health.'

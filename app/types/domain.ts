@@ -55,4 +55,14 @@ export interface Adversary {
   escalationAbility: EscalationAbility;
   levels: AdversaryLevel[];
   references: AdversaryReference[];
+  creator?: string;
+  sourceUrl?: string;
+  discussionUrl?: string;
+  sourceNote?: string;
+  specialRules?: { title: string; description: string }[];
+  playtestConfidence?: 'more' | 'some' | 'limited';
+  playtestEvidence?: string;
+  impressions?: string;
+  balanceNote?: string;
+  playNotes?: string[];
 }

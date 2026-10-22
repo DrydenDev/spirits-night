@@ -21,6 +21,17 @@ const fearCards = computed(
     class="bg-depth-800 border border-depth-600 rounded-xl overflow-hidden flex flex-col gap-3 p-4"
   >
     <div
+      v-for="rule in adversary.specialRules ?? []"
+      :key="rule.title"
+      class="border-l-4 border-teal-500 bg-teal-900/15 rounded-r-lg px-4 py-3"
+    >
+      <p class="font-display text-xs uppercase tracking-widest text-teal-400 mb-1">Special rule</p>
+      <p class="text-slate-200 text-base leading-relaxed">
+        <strong class="text-teal-300">{{ rule.title }}:</strong>{{ ' ' }}
+        <SpiritText :text="rule.description" />
+      </p>
+    </div>
+    <div
       v-if="adversary.lossCondition"
       class="border-l-4 border-red-500 bg-red-900/15 rounded-r-lg px-4 py-3"
     >

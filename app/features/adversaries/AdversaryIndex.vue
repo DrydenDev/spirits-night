@@ -2,9 +2,13 @@
 import { computed, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
 import { getAllAdversaries } from '~/models/Adversary';
+import { communityAdversaries } from './communityAdversaries';
+import { PLAYTEST_CONFIDENCE_LABELS } from './playtest';
 
 const adversaries = computed(() =>
-  [...getAllAdversaries()].sort((first, second) => first.name.localeCompare(second.name))
+  getAllAdversaries()
+    .filter((adversary) => !adversary.sourceUrl)
+    .sort((first, second) => first.name.localeCompare(second.name))
 );
 
 onMounted(() => {
@@ -70,5 +74,37 @@ function difficultyRange(difficulties: number[]): string {
       <RouterLink to="/adversary/random" class="action-link">Random</RouterLink>
       <RouterLink to="/adversary/today" class="action-link">Today</RouterLink>
     </div>
+
+    <section aria-labelledby="community-adversaries-title" class="mt-12">
+      <h2 id="community-adversaries-title" class="font-display text-xl text-white tracking-wide">
+        Community adversaries
+      </h2>
+      <p class="text-sm text-slate-400 mt-2 mb-4">
+        Fan-made adversaries with in-app rules and links to their original cards. Playtest evidence
+        varies by design.
+      </p>
+      <div class="grid gap-4 md:grid-cols-2">
+        <article
+          v-for="entry in communityAdversaries"
+          :key="entry.name"
+          class="bg-depth-800 border border-depth-600 rounded-xl p-5"
+        >
+          <h3 class="font-display text-teal-400 tracking-wide">{{ entry.name }}</h3>
+          <p class="text-xs text-slate-500 mt-1">By {{ entry.creator }} · Fan-made</p>
+          <p class="text-sm text-slate-300 mt-3">{{ entry.impressions }}</p>
+          <p v-if="entry.playtestConfidence" class="text-xs text-teal-300 mt-3">
+            {{ PLAYTEST_CONFIDENCE_LABELS[entry.playtestConfidence] }}
+          </p>
+          <div class="flex flex-wrap gap-3 mt-4">
+            <RouterLink :to="`/adversary/${entry.slug}`" class="action-link">
+              View rules
+            </RouterLink>
+            <a :href="entry.sourceUrl" target="_blank" rel="noopener noreferrer" class="action-link"
+              >Original rules</a
+            >
+          </div>
+        </article>
+      </div>
+    </section>
   </div>
 </template>

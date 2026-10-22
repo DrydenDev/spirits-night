@@ -11,21 +11,23 @@ import { getAdversaryBySlug } from '~/models/Adversary';
 import NotFound from '~/shared/NotFound.vue';
 import AdversaryCard from './AdversaryCard.vue';
 import AdversaryReference from './AdversaryReference.vue';
+import { PLAYTEST_CONFIDENCE_LABELS } from './playtest';
 import { parseAdversaryLevel } from './selection';
 
 const route = useRoute();
 const router = useRouter();
 const slug = computed(() => String(route.params.slug ?? ''));
 const adversary = computed(() => getAdversaryBySlug(slug.value));
+const maxLevel = computed(() => adversary.value?.levels.at(-1)?.level ?? ADVERSARY_MAX_LEVEL);
 const routeLevel = computed(
-  () => parseAdversaryLevel(route.params.level as string | undefined) ?? ADVERSARY_MAX_LEVEL
+  () =>
+    parseAdversaryLevel(route.params.level as string | undefined, maxLevel.value) ?? maxLevel.value
 );
 const selectedLevel = ref(routeLevel.value);
 const currentTab = ref<'card' | 'reference'>('card');
 const status = ref('');
-const levels = Array.from(
-  { length: ADVERSARY_MAX_LEVEL - ADVERSARY_MIN_LEVEL + 1 },
-  (_, index) => index + ADVERSARY_MIN_LEVEL
+const levels = computed(() =>
+  Array.from({ length: maxLevel.value - ADVERSARY_MIN_LEVEL + 1 }, (_, index) => index)
 );
 
 watch(routeLevel, (level) => {
@@ -77,6 +79,7 @@ async function copyPermalink(): Promise<void> {
   <div v-else>
     <div class="relative -mx-4 h-44 mb-6 overflow-hidden">
       <img
+        v-if="!adversary.sourceUrl"
         :src="`/images/adversaries/${adversary.slug}/banner.png`"
         alt=""
         class="absolute inset-0 w-full h-full object-cover"
@@ -99,7 +102,7 @@ async function copyPermalink(): Promise<void> {
           v-model.number="selectedLevel"
           type="range"
           :min="ADVERSARY_MIN_LEVEL"
-          :max="ADVERSARY_MAX_LEVEL"
+          :max="maxLevel"
           class="w-full accent-teal-400"
           @change="commitLevel"
         />
@@ -151,6 +154,50 @@ async function copyPermalink(): Promise<void> {
           adversary.expansion
         }}</span>
       </div>
+
+      <div v-if="adversary.sourceUrl" class="text-center text-sm text-slate-400">
+        <p>Fan-made by {{ adversary.creator }}. {{ adversary.sourceNote }}</p>
+        <a
+          :href="adversary.sourceUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-teal-400 underline inline-block mt-2"
+          >Original rules</a
+        >
+        <a
+          v-if="adversary.discussionUrl"
+          :href="adversary.discussionUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-teal-400 underline inline-block mt-2 ml-4"
+          >Discussion and play notes</a
+        >
+      </div>
+
+      <section
+        v-if="adversary.playtestConfidence"
+        aria-label="Community playtest assessment"
+        class="bg-depth-800 border border-depth-600 rounded-xl p-4 text-sm text-slate-300 space-y-3"
+      >
+        <div class="flex flex-wrap items-center gap-3">
+          <h2 class="font-display text-base text-white">Table impressions</h2>
+          <span class="tag bg-teal-900/30 border-teal-600/40 text-teal-300">
+            {{ PLAYTEST_CONFIDENCE_LABELS[adversary.playtestConfidence] }}
+          </span>
+        </div>
+        <p>{{ adversary.impressions }}</p>
+        <p>
+          <strong class="text-slate-100">Playtest evidence:</strong>
+          {{ adversary.playtestEvidence }}
+        </p>
+        <p><strong class="text-slate-100">Balance:</strong> {{ adversary.balanceNote }}</p>
+        <div v-if="adversary.playNotes?.length">
+          <h3 class="font-semibold text-slate-100">Play notes</h3>
+          <ul class="list-disc pl-5 mt-1 space-y-1">
+            <li v-for="note in adversary.playNotes" :key="note">{{ note }}</li>
+          </ul>
+        </div>
+      </section>
 
       <div class="flex flex-wrap justify-center gap-3 py-2">
         <RouterLink to="/adversary/random" class="action-link">Random</RouterLink>
